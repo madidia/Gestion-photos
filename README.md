@@ -13,3 +13,10 @@ d’information, fera partie intégrante de ce projet.
 
 Nous mettons en oeuvre dans ce projet notre savoir faire en designs patterns, ainsi vous verrez l'utilisation du singleton,
 d'abstract factory, pattern MVC et d'autres patterns permettant l'utilisation simple, robuste et efficace de notre application.
+
+
+Developpeurs :
+BODIANG Assane https://github.com/bodiangas
+DIALLO Mamadou Dian https://github.com/madidia
+DIALLO Thierno Ibrahima https://github.com/sorytech
+JOUHARI Ali
