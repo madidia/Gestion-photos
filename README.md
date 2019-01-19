@@ -1,7 +1,6 @@
 Gestion de photo un est un projet en administration de base de données qui consiste en la réalisation de deux applications clientes Java 
 accédant via le protocole JDBC à une base de données sur un serveur distant. Chaque application est liée au rôle de l'utilisateur
-(Commande Client et Gestion Stock). Plusieurs utilisateurs peuvent accéder à la base de manière concurrente. L'accent est mis 
-sur le maintien de la cohérence des données et en aucun cas sur l'interface homme-machine.
+(Commande Client et Gestion Stock). Plusieurs utilisateurs peuvent accéder à la base de manière concurrente.
 
 Les technologies utilisées sont : Java et JDBC pour la partie applicative, Oracle (SQL,
 PL/SQL) pour la partie base de données.
