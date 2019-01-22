@@ -129,8 +129,8 @@ create table Photo(idPhoto integer primary key,
 create table Support(type varchar2(245) not null,
 		     format varchar2(245) not null,
 		     qualite varchar2(245) not null,
-                     quantiteStock integer,
-                     pu integer
+                     quantiteStock integer not null,
+                     pu number(7,2) not null,
                      constraint supp_pk primary key(type,format,qualite));
 
 --?????????????################################ CREATION DE LA TABLE Impression ###########################
