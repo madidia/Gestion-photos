@@ -72,7 +72,8 @@ create table CodePersonnel(CodeCP integer primary key,
                             constraint cop_c2 foreign key (mailCP) references ClientP(mailC)ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE adresseC ###########################
-create table adresse (adresseC varchar2(245) primary key,
+create table adresse (idAdresse integer,
+						adresseC varchar2(245),
                         mailAC varchar2(245) not null,
                         constraint ac_c1 foreign key(mailAC) references ClientP(mailC)ON DELETE CASCADE);
 
@@ -80,26 +81,24 @@ create table adresse (adresseC varchar2(245) primary key,
 create table Commande(numCommande integer primary key,
                         mail varchar2(245) not null,
                         dateComm date not null,
-                        adresseLivraison varchar2(245) not null,
+                        idAdresse integer not null,
                         statut varchar2(245) not null,
                         montant Number(5,2) not null,
                         code integer,
                         constraint com_c1 foreign key(mail) references ClientP(mailC) ON DELETE CASCADE,
                         constraint com_c2 foreign key(code) references Code(code) ON DELETE CASCADE,
-						constraint com_c3 foreign key(adresseLivraison) references adresse(adresseC) ON DELETE CASCADE,
 						constraint com_c4 check (statut in ('en cours','pret a lenvoi','envoyee')));
 
 --################################ CREATION DE LA TABLE Historique ###########################
 create table Historique(numCommande integer primary key,
                         mail varchar2(245) not null,
                         dateComm date not null,
-                        adresseLivraison varchar2(245) not null,
+                        idAdresse integer not null,
                         statut varchar2(245) not null,
                         montant Number(5,2) not null,
                         code integer,
                         constraint h_fk1 foreign key(mail) references ClientP(mailC) ON DELETE CASCADE,
                         constraint h_fk2 foreign key(code) references Code(code) ON DELETE CASCADE,
-						constraint h_c3 foreign key(adresseLivraison) references adresse(adresseC) ON DELETE CASCADE,
 						constraint h_c4 check (statut in ('en cours','pret a lenvoi','envoyee')));
 
 --################################ CREATION DE LA TABLE Panier ###########################
@@ -217,10 +216,3 @@ create table AgendaPhoto(idImpression integer,
                     constraint agp_pk primary key (idImpression,idPhoto),
                     constraint agp_fk1 foreign key (idImpression) references Impression(idImpression) ON DELETE CASCADE,
                     constraint agp_fk2 foreign key (idPhoto) references Photo(idPhoto) ON DELETE CASCADE);
-
-
-
-
-
-
-
