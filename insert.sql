@@ -73,11 +73,11 @@ insert into Impression values (5, 'A3', 'faible', 1, 2,'A3','faible','album');
 insert into Impression values (6, 'A3', 'faible', 1, 6,'A3','faible','cadre');
 
 
-INSERT INTO Img VALUES('/pp/ll.png','sgidney0@typepad.com','1','oui','11-JAN-19');
-INSERT INTO Img VALUES('/yy/aa.png','sbarlthrop1@netscape.com','1','oui','09-JAN-19');
-INSERT INTO Img VALUES('/jj/bb.png','rwellsman2@google.com.au','7','non','05-DEC-18');
-INSERT INTO Img VALUES('/ad/cc.png','bsheards3@ezinearticles.com','4','non','08-JAN-19');
-INSERT INTO Img VALUES('/sr/dd.png','cfernanando4@newsvine.com','7','oui','07-OCT-19');
+INSERT INTO Img VALUES('/pp/ll.png','sgidney0@typepad.com','1','oui');
+INSERT INTO Img VALUES('/yy/aa.png','sbarlthrop1@netscape.com','1','oui');
+INSERT INTO Img VALUES('/jj/bb.png','rwellsman2@google.com.au','7','non');
+INSERT INTO Img VALUES('/ad/cc.png','bsheards3@ezinearticles.com','4','non');
+INSERT INTO Img VALUES('/sr/dd.png','cfernanando4@newsvine.com','7','oui');
 
 INSERT INTO Photo VALUES(1,'/pp/ll.png',5,'ppppp');
 INSERT INTO Photo VALUES(2,'/yy/aa.png',6,'dddd');
@@ -85,4 +85,3 @@ INSERT INTO Photo VALUES(3,'/yy/aa.png',8,'aaaa');
 INSERT INTO Photo VALUES(4,'/jj/bb.png',7,'bbbb');
 INSERT INTO Photo VALUES(5,'/ad/cc.png',1,'jjjj');
 INSERT INTO Photo VALUES(6,'/sr/dd.png',2,'oooo');
-

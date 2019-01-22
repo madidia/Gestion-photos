@@ -107,7 +107,6 @@ create table Img(chemin varchar2(245) primary key,
                  mail varchar2(245) not null,
 		 		 resolution number(7,2) not null,
                  partagee varchar2(3) not null,
-                 dateUtilisation date not null,
                  constraint i_c1 foreign key (mail) references ClientP(mailC) ON DELETE CASCADE,
 		 		 constraint i_c2 check (partagee in('oui','non')));
 
