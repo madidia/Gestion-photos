@@ -24,36 +24,36 @@ insert into CLIENTP (mailC, nomC, prenomC, mdpasseC) values ('aeastgate8@google.
 insert into Administrateur (mailA, nomA, prenomA, mdpasseA) values ('aknoble9@reddit.com', 'Knoble', 'Aubree', 'YAkib8bs6L');
 
 
-insert into ADRESSEC values ('6 bis rue du vieux temple 38000 Grenoble', 'sgidney0@typepad.com');
-insert into ADRESSEC values ('1220 rue des residences 38400 Saint Martin Dheres', 'sbarlthrop1@netscape.com');
-insert into ADRESSEC values ('2 rue jules ferry 38100 Grenoble', 'rwellsman2@google.com.au');
-insert into ADRESSEC values ('5 rue Lieutnant Chabal 38100 Grenoble', 'bsheards3@ezinearticles.com');
-insert into ADRESSEC values ('1 rue Marcel Pagnol 38400 Saint Martin Dheres', 'cfernanando4@newsvine.com');
-insert into ADRESSEC values ('107 rue des tailles 38400 Saint Martin Dheres','hvasichev5@jiathis.com');
-INSERT INTO ADRESSEC VALUES('108 rue des tailles 38400 Saint Martin Dheres','rgoshawk6@unicef.org');
-INSERT INTO ADRESSEC VALUES('8 rue jules ferry 38100 Grenoble','lickovic7@ihg.com');
-INSERT INTO ADRESSEC VALUES('5 rue Lieutnant Chabal 38100 Grenoble','aeastgate8@google.co.uk');
+insert into ADRESSE values (1,'6 bis rue du vieux temple 38000 Grenoble', 'sgidney0@typepad.com');
+insert into ADRESSE values (2,'1220 rue des residences 38400 Saint Martin Dheres', 'sbarlthrop1@netscape.com');
+insert into ADRESSE values (3,'2 rue jules ferry 38100 Grenoble', 'rwellsman2@google.com.au');
+insert into ADRESSE values (4,'5 rue Lieutnant Chabal 38100 Grenoble', 'bsheards3@ezinearticles.com');
+insert into ADRESSE values (5,'1 rue Marcel Pagnol 38400 Saint Martin Dheres', 'cfernanando4@newsvine.com');
+insert into ADRESSE values (6,'107 rue des tailles 38400 Saint Martin Dheres','hvasichev5@jiathis.com');
+INSERT INTO ADRESSE VALUES(7,'108 rue des tailles 38400 Saint Martin Dheres','rgoshawk6@unicef.org');
+INSERT INTO ADRESSE VALUES(8,'8 rue jules ferry 38100 Grenoble','lickovic7@ihg.com');
+INSERT INTO ADRESSE VALUES(9,'5 rue Lieutnant Chabal 38100 Grenoble','aeastgate8@google.co.uk');
 
 
-insert into Commande (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (1, 'sgidney0@typepad.com', '11-JAN-19', '6 bis rue du vieux temple 38000 Grenoble', 'en cours', 3.4);
-insert into Commande (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (2, 'sbarlthrop1@netscape.com', '08-DEC-18', '1220 rue des residences 38400 Saint Martin Dheres', 'en cours', 134.0);
-insert into Commande (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (3, 'rwellsman2@google.com.au', '09-NOV-18', '2 rue jules ferry 38100 Grenoble', 'envoyee', 53.4);
-insert into Commande (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (4, 'bsheards3@ezinearticles.com', '11-JAN-19', '5 rue Lieutnant Chabal 38100 Grenoble', 'en cours', 15.9);
-insert into Commande (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (5, 'cfernanando4@newsvine.com', '10-DEC-18', '1 rue Marcel Pagnol 38400 Saint Martin Dheres', 'pret a lenvoi', 105.3);
-insert into Commande (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (6, 'hvasichev5@jiathis.com', '05-DEC-18', '107 rue des tailles 38400 Saint Martin Dheres', 'pret a lenvoi', 77.2);
-insert into Commande (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (7, 'rgoshawk6@unicef.org', '02-OCT-18', '108 rue des tailles 38400 Saint Martin Dheres', 'pret a lenvoi', 136.8);
-insert into Commande (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (8, 'lickovic7@ihg.com', '11-NOV-18', '8 rue jules ferry 38100 Grenoble', 'pret a lenvoi', 137.2);
-insert into Commande (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (9, 'aeastgate8@google.co.uk', '10-DEC-18', '5 rue Lieutnant Chabal 38100 Grenoble', 'envoyee', 144.6);
+insert into Commande values (1, 'sgidney0@typepad.com', '11-JAN-19', 1, 'en cours', 3.4,NULL);
+insert into Commande values (2, 'sbarlthrop1@netscape.com', '08-DEC-18', 2, 'en cours', 134.0,NULL);
+insert into Commande  values (3, 'rwellsman2@google.com.au', '09-NOV-18', 3, 'envoyee', 53.4,NULL);
+insert into Commande  values (4, 'bsheards3@ezinearticles.com', '11-JAN-19', 4, 'en cours', 15.9,NULL);
+insert into Commande values (5, 'cfernanando4@newsvine.com', '10-DEC-18', 5, 'pret a lenvoi', 105.3,NULL);
+insert into Commande  values (6, 'hvasichev5@jiathis.com', '05-DEC-18', 6, 'pret a lenvoi', 77.2,NULL);
+insert into Commande values (7, 'rgoshawk6@unicef.org', '02-OCT-18',7, 'pret a lenvoi', 136.8,NULL);
+insert into Commande values (8, 'lickovic7@ihg.com', '11-NOV-18', 8, 'pret a lenvoi', 137.2,NULL);
+insert into Commande values (9, 'aeastgate8@google.co.uk', '10-DEC-18', 9, 'envoyee', 144.6,NULL);
 
-insert into HISTORIQUE (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (1, 'sgidney0@typepad.com', '11-JAN-19', '6 bis rue du vieux temple 38000 Grenoble', 'en cours', 3.4);
-insert into HISTORIQUE (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (2, 'sbarlthrop1@netscape.com', '08-DEC-18', '1220 rue des residences 38400 Saint Martin Dheres', 'en cours', 134.0);
-insert into HISTORIQUE (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (3, 'rwellsman2@google.com.au', '09-NOV-18', '2 rue jules ferry 38100 Grenoble', 'envoyee', 53.4);
-insert into HISTORIQUE (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (4, 'bsheards3@ezinearticles.com', '11-JAN-19', '5 rue Lieutnant Chabal 38100 Grenoble', 'en cours', 15.9);
-insert into HISTORIQUE (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (5, 'cfernanando4@newsvine.com', '10-DEC-18', '1 rue Marcel Pagnol 38400 Saint Martin Dheres', 'pret a lenvoi', 105.3);
-insert into HISTORIQUE (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (6, 'hvasichev5@jiathis.com', '05-DEC-18', '107 rue des tailles 38400 Saint Martin Dheres', 'pret a lenvoi', 77.2);
-insert into HISTORIQUE (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (7, 'rgoshawk6@unicef.org', '02-OCT-18', '108 rue des tailles 38400 Saint Martin Dheres', 'pret a lenvoi', 136.8);
-insert into HISTORIQUE (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (8, 'lickovic7@ihg.com', '11-NOV-18', '8 rue jules ferry 38100 Grenoble', 'pret a lenvoi', 137.2);
-insert into HISTORIQUE (numCommande, mail, dateComm, adresseLivraison, statut, montant) values (9, 'aeastgate8@google.co.uk', '10-DEC-18', '5 rue Lieutnant Chabal 38100 Grenoble', 'envoyee', 144.6);
+insert into Historique values (1, 'sgidney0@typepad.com', '11-JAN-19', 1, 'en cours', 3.4,NULL);
+insert into Historique values (2, 'sbarlthrop1@netscape.com', '08-DEC-18', 2, 'en cours', 134.0,NULL);
+insert into Historique  values (3, 'rwellsman2@google.com.au', '09-NOV-18', 3, 'envoyee', 53.4,NULL);
+insert into Historique  values (4, 'bsheards3@ezinearticles.com', '11-JAN-19', 4, 'en cours', 15.9,NULL);
+insert into Historique values (5, 'cfernanando4@newsvine.com', '10-DEC-18', 5, 'pret a lenvoi', 105.3,NULL);
+insert into Historique  values (6, 'hvasichev5@jiathis.com', '05-DEC-18', 6, 'pret a lenvoi', 77.2,NULL);
+insert into Historique values (7, 'rgoshawk6@unicef.org', '02-OCT-18',7, 'pret a lenvoi', 136.8,NULL);
+insert into Historique values (8, 'lickovic7@ihg.com', '11-NOV-18', 8, 'pret a lenvoi', 137.2,NULL);
+insert into Historique values (9, 'aeastgate8@google.co.uk', '10-DEC-18', 9, 'envoyee', 144.6,NULL);
 
 
 insert into PANIER values (1,1,2);
@@ -99,7 +99,6 @@ INSERT INTO Photo VALUES(3,'/yy/aa.png',8,'aaaa');
 INSERT INTO Photo VALUES(4,'/jj/bb.png',7,'bbbb');
 INSERT INTO Photo VALUES(5,'/ad/cc.png',1,'jjjj');
 INSERT INTO Photo VALUES(6,'/sr/dd.png',2,'oooo');
-
 
 
 
