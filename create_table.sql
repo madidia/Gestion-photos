@@ -129,7 +129,7 @@ create table Photo(idPhoto integer primary key,
 create table Support(type varchar2(245) not null,
 		     format varchar2(245) not null,
 		     qualite varchar2(245) not null,
-                     quantite integer,
+                     quantiteStock integer,
                      pu integer
                      constraint supp_pk primary key(type,format,qualite));
 
@@ -137,7 +137,8 @@ create table Support(type varchar2(245) not null,
 create table Impression(idImpression integer primary key,
 			format varchar2(245) not null,
                         qualite varchar2(245) not null,
-               		quantite integer not null,
+               		quantiteSupport integer not null,
+ 			nbExamplaire integer not null,
 			numCommande integer not null,
                         formatSupport varchar2(245) not null,
 			qualiteSupport varchar2(245) not null,
