@@ -14,7 +14,6 @@ DROP TABLE UtiliseImage;
 DROP TABLE Img;
 DROP TABLE Impression;
 DROP TABLE Support;
-DROP TABLE Panier;
 DROP TABLE Historique;
 DROP TABLE Commande;
 
@@ -101,11 +100,6 @@ create table Historique(numCommande integer primary key,
                         constraint h_fk2 foreign key(code) references Code(code) ON DELETE CASCADE,
 						constraint h_c4 check (statut in ('en cours','pret a lenvoi','envoyee')));
 
---################################ CREATION DE LA TABLE Panier ###########################
-create table Panier(idPanier integer primary key,
-		    		numCommande integer not null,
-                    quantite integer not null,
-		    		constraint pa_fk1 foreign key(numCommande) references Commande(numCommande) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE Image ###########################
 create table Img(chemin varchar2(245) primary key,
@@ -132,16 +126,27 @@ create table Photo(idPhoto integer primary key,
                     constraint photo_fk1 foreign key (chemin) references Img(chemin) ON DELETE CASCADE);
 
 --?????????????################################ CREATION DE LA TABLE Support ###########################
-create table Support(idSupport integer primary key);
+create table Support(type varchar2(245) not null,
+		     format varchar2(245) not null,
+		     qualite varchar2(245) not null,
+                     quantite integer,
+                     pu integer
+                     constraint supp_pk primary key(type,format,qualite));
 
 --?????????????################################ CREATION DE LA TABLE Impression ###########################
 create table Impression(idImpression integer primary key,
-						idSupport integer not null,
-						format varchar2(245) not null,
+			format varchar2(245) not null,
                         qualite varchar2(245) not null,
-                        idPanier integer not null,
-                        constraint i_fk1 foreign key(idPanier) references Panier(idPanier) ON DELETE CASCADE,
-						constraint i_fk2 foreign key(idSupport) references Support(idSupport) ON DELETE CASCADE);
+               		quantite integer not null,
+			numCommande integer not null,
+                        formatSupport varchar2(245) not null,
+			qualiteSupport varchar2(245) not null,
+			typeSupport varchar2(245) not null,
+    			constraint i_fk1 foreign key(formatSupport) references Support(format) ON DELETE CASCADE,
+			constraint i_fk2 foreign key(qualiteSupport) references Support(qualite) ON DELETE CASCADE,
+			constraint i_fk3 foreign key(typeSupport) references Support(type) ON DELETE CASCADE ,
+			constraint i_fk4 foreign key(numCommande) references Commande(numCommande) ON DELETE CASCADE
+			);
 
 --################################ CREATION DE LA TABLE Tirage ###########################
 create table Tirage(idImpression integer primary key,
