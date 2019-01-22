@@ -55,17 +55,17 @@ create table Operation(dateOp date primary key,
                         constraint o_c1 foreign key (mail) references Administrateur(mailA)ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE Code ###########################
-create table Code(code varchar2(245) primary key,
+create table Code(code integer primary key,
 		 valeur integer not null);
 
 
 --################################ CREATION DE LA TABLE CodeMarketing ###########################
-create table CodeMarketing(codeCM varchar2(245) primary key,
+create table CodeMarketing(codeCM integer primary key,
                             valeurCM integer not null,
                             constraint cm_c1 foreign key (codeCM) references Code(code)ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE CodePersonnel ###########################
-create table CodePersonnel(CodeCP varchar2(245) primary key,
+create table CodePersonnel(CodeCP integer primary key,
                             valeurCP integer not null,
                             mailCP varchar2(245) not null,
                             constraint cop_c1 foreign key (codeCP) references Code(code),
@@ -77,7 +77,7 @@ create table adresse (adresseC varchar2(245) primary key,
                         constraint ac_c1 foreign key(mailAC) references ClientP(mailC)ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE Commande ###########################
-create table Commande(numCommande varchar2(245) primary key,
+create table Commande(numCommande integer primary key,
                         mail varchar2(245) not null,
                         dateComm date not null,
                         adresseLivraison varchar2(245) not null,
@@ -90,7 +90,7 @@ create table Commande(numCommande varchar2(245) primary key,
 						constraint com_c4 check (statut in ('en cours','pret a lenvoi','envoyee')));
 
 --################################ CREATION DE LA TABLE Historique ###########################
-create table Historique(numCommande varchar2(245) primary key,
+create table Historique(numCommande integer primary key,
                         mail varchar2(245) not null,
                         dateComm date not null,
                         adresseLivraison varchar2(245) not null,
@@ -103,7 +103,7 @@ create table Historique(numCommande varchar2(245) primary key,
 						constraint h_c4 check (statut in ('en cours','pret a lenvoi','envoyee')));
 
 --################################ CREATION DE LA TABLE Panier ###########################
-create table Panier(idPanier varchar2(245) primary key,
+create table Panier(idPanier integer primary key,
 		    		numCommande varchar2(245) not null,
                     quantite integer not null,
 		    		constraint pa_fk1 foreign key(numCommande) references Commande(numCommande) ON DELETE CASCADE);
@@ -126,17 +126,17 @@ create table UtiliseImage(mail varchar2(245) not null,
 			              constraint ui_fk2 foreign key (chemin) references Img(chemin) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE Photo ###########################
-create table Photo(idPhoto varchar2(245) primary key,
+create table Photo(idPhoto integer primary key,
                     chemin varchar2(245) not null,
                     resolution number(7,2) not null,
                     parametre varchar2(245),
                     constraint photo_fk1 foreign key (chemin) references Img(chemin) ON DELETE CASCADE);
 
 --?????????????################################ CREATION DE LA TABLE Support ###########################
-create table Support(idSupport varchar2(245) primary key);
+create table Support(idSupport integer primary key);
 
 --?????????????################################ CREATION DE LA TABLE Impression ###########################
-create table Impression(idImpression varchar2(245) primary key,
+create table Impression(idImpression integer primary key,
 						idSupport varchar2(245) not null,
 						format varchar2(245) not null,
                         qualite varchar2(245) not null,
@@ -145,13 +145,13 @@ create table Impression(idImpression varchar2(245) primary key,
 						constraint i_fk2 foreign key(idSupport) references Support(idSupport) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE Tirage ###########################
-create table Tirage(idImpression varchar2(245) primary key,
+create table Tirage(idImpression integer primary key,
 					format varchar2(245) not null,
                     qualite varchar2(245) not null,
                     constraint i_t1 foreign key (idImpression) references Impression(idImpression) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE Album ###########################
-create table Album(idImpression varchar2(245) primary key,
+create table Album(idImpression integer primary key,
 		   		   format varchar2(245) not null,
                    qualite varchar2(245) not null,
                    couverture varchar2(245) not null,
@@ -160,14 +160,14 @@ create table Album(idImpression varchar2(245) primary key,
 		   		   constraint a_fk2 foreign key (couverture) references Photo(idPhoto) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE Calendrier ###########################
-create table Calendrier(idImpression varchar2(245) primary key,
+create table Calendrier(idImpression integer primary key,
 						format varchar2(245) not null,
                         qualite varchar2(245) not null,
                         modele varchar2(245),
                         constraint cal_fk1 foreign key (idImpression) references Impression(idImpression) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE Agenda ###########################
-create table Agenda(idImpression varchar2(245) primary key,
+create table Agenda(idImpression integer primary key,
 		    	    format varchar2(245) not null,
                     qualite varchar2(245) not null,
                     typeAgenda varchar2(245) not null,
@@ -176,7 +176,7 @@ create table Agenda(idImpression varchar2(245) primary key,
                     constraint ag_fk2 foreign key (idImpression) references Impression(idImpression) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE Cadre ###########################
-create table Cadre(idImpression varchar2(245) primary key,
+create table Cadre(idImpression integer primary key,
 		   		   format varchar2(245) not null,
                    qualite varchar2(245) not null,
                    taille varchar2(245),
@@ -190,7 +190,7 @@ create table Pge(idPage integer primary key,
                  constraint pg_fk foreign key (idImpression) references Impression(idImpression) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE TiragePhoto ###########################
-create table TiragePhoto(idImpression varchar2(245),
+create table TiragePhoto(idImpression integer,
                     	 idPhoto varchar2(245),
 		    			 nbExemplaire integer,
                          constraint pk_tp1 primary key (idImpression,idPhoto),
@@ -198,21 +198,21 @@ create table TiragePhoto(idImpression varchar2(245),
                          constraint i_tp2 foreign key (idPhoto) references Photo(idPhoto) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE CadrePhoto ###########################
-create table CadrePhoto(idImpression varchar2(245),
+create table CadrePhoto(idImpression integer,
                     idPhoto varchar2(245),
                     constraint cp_pk primary key (idImpression,idPhoto),
                     constraint cp_fk1 foreign key (idImpression) references Impression(idImpression) ON DELETE CASCADE,
                     constraint cp_fk2 foreign key (idPhoto) references Photo(idPhoto) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE PagePhoto ###########################
-create table PagePhoto(idPhoto varchar2(245),
+create table PagePhoto(idPhoto integer,
                     idPage integer,
                     constraint pp_pk primary key (idPhoto,idPage),
                     constraint pp_fk1 foreign key (idPhoto) references Photo(idPhoto) ON DELETE CASCADE,
 					constraint pp_fk2 foreign key (idPage) references Pge(idPage) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE AgendaPhoto ###########################
-create table AgendaPhoto(idImpression varchar2(245),
+create table AgendaPhoto(idImpression integer,
                     idPhoto varchar2(245),
                     constraint agp_pk primary key (idImpression,idPhoto),
                     constraint agp_fk1 foreign key (idImpression) references Impression(idImpression) ON DELETE CASCADE,
