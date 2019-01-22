@@ -7,15 +7,15 @@ DROP TABLE Pge;
 DROP TABLE Cadre;
 DROP TABLE Agenda;
 DROP TABLE Calendrier;
-DROP TABLE Album;
-DROP TABLE Tirage;
-DROP TABLE Photo;
-DROP TABLE UtiliseImage;
-DROP TABLE Img;
-DROP TABLE Impression;
-DROP TABLE Support;
-DROP TABLE Historique;
-DROP TABLE Commande;
+DROP TABLE Album ;
+DROP TABLE Tirage CASCADE CONSTRAINT;
+DROP TABLE Photo CASCADE CONSTRAINT;
+DROP TABLE UtiliseImage CASCADE CONSTRAINT;
+DROP TABLE Img CASCADE CONSTRAINT;
+DROP TABLE Impression CASCADE CONSTRAINT;
+DROP TABLE Support CASCADE CONSTRAINT;
+DROP TABLE Historique CASCADE CONSTRAINT;
+DROP TABLE Commande CASCADE CONSTRAINT;
 
 DROP TABLE CodePersonnel;
 DROP TABLE CodeMarketing;
@@ -67,11 +67,11 @@ create table CodeMarketing(codeCM integer primary key,
 create table CodePersonnel(CodeCP integer primary key,
                             valeurCP integer not null,
                             mailCP varchar2(245) not null,
-                            constraint cop_c1 foreign key (codeCP) references Code(code),
-                            constraint cop_c2 foreign key (mailCP) references ClientP(mailC)ON DELETE CASCADE);
+                            constraint cop_c1 foreign key (codeCP) references Code(code) ON DELETE CASCADE,
+                            constraint cop_c2 foreign key (mailCP) references ClientP(mailC) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE adresseC ###########################
-create table adresse (idAdresse integer,
+create table Adresse (idAdresse integer primary key,
 						adresseC varchar2(245),
                         mailAC varchar2(245) not null,
                         constraint ac_c1 foreign key(mailAC) references ClientP(mailC)ON DELETE CASCADE);
@@ -86,6 +86,7 @@ create table Commande(numCommande integer primary key,
                         code integer,
                         constraint com_c1 foreign key(mail) references ClientP(mailC) ON DELETE CASCADE,
                         constraint com_c2 foreign key(code) references Code(code) ON DELETE CASCADE,
+					    constraint com_c3 foreign key(idAdresse) references Adresse(idAdresse) ON DELETE CASCADE,
 						constraint com_c4 check (statut in ('en cours','pret a lenvoi','envoyee')));
 
 --################################ CREATION DE LA TABLE Historique ###########################
@@ -98,7 +99,7 @@ create table Historique(numCommande integer primary key,
                         code integer,
                         constraint h_fk1 foreign key(mail) references ClientP(mailC) ON DELETE CASCADE,
                         constraint h_fk2 foreign key(code) references Code(code) ON DELETE CASCADE,
-						constraint h_c4 check (statut in ('en cours','pret a lenvoi','envoyee')));
+			constraint h_c4 check (statut in ('en cours','pret a lenvoi','envoyee')));
 
 
 --################################ CREATION DE LA TABLE Image ###########################
@@ -112,11 +113,11 @@ create table Img(chemin varchar2(245) primary key,
 
 --################################ CREATION DE LA TABLE UtiliseImage ###########################
 create table UtiliseImage(mail varchar2(245) not null,
-			  			  chemin varchar2(245) not null,
+			  chemin varchar2(245) not null,
                           dateUtilisation date not null,
-                 	  	  constraint i_pk1 primary key (mail,chemin,dateUtilisation),
-			  			  constraint ui_fk1 foreign key (mail) references ClientP(mailC) ON DELETE CASCADE,
-			              constraint ui_fk2 foreign key (chemin) references Img(chemin) ON DELETE CASCADE);
+                 	  constraint i_pk1 primary key (mail,chemin,dateUtilisation),
+			  constraint ui_fk1 foreign key (mail) references ClientP(mailC) ON DELETE CASCADE,
+			  constraint ui_fk2 foreign key (chemin) references Img(chemin) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE Photo ###########################
 create table Photo(idPhoto integer primary key,
@@ -142,11 +143,8 @@ create table Impression(idImpression integer primary key,
                         formatSupport varchar2(245) not null,
 			qualiteSupport varchar2(245) not null,
 			typeSupport varchar2(245) not null,
-    			constraint i_fk1 foreign key(formatSupport) references Support(format) ON DELETE CASCADE,
-			constraint i_fk2 foreign key(qualiteSupport) references Support(qualite) ON DELETE CASCADE,
-			constraint i_fk3 foreign key(typeSupport) references Support(type) ON DELETE CASCADE ,
-			constraint i_fk4 foreign key(numCommande) references Commande(numCommande) ON DELETE CASCADE
-			);
+    			constraint i_fk1 foreign key(typeSupport,formatSupport,qualiteSupport) references Support(type,format,qualite) ON DELETE CASCADE,
+			constraint i_fk2 foreign key(numCommande) references Commande(numCommande) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE Tirage ###########################
 create table Tirage(idImpression integer primary key,
