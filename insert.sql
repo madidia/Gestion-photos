@@ -56,35 +56,21 @@ insert into Historique values (8, 'lickovic7@ihg.com', '11-NOV-18', 8, 'pret a l
 insert into Historique values (9, 'aeastgate8@google.co.uk', '10-DEC-18', 9, 'envoyee', 144.6,NULL);
 
 
-insert into PANIER values (1,1,2);
-insert into PANIER values (2,5,1);
-insert into PANIER values (3,2,8);
-insert into PANIER values (4,3,2);
-insert into PANIER values (5,4,1);
-insert into PANIER values (6,7,2);
-insert into PANIER values (7,8,1);
-insert into PANIER values (8,9,2);
-insert into PANIER values (9,6,1);
+insert into Support values ('papier','A3','faible',500,1.5);
+insert into Support values ('papier','A4','moyenne',500,2.0);
+insert into Support values ('papier','A3','elevee',500,2.5);
+insert into Support values ('agenda','A3','faible',500,1.5);
+insert into Support values ('album','A3','faible',500,1.5);
+insert into Support values ('cadre','A3','faible',500,1.5);
+insert into Support values ('papier','A4','faible',500,1.5);
 
-insert into Support (idSupport) values (1);
-insert into Support (idSupport) values (2);
-insert into Support (idSupport) values (3);
-insert into Support (idSupport) values (4);
-insert into Support (idSupport) values (5);
-insert into Support (idSupport) values (6);
-insert into Support (idSupport) values (7);
-insert into Support (idSupport) values (8);
-insert into Support (idSupport) values (9);
 
-insert into Impression (idImpression, idSupport, format, qualite, idPanier) values (1, 1, 'Konklab', 'Toughjoyfax', 1);
-insert into Impression (idImpression, idSupport, format, qualite, idPanier) values (2, 2, 'Ronstring', 'Tres-Zap', 2);
-insert into Impression (idImpression, idSupport, format, qualite, idPanier) values (3, 3, 'Mat Lam Tam', 'Y-find', 3);
-insert into Impression (idImpression, idSupport, format, qualite, idPanier) values (4, 4, 'Veribet', 'Subin', 4);
-insert into Impression (idImpression, idSupport, format, qualite, idPanier) values (5, 5, 'Temp', 'Zaam-Dox', 5);
-insert into Impression (idImpression, idSupport, format, qualite, idPanier) values (6, 6, 'Fix San', 'Trippledex', 6);
-insert into Impression (idImpression, idSupport, format, qualite, idPanier) values (7, 7, 'Alphazap', 'Pannier', 7);
-insert into Impression (idImpression, idSupport, format, qualite, idPanier) values (8, 8, 'Alphazap', 'Ventosanzap', 8);
-insert into Impression (idImpression, idSupport, format, qualite, idPanier) values (9, 9, 'Bitchip', 'Fintone', 9);
+insert into Impression values (1, 'A3', 'faible', 1, 1,'A3','faible','papier');
+insert into Impression values (2, 'A4', 'faible', 1, 2,'A4','faible','papier');
+insert into Impression values (3, 'A3', 'faible', 1, 3,'A3','faible','agenda');
+insert into Impression values (4, 'A3', 'faible', 1, 4,'A3','faible','papier');
+insert into Impression values (5, 'A3', 'faible', 1, 2,'A3','faible','album');
+insert into Impression values (6, 'A3', 'faible', 1, 6,'A3','faible','cadre');
 
 
 INSERT INTO Img VALUES('/pp/ll.png','sgidney0@typepad.com','1','oui','11-JAN-19');
@@ -99,12 +85,4 @@ INSERT INTO Photo VALUES(3,'/yy/aa.png',8,'aaaa');
 INSERT INTO Photo VALUES(4,'/jj/bb.png',7,'bbbb');
 INSERT INTO Photo VALUES(5,'/ad/cc.png',1,'jjjj');
 INSERT INTO Photo VALUES(6,'/sr/dd.png',2,'oooo');
-
-
-
-
-
-
-
-
 
