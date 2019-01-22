@@ -83,7 +83,7 @@ create table Commande(numCommande integer primary key,
                         adresseLivraison varchar2(245) not null,
                         statut varchar2(245) not null,
                         montant Number(5,2) not null,
-                        code varchar(245),
+                        code integer,
                         constraint com_c1 foreign key(mail) references ClientP(mailC) ON DELETE CASCADE,
                         constraint com_c2 foreign key(code) references Code(code) ON DELETE CASCADE,
 						constraint com_c3 foreign key(adresseLivraison) references adresse(adresseC) ON DELETE CASCADE,
@@ -96,7 +96,7 @@ create table Historique(numCommande integer primary key,
                         adresseLivraison varchar2(245) not null,
                         statut varchar2(245) not null,
                         montant Number(5,2) not null,
-                        code varchar(245),
+                        code integer,
                         constraint h_fk1 foreign key(mail) references ClientP(mailC) ON DELETE CASCADE,
                         constraint h_fk2 foreign key(code) references Code(code) ON DELETE CASCADE,
 						constraint h_c3 foreign key(adresseLivraison) references adresse(adresseC) ON DELETE CASCADE,
@@ -104,7 +104,7 @@ create table Historique(numCommande integer primary key,
 
 --################################ CREATION DE LA TABLE Panier ###########################
 create table Panier(idPanier integer primary key,
-		    		numCommande varchar2(245) not null,
+		    		numCommande integer not null,
                     quantite integer not null,
 		    		constraint pa_fk1 foreign key(numCommande) references Commande(numCommande) ON DELETE CASCADE);
 
@@ -137,10 +137,10 @@ create table Support(idSupport integer primary key);
 
 --?????????????################################ CREATION DE LA TABLE Impression ###########################
 create table Impression(idImpression integer primary key,
-						idSupport varchar2(245) not null,
+						idSupport integer not null,
 						format varchar2(245) not null,
                         qualite varchar2(245) not null,
-                        idPanier varchar2(245) not null,
+                        idPanier integer not null,
                         constraint i_fk1 foreign key(idPanier) references Panier(idPanier) ON DELETE CASCADE,
 						constraint i_fk2 foreign key(idSupport) references Support(idSupport) ON DELETE CASCADE);
 
@@ -148,13 +148,13 @@ create table Impression(idImpression integer primary key,
 create table Tirage(idImpression integer primary key,
 					format varchar2(245) not null,
                     qualite varchar2(245) not null,
-                    constraint i_t1 foreign key (idImpression) references Impression(idImpression) ON DELETE CASCADE);
+                    constraint tirage_fk1 foreign key (idImpression) references Impression(idImpression) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE Album ###########################
 create table Album(idImpression integer primary key,
 		   		   format varchar2(245) not null,
                    qualite varchar2(245) not null,
-                   couverture varchar2(245) not null,
+                   couverture integer not null,
                    titre varchar2(245) not null,
                    constraint a_fk1 foreign key (idImpression) references Impression(idImpression) ON DELETE CASCADE,
 		   		   constraint a_fk2 foreign key (couverture) references Photo(idPhoto) ON DELETE CASCADE);
@@ -185,21 +185,21 @@ create table Cadre(idImpression integer primary key,
 
 --################################ CREATION DE LA TABLE Page ###########################
 create table Pge(idPage integer primary key,
-		 	     numPage varchar2(245),
-                 idImpression varchar2(245),
+		 	     numPage integer,
+                 idImpression integer,
                  constraint pg_fk foreign key (idImpression) references Impression(idImpression) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE TiragePhoto ###########################
 create table TiragePhoto(idImpression integer,
-                    	 idPhoto varchar2(245),
+                    	 idPhoto integer,
 		    			 nbExemplaire integer,
                          constraint pk_tp1 primary key (idImpression,idPhoto),
-                         constraint i_tp1 foreign key (idImpression) references Impression(idImpression) ON DELETE CASCADE,
-                         constraint i_tp2 foreign key (idPhoto) references Photo(idPhoto) ON DELETE CASCADE);
+                         constraint tp_fk1 foreign key (idImpression) references Impression(idImpression) ON DELETE CASCADE,
+                         constraint tp_fk2 foreign key (idPhoto) references Photo(idPhoto) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE CadrePhoto ###########################
 create table CadrePhoto(idImpression integer,
-                    idPhoto varchar2(245),
+                    idPhoto integer,
                     constraint cp_pk primary key (idImpression,idPhoto),
                     constraint cp_fk1 foreign key (idImpression) references Impression(idImpression) ON DELETE CASCADE,
                     constraint cp_fk2 foreign key (idPhoto) references Photo(idPhoto) ON DELETE CASCADE);
@@ -213,11 +213,10 @@ create table PagePhoto(idPhoto integer,
 
 --################################ CREATION DE LA TABLE AgendaPhoto ###########################
 create table AgendaPhoto(idImpression integer,
-                    idPhoto varchar2(245),
+                    idPhoto integer,
                     constraint agp_pk primary key (idImpression,idPhoto),
                     constraint agp_fk1 foreign key (idImpression) references Impression(idImpression) ON DELETE CASCADE,
                     constraint agp_fk2 foreign key (idPhoto) references Photo(idPhoto) ON DELETE CASCADE);
-
 
 
 
