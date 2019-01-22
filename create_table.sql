@@ -45,7 +45,7 @@ create table ClientP(mailC varchar2(245) primary key,
 create table Administrateur(mailA varchar2(245) primary key,
                     nomA varchar2(245) not null,
                     prenomA varchar2(245) not null,
-                    mdpasseC varchar2(245) not null,
+                    mdpasseA varchar2(245) not null,
                     constraint a_c1 foreign key(mailA) references utilisateur(mailU) ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE Operation ###########################
