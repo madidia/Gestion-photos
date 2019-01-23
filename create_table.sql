@@ -54,17 +54,17 @@ create table Operation(dateOp date primary key,
                         constraint o_c1 foreign key (mail) references Administrateur(mailA)ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE Code ###########################
-create table Code(code integer primary key,
+create table Code(code varchar2(10) primary key,
 		 valeur integer not null);
 
 
 --################################ CREATION DE LA TABLE CodeMarketing ###########################
-create table CodeMarketing(codeCM integer primary key,
+create table CodeMarketing(codeCM varchar2(10) primary key,
                             valeurCM integer not null,
                             constraint cm_c1 foreign key (codeCM) references Code(code)ON DELETE CASCADE);
 
 --################################ CREATION DE LA TABLE CodePersonnel ###########################
-create table CodePersonnel(CodeCP integer primary key,
+create table CodePersonnel(CodeCP varchar2(10) primary key,
                             valeurCP integer not null,
                             mailCP varchar2(245) not null,
                             constraint cop_c1 foreign key (codeCP) references Code(code) ON DELETE CASCADE,
@@ -83,7 +83,7 @@ create table Commande(numCommande integer primary key,
                         idAdresse integer not null,
                         statut varchar2(245) not null,
                         montant Number(5,2) not null,
-                        code integer,
+                        code varchar2(10),
                         constraint com_c1 foreign key(mail) references ClientP(mailC) ON DELETE CASCADE,
                         constraint com_c2 foreign key(code) references Code(code) ON DELETE CASCADE,
 					    constraint com_c3 foreign key(idAdresse) references Adresse(idAdresse) ON DELETE CASCADE,
@@ -96,7 +96,7 @@ create table Historique(numCommande integer primary key,
                         idAdresse integer not null,
                         statut varchar2(245) not null,
                         montant Number(5,2) not null,
-                        code integer,
+                        code varchar2(10),
                         constraint h_fk1 foreign key(mail) references ClientP(mailC) ON DELETE CASCADE,
                         constraint h_fk2 foreign key(code) references Code(code) ON DELETE CASCADE,
 			constraint h_c4 check (statut in ('en cours','pret a lenvoi','envoyee')));

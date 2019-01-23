@@ -34,7 +34,7 @@ INSERT INTO ADRESSE VALUES(7,'108 rue des tailles 38400 Saint Martin Dheres','rg
 INSERT INTO ADRESSE VALUES(8,'8 rue jules ferry 38100 Grenoble','lickovic7@ihg.com');
 INSERT INTO ADRESSE VALUES(9,'5 rue Lieutnant Chabal 38100 Grenoble','aeastgate8@google.co.uk');
 
-
+ 
 insert into Commande values (1, 'sgidney0@typepad.com', '11-JAN-19', 1, 'en cours', 3.4,NULL);
 insert into Commande values (2, 'sbarlthrop1@netscape.com', '08-DEC-18', 2, 'en cours', 134.0,NULL);
 insert into Commande  values (3, 'rwellsman2@google.com.au', '09-NOV-18', 3, 'envoyee', 53.4,NULL);
@@ -85,3 +85,5 @@ INSERT INTO Photo VALUES(3,'/yy/aa.png',8,'aaaa');
 INSERT INTO Photo VALUES(4,'/jj/bb.png',7,'bbbb');
 INSERT INTO Photo VALUES(5,'/ad/cc.png',1,'jjjj');
 INSERT INTO Photo VALUES(6,'/sr/dd.png',2,'oooo');
+
+
