@@ -1,12 +1,13 @@
 package models;
 
-public class Client {
+public class Administateur {
+
 	private String mail;
 	private String nom;
 	private String prenom;
 	private String password;
 	
-	public Client(String mail, String nom, String prenom, String password) {
+	public Administateur(String mail, String nom, String prenom, String password) {
 		super();
 		this.mail = mail;
 		this.nom = nom;
