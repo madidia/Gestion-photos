@@ -7,8 +7,8 @@ import models.Impression;
 import models.Tirage;
 
 public class TirageDAO extends ImpressionDAO{
-      public Tirage find(Long x) {
-    	  Tirage tr = (Tirage) super.find(x);
+      public Tirage find(Long id) {
+    	  Tirage tr = (Tirage) super.find(id);
 		return tr;
       }
       

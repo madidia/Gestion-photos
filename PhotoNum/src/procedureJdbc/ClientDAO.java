@@ -11,12 +11,12 @@ public class ClientDAO extends DAO<Client>{
     public Connection conn;
 	
 	@Override
-	public Client find(String id) {
+	public Client find(String mail) {
 	   	Statement stmt;
   	    Client clt = null;
 		try {
 			stmt = conn.createStatement();
-	    	String query1 = "Select * from ClientP where mailC = '"+id+"' ";
+	    	String query1 = "Select * from ClientP where mailC = '"+mail+"' ";
 	    	ResultSet rs = stmt.executeQuery(query1);
 	    	if(rs.next())
 	    	   clt = new Client(rs.getString("mailC"), rs.getString("nomC") , rs.getString("prenomC") , rs.getString("mdpasseC"));

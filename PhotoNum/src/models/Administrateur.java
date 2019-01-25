@@ -1,26 +1,16 @@
 package models;
 
-public class Administateur {
+public class Administrateur extends Utilisateur{
 
-	private String mail;
 	private String nom;
 	private String prenom;
 	private String password;
 	
-	public Administateur(String mail, String nom, String prenom, String password) {
-		super();
-		this.mail = mail;
+	public Administrateur(String mail, String nom, String prenom, String password) {
+		super(mail);
 		this.nom = nom;
 		this.prenom = prenom;
 		this.password = password;
-	}
-
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
 	}
 
 	public String getNom() {

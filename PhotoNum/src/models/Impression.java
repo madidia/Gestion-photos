@@ -11,7 +11,6 @@ public class Impression {
 	private String typeSupport;
 	
 	public Impression(int id, String format, String qualite, int nbExemplaire) {
-		super();
 		this.id = id;
 		this.format = format;
 		this.qualite = qualite;
