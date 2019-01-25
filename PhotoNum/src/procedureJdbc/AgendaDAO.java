@@ -8,27 +8,34 @@ import models.Impression;
 import models.Agenda;
 
 public class AgendaDAO extends ImpressionDAO{
-    public Agenda find(Long x) {
+    public Agenda find(int x) {
+      Agenda ag = null;
   	  Statement stmt;
   	  try {
   	  stmt = super.conn.createStatement();
   	  String query = "Select * from Agenda where idImpression = '"+x+"'";
-  	  ResultSet rs;
+  	  String query2 = "Select * from Impression where idImpression = '"+x+"'";
+  	  ResultSet rs = stmt.executeQuery(query);
+  	  ResultSet rs2 = stmt.executeQuery(query2);
 	  rs = stmt.executeQuery(query);
   	  if(!rs.next())
   	  	{
-			return new Agenda(rs.getString(0), rs.getString(1),rs.getString(2));
+			ag = new Agenda(x ,rs.getString("format"),rs.getString("qualite"),0,rs.getString("typeAgenda"),rs.getString("model"));
   		} 
+  	  if(!rs2.next())
+  	    {
+  		    ag.setNbExemplaire(rs2.getInt("nbExemplaire"));
+  	    }
   	  }
   	  catch (SQLException e1) {
   			// TODO Auto-generated catch block
   			e1.printStackTrace();
   		}
-  	  return null;
+  	  return ag;
     }
     
-    public Agenda create(Agenda obj) {
-  	  super.create(new Impression(0,obj.getFormat(),obj.getQualite(),0));
+    /*public Agenda create(Agenda obj) {
+  	  super.create(new Impression(obj.get,obj.getFormat(),obj.getQualite(),0));
   	  try {
 			Statement stmt = super.conn.createStatement();
 			String query = "Insert into Agenda Values("+0+","+obj.getFormat()+","+obj.getQualite()+","+obj.getModel()+")";
@@ -38,7 +45,7 @@ public class AgendaDAO extends ImpressionDAO{
 			e.printStackTrace();
 		}
 		return null;
-    }
+    }*/
     
     public Agenda update(Agenda obj) {
   	  super.update(new Impression(0,obj.getFormat(),obj.getQualite(),0));

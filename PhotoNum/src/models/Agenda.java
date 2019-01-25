@@ -1,32 +1,13 @@
 package models;
 
-public class Agenda {
-
-	private String format;
-	private String qualite;
+public class Agenda extends Impression{
+    private String typeAgenda;
 	private String model;
 	
-	public Agenda(String format, String qualite, String model) {
-		super();
-		this.format = format;
-		this.qualite = qualite;
+	public Agenda(int idImp,String format, String qualite,int nbExp,String typeAgenda,String model) {
+		super(idImp,format,qualite,nbExp);
+		this.setTypeAgenda(typeAgenda);
 		this.model = model;
-	}
-
-	public String getFormat() {
-		return format;
-	}
-
-	public void setFormat(String format) {
-		this.format = format;
-	}
-
-	public String getQualite() {
-		return qualite;
-	}
-
-	public void setQualite(String qualite) {
-		this.qualite = qualite;
 	}
 
 	public String getModel() {
@@ -35,6 +16,14 @@ public class Agenda {
 
 	public void setModel(String model) {
 		this.model = model;
+	}
+
+	public String getTypeAgenda() {
+		return typeAgenda;
+	}
+
+	public void setTypeAgenda(String typeAgenda) {
+		this.typeAgenda = typeAgenda;
 	}
 	
 }
