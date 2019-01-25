@@ -17,17 +17,22 @@ public class ImpressionDAO extends DAO<Impression>{
 	@Override
 	public Impression find(long id) {
 		id = (int) id;
+		Impression imp  = null;
 	   	Statement stmt;
 		try {
 			stmt = conn.createStatement();
 	    	String query1 = "Select * from Impression where idImpression = '"+id+"' ";
 	    	ResultSet rs = stmt.executeQuery(query1);
 	    	if(rs.next())
-	    	  return new Impression(rs.getInt(0),rs.getString(1),rs.getString(2),rs.getInt(3));
+	    	{
+	    	  imp = new Impression(rs.getInt(0),rs.getString(1),rs.getString(2),rs.getInt(3));
+	    	}
+	    	rs.close();
+	    	stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return imp;
 	}
 
 	@Override
@@ -50,7 +55,7 @@ public class ImpressionDAO extends DAO<Impression>{
 			String query = "Update Impression SET idImpression ='"+obj.getId()+"' ,format ='"+obj.getFormat()+"',qualite ='"+obj.getQualite()+"'"
 					         + ", nbExemplaire ='"+obj.getNbExemplaire()+"'";
 			stmt.executeQuery(query);
-			
+			stmt.close();
 			return obj;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -64,7 +69,7 @@ public class ImpressionDAO extends DAO<Impression>{
 			Statement stmt = conn.createStatement();
 			String query = "DELETE ON Impression where idImpression = '"+obj.getId()+"'";
 			stmt.executeQuery(query);
-			
+			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

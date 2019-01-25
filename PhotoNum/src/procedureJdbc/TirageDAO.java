@@ -8,16 +8,17 @@ import models.Tirage;
 
 public class TirageDAO extends ImpressionDAO{
       public Tirage find(Long x) {
-    	  super.find(x);
-		return new Tirage(super.find(x).getFormat(), super.find(x).getQualite());
+    	  Tirage tr = (Tirage) super.find(x);
+		return tr;
       }
       
       public Tirage create(Tirage obj) {
-    	  super.create(new Impression(0,obj.getFormat(),obj.getQualite(),0));
+    	  super.create(new Impression(obj.getId(),obj.getFormat(),obj.getQualite(),obj.getNbExemplaire()));
     	  try {
 			Statement stmt = super.conn.createStatement();
-			String query = "Insert into Tirage Values("+0+","+obj.getFormat()+","+obj.getQualite()+")";
+			String query = "Insert into Tirage Values("+obj.getId()+","+obj.getFormat()+","+obj.getQualite()+")";
 			stmt.executeQuery(query);
+			stmt.close();
 			return obj;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -26,7 +27,15 @@ public class TirageDAO extends ImpressionDAO{
       }
       
       public Tirage update(Tirage obj) {
-    	  super.update(new Impression(0,obj.getFormat(),obj.getQualite(),0));
+    	  super.update(new Impression(obj.getId(),obj.getFormat(),obj.getQualite(),obj.getNbExemplaire()));
+    	  try {
+			Statement stmt = super.conn.createStatement();
+			String query = "UPDATE Tirage SET format = '"+obj.getFormat()+"', qualite = '"+obj.getQualite()+"'";
+			stmt.executeQuery(query);
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	  
 		return obj;
       }
 }

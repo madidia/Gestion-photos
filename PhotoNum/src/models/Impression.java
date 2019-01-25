@@ -5,6 +5,10 @@ public class Impression {
 	private String format;
 	private String qualite;
 	private int nbExemplaire;
+	private int numCommande;
+	private String formatSupport;
+	private String qualiteSupport;
+	private String typeSupport;
 	
 	public Impression(int id, String format, String qualite, int nbExemplaire) {
 		super();
@@ -44,6 +48,38 @@ public class Impression {
 
 	public void setNbExemplaire(int nbExemplaire) {
 		this.nbExemplaire = nbExemplaire;
+	}
+
+	public String getFormatSupport() {
+		return formatSupport;
+	}
+
+	public void setFormatSupport(String formatSupport) {
+		this.formatSupport = formatSupport;
+	}
+
+	public int getNumCommande() {
+		return numCommande;
+	}
+
+	public void setNumCommande(int numCommande) {
+		this.numCommande = numCommande;
+	}
+
+	public String getQualiteSupport() {
+		return qualiteSupport;
+	}
+
+	public void setQualiteSupport(String qualiteSupport) {
+		this.qualiteSupport = qualiteSupport;
+	}
+
+	public String getTypeSupport() {
+		return typeSupport;
+	}
+
+	public void setTypeSupport(String typeSupport) {
+		this.typeSupport = typeSupport;
 	}
 	
 	

@@ -1,0 +1,28 @@
+!SESSION 2019-01-25 15:11:15.724 -----------------------------------------------
+eclipse.buildId=4.9.0.I20180906-0745
+java.version=1.8.0_151
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.modeling.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.modeling.product
+
+!ENTRY org.eclipse.jface 2 0 2019-01-25 15:12:06.412
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2019-01-25 15:12:06.412
+!MESSAGE A conflict occurred for CTRL+6:
+Binding(CTRL+6,
+	ParameterizedCommand(Command(org.eclipse.emf.ecp.cdo.ui.checkinCommand,Checkin,
+		,
+		Category(org.eclipse.emf.ecp.cdo.ui.commands,ECP CDO Provider,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@32e9c3af,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+6,
+	ParameterizedCommand(Command(CaseineVPL.commands.importProjectCommand,Import Project Command,
+		,
+		Category(CaseineVPL.commands.category,Caseine Category,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@796e2187,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
