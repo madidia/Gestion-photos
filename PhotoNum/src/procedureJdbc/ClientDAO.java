@@ -56,14 +56,13 @@ public class ClientDAO extends DAO<Client>{
 	public Client update(Client obj) {
 		try {
 			Statement stmt = conn.createStatement();
-			String query = "Update ClientP SET nomC ='"+obj.getNom()+"' and '"+obj.getPrenom()+"' and '"+obj.getPassword()+"'";
+			String query = "Update Tirage SET nomC ='"+obj.getNom()+"' ,prenomC ='"+obj.getPrenom()+"',mdpasseC ='"+obj.getPassword()+"'";
 			stmt.executeQuery(query);
 			
 			return obj;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
 
