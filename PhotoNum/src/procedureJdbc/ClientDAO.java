@@ -8,21 +8,24 @@ import java.sql.Statement;
 import models.Client;
 
 public class ClientDAO extends DAO<Client>{
-    Connection conn;
+    public Connection conn;
 	
 	@Override
-	public Client find(String id) {
+	public Client find(String mail) {
 	   	Statement stmt;
+  	    Client clt = null;
 		try {
 			stmt = conn.createStatement();
-	    	String query1 = "Select * from Utilisateur where mailU = '"+id+"' ";
+	    	String query1 = "Select * from ClientP where mailC = '"+mail+"' ";
 	    	ResultSet rs = stmt.executeQuery(query1);
 	    	if(rs.next())
-	    	  return new Client(rs.getString("mailC"), rs.getString("nomC") , rs.getString("prenomC") , rs.getString("mdpasseC"));
+	    	   clt = new Client(rs.getString("mailC"), rs.getString("nomC") , rs.getString("prenomC") , rs.getString("mdpasseC"));
+	    	rs.close();
+	    	stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return clt;
 	}
 
 	@Override
@@ -42,6 +45,8 @@ public class ClientDAO extends DAO<Client>{
 	 		 String query3 = "INSERT INTO ClientP Values ('"+obj.getMail()+"','"+obj.getNom()+"','"+obj.getPrenom()+"','"+obj.getPassword()+"')";
 	 		 stmt.executeQuery(query2);
 	 		 stmt.executeQuery(query3);
+	 		 rs.close();
+	 		 stmt.close();
 	 		 return obj;
 		   } else {
 	 		   System.out.println("mail déja utilisé");
@@ -51,19 +56,19 @@ public class ClientDAO extends DAO<Client>{
 	   		}
 	   return null; 
     }
-
+    
 	@Override
 	public Client update(Client obj) {
 		try {
 			Statement stmt = conn.createStatement();
-			String query = "Update ClientP SET nomC ='"+obj.getNom()+"' and '"+obj.getPrenom()+"' and '"+obj.getPassword()+"'";
+			String query = "Update ClientP SET nomC ='"+obj.getNom()+"' ,prenomC ='"+obj.getPrenom()+"',mdpasseC ='"+obj.getPassword()+"'"
+					+ "WHERE mailC ='"+obj.getMail()+"'";
 			stmt.executeQuery(query);
-			
+			stmt.close();
 			return obj;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
 
@@ -73,7 +78,7 @@ public class ClientDAO extends DAO<Client>{
 			Statement stmt = conn.createStatement();
 			String query = "DELETE ON ClientP where mailC = '"+obj.getMail()+"'";
 			stmt.executeQuery(query);
-			
+			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

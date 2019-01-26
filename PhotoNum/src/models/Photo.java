@@ -8,7 +8,6 @@ public class Photo {
 	private String parametre;
 	
 	public Photo(int id, String chemin, String resolution, String parametre) {
-		super();
 		this.id = id;
 		this.chemin = chemin;
 		this.resolution = resolution;

@@ -1,34 +1,13 @@
 package models;
 
-public class Cadre {
-
-	private String format;
-	private String qualite;
+public class Cadre extends Impression{
 	private String model;
 	private String taille;
 	
-	public Cadre(String format, String qualite, String model, String taille) {
-		super();
-		this.format = format;
-		this.qualite = qualite;
+	public Cadre(int idImp ,String format, String qualite, int nbEx ,String model, String taille) {
+		super(idImp,format,qualite,nbEx);
 		this.model = model;
 		this.taille = taille;
-	}
-
-	public String getFormat() {
-		return format;
-	}
-
-	public void setFormat(String format) {
-		this.format = format;
-	}
-
-	public String getQualite() {
-		return qualite;
-	}
-
-	public void setQualite(String qualite) {
-		this.qualite = qualite;
 	}
 
 	public String getModel() {

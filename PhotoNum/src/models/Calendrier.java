@@ -1,32 +1,15 @@
 package models;
 
-public class Calendrier {
+import java.util.ArrayList;
+
+public class Calendrier extends Impression{
 	
-	private String format;
-	private String qualite;
+	private ArrayList<Page> pageCal = new ArrayList<Page>(); 
 	private String model;
 	
-	public Calendrier(String format, String qualite, String model) {
-		super();
-		this.format = format;
-		this.qualite = qualite;
+	public Calendrier(int idImp ,String format, String qualite, int nbExemp, String model) {
+		super(idImp,format,qualite,nbExemp);
 		this.model = model;
-	}
-
-	public String getFormat() {
-		return format;
-	}
-
-	public void setFormat(String format) {
-		this.format = format;
-	}
-
-	public String getQualite() {
-		return qualite;
-	}
-
-	public void setQualite(String qualite) {
-		this.qualite = qualite;
 	}
 
 	public String getModel() {
@@ -35,6 +18,14 @@ public class Calendrier {
 
 	public void setModel(String model) {
 		this.model = model;
+	}
+
+	public ArrayList<Page> getPageCal() {
+		return pageCal;
+	}
+
+	public void setPageCal(ArrayList<Page> pageCal) {
+		this.pageCal = pageCal;
 	}
 	
 	

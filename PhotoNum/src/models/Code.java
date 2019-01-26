@@ -2,21 +2,12 @@ package models;
 
 public class Code {
 	
-	private int code;
+	private String code;
 	private int valeur;
 	
-	public Code(int code, int valeur) {
-		super();
-		this.code = code;
+	public Code(String code, int valeur) {
+		this.setCode(code);
 		this.valeur = valeur;
-	}
-
-	public int getCode() {
-		return code;
-	}
-
-	public void setCode(int code) {
-		this.code = code;
 	}
 
 	public int getValeur() {
@@ -25,6 +16,14 @@ public class Code {
 
 	public void setValeur(int valeur) {
 		this.valeur = valeur;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 	

@@ -1,16 +1,15 @@
 package models;
 
-public class Album {
+import java.util.ArrayList;
+
+public class Album extends Impression{
 
 	private String titre;
-	private String format;
-	private String qualite;
+	private ArrayList<Page> pageAlb = new ArrayList<Page>();
 	
-	public Album(String titre, String format, String qualite) {
-		super();
+	public Album(int idImp, String titre, String format, String qualite, int nbExemplaire) {
+		super(idImp,format,qualite,nbExemplaire);
 		this.titre = titre;
-		this.format = format;
-		this.qualite = qualite;
 	}
 
 	public String getTitre() {
@@ -21,21 +20,11 @@ public class Album {
 		this.titre = titre;
 	}
 
-	public String getFormat() {
-		return format;
+	public ArrayList<Page> getPageAlb() {
+		return pageAlb;
 	}
 
-	public void setFormat(String format) {
-		this.format = format;
+	public void setPageAlb(ArrayList<Page> pageAlb) {
+		this.pageAlb = pageAlb;
 	}
-
-	public String getQualite() {
-		return qualite;
-	}
-
-	public void setQualite(String qualite) {
-		this.qualite = qualite;
-	}
-	
-	
 }

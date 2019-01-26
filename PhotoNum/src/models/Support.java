@@ -9,7 +9,6 @@ public class Support {
 	private double prix;
 	
 	public Support(String type, String format, String qualite, int quantite, double prix) {
-		super();
 		this.type = type;
 		this.format = format;
 		this.qualite = qualite;

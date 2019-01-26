@@ -5,7 +5,6 @@ public class Utilisateur {
 	private String mail;
 
 	public Utilisateur(String mail) {
-		super();
 		this.mail = mail;
 	}
 
