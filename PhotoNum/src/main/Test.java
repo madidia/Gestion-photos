@@ -5,14 +5,14 @@ import java.text.ParseException;
 
 import connexion.Connexion;
 import models.Client;
-import procedureJdbc.ClientDAO;
+import procedureJdbc.ClientDAO1;
 
 public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			ClientDAO c = new ClientDAO();
+			Client c = new Client();
 			c.conn = Connexion.getConnection();
 			Client ac = c.find("mail@gmail.com");
 			System.out.println(ac.getPrenom());

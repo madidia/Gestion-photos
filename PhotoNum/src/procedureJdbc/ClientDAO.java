@@ -1,15 +1,13 @@
 package procedureJdbc;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import models.Client;
 
-public class ClientDAO extends DAO<Client>{
-    public Connection conn;
-	
+public class ClientDAO extends UtilisateurDAO<Client> {
+
 	@Override
 	public Client find(String mail) {
 	   	Statement stmt;
@@ -27,13 +25,7 @@ public class ClientDAO extends DAO<Client>{
 		}
 		return clt;
 	}
-
-	@Override
-	public Client find(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public Client create(Client obj) {
 	   try {
@@ -49,7 +41,7 @@ public class ClientDAO extends DAO<Client>{
 	 		 stmt.close();
 	 		 return obj;
 		   } else {
-	 		   System.out.println("mail dÃ©ja utilisÃ©");
+	 		   System.out.println("mail déja utilisé");
 		   }
 	   	} catch (SQLException e) {
 		   e.printStackTrace();
@@ -83,5 +75,4 @@ public class ClientDAO extends DAO<Client>{
 			e.printStackTrace();
 		}
 	}
-
 }
