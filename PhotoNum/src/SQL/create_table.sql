@@ -81,13 +81,13 @@ create table Commande(numCommande integer primary key,
                         mail varchar2(245) not null,
                         dateComm date not null,
                         idAdresse integer not null,
-                        statut varchar2(245) not null,
+                        statut varchar2(20) default 'en attente',
                         montant Number(5,2) not null,
                         code varchar2(10),
                         constraint com_c1 foreign key(mail) references ClientP(mailC) ON DELETE CASCADE,
                         constraint com_c2 foreign key(code) references Code(code) ON DELETE CASCADE,
 					    constraint com_c3 foreign key(idAdresse) references Adresse(idAdresse) ON DELETE CASCADE,
-						constraint com_c4 check (statut in ('en cours','pret a lenvoi','envoyee')));
+						constraint com_c4 check (statut in ( 'en attente','en cours','pret a lenvoi','envoyee')));
 
 --################################ CREATION DE LA TABLE Historique ###########################
 create table Historique(numCommande integer primary key,
@@ -105,16 +105,16 @@ create table Historique(numCommande integer primary key,
 --################################ CREATION DE LA TABLE Image ###########################
 create table Img(chemin varchar2(245) primary key,
                  mail varchar2(245) not null,
-		 		 resolution number(7,2) not null,
+		 resolution number(7,2) not null,
                  partagee varchar2(3) not null,
+		 dateDerniereUtilisation date not null,
                  constraint i_c1 foreign key (mail) references ClientP(mailC) ON DELETE CASCADE,
 		 		 constraint i_c2 check (partagee in('oui','non')));
 
 --################################ CREATION DE LA TABLE UtiliseImage ###########################
 create table UtiliseImage(mail varchar2(245) not null,
 			  chemin varchar2(245) not null,
-                          dateUtilisation date not null,
-                 	  constraint i_pk1 primary key (mail,chemin,dateUtilisation),
+                 	  constraint i_pk1 primary key (mail,chemin),
 			  constraint ui_fk1 foreign key (mail) references ClientP(mailC) ON DELETE CASCADE,
 			  constraint ui_fk2 foreign key (chemin) references Img(chemin) ON DELETE CASCADE);
 
