@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="models.Utilisateur"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="models.Impression"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="procedureJdbc.ImpressionDAO"/>
+    <fullyQualifiedTypeName name="connexion.Connexion"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="procedureJdbc.CommandeDAO"/>
+    <fullyQualifiedTypeName name="models.Commande"/>
+    <fullyQualifiedTypeName name="models.Client"/>
+    <fullyQualifiedTypeName name="models.Support"/>
+    <fullyQualifiedTypeName name="main.Test"/>
+    <fullyQualifiedTypeName name="procedureJdbc.SupportDAO"/>
+    <fullyQualifiedTypeName name="procedureJdbc.UtilisateurDAO"/>
+    <fullyQualifiedTypeName name="models.Adresse"/>
+    <fullyQualifiedTypeName name="models.Code"/>
+    <fullyQualifiedTypeName name="models.CodePersonnel"/>
+    <fullyQualifiedTypeName name="procedureJdbc.CodePersonnelDAO"/>
+    <fullyQualifiedTypeName name="procedureJdbc.ClientDAO"/>
+    <fullyQualifiedTypeName name="models.Page"/>
+</qualifiedTypeNameHistroy>

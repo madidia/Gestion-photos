@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+/home/dian-diallo/Documents/M1/S7/ABD/ProjetBD/Gestion-photos/.metadata/.plugins/org.eclipse.jdt.core
+4068934663.index
+646308851.index
