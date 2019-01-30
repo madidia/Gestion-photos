@@ -1,25 +1,30 @@
 package procedureJdbc;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import models.Client;
 
-public class ClientDAO extends DAO<Client>{
-    public Connection conn;
-	
+public class ClientDAO extends UtilisateurDAO<Client> {
+
 	@Override
 	public Client find(String mail) {
 	   	Statement stmt;
   	    Client clt = null;
 		try {
+			String m="",prenom="",nom="",mdp="";
 			stmt = conn.createStatement();
 	    	String query1 = "Select * from ClientP where mailC = '"+mail+"' ";
 	    	ResultSet rs = stmt.executeQuery(query1);
-	    	if(rs.next())
-	    	   clt = new Client(rs.getString("mailC"), rs.getString("nomC") , rs.getString("prenomC") , rs.getString("mdpasseC"));
+	    	if(rs.next()) {
+	    		m=rs.getString(1);
+	    		nom=rs.getString(2);
+	    		prenom=rs.getString(3);
+	    		mdp=rs.getString(4);
+	    	}
+	    	   clt = new Client(m,nom,prenom,mdp);
+	    	System.out.println("yess "+clt.getMail());
 	    	rs.close();
 	    	stmt.close();
 		} catch (SQLException e) {
@@ -27,13 +32,7 @@ public class ClientDAO extends DAO<Client>{
 		}
 		return clt;
 	}
-
-	@Override
-	public Client find(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public Client create(Client obj) {
 	   try {
@@ -47,9 +46,11 @@ public class ClientDAO extends DAO<Client>{
 	 		 stmt.executeQuery(query3);
 	 		 rs.close();
 	 		 stmt.close();
+	 		 conn.commit();
+	 		 conn.close();
 	 		 return obj;
 		   } else {
-	 		   System.out.println("mail déja utilisé");
+	 		   System.out.println("mail d�ja utilis�");
 		   }
 	   	} catch (SQLException e) {
 		   e.printStackTrace();
@@ -83,5 +84,4 @@ public class ClientDAO extends DAO<Client>{
 			e.printStackTrace();
 		}
 	}
-
 }

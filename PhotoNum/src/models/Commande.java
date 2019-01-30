@@ -1,51 +1,177 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Commande {
-	private String id;
+	private int id;
+	private Client client;
 	private Date date;
-	private int montant;
-	private String status;
+	private Adresse adresse;
+	private double montant;
+	private String statut;
+	private Code code;
+	private ArrayList<Impression> impressions = new ArrayList<>();
 	
-	public Commande(String id, Date date, int montant, String status) {
-		super();
-		this.id = id;
-		this.date = date;
-		this.montant = montant;
-		this.status = status;
+	public Commande(Client client,Adresse adresse, Date date, String status, Code c) {
+		this.client=client;
+		this.setDate(date);
+		this.adresse=adresse;
+		this.setStatut(status);
+		this.code=c;
 	}
 
-	public String getId() {
+	
+
+	public void calculeMontant(ArrayList<Impression> imp) {
+
+		double m=0;
+		int nb;
+		double pu;
+		
+		for(int i=0;i<imp.size();i++) {
+			nb=imp.get(i).getNbExemplaire();
+			pu=imp.get(i).getSupport().getPrix();
+			m=m+(nb*pu);
+		}
+		this.setMontant(m);
+	}
+	
+	
+
+
+	/**
+	 * @return the impressions
+	 */
+	public ArrayList<Impression> getImpressions() {
+		return impressions;
+	}
+
+	/**
+	 * @param impressions the impressions to set
+	 */
+	public void setImpressions(ArrayList<Impression> impressions) {
+		this.impressions = impressions;
+	}
+
+	
+	/**
+	 * @return the idAdresse
+	 */
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	/**
+	 * @param idAdresse the idAdresse to set
+	 */
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
+	/**
+	 * @return the code
+	 */
+	public Code getCode() {
+		return code;
+	}
+
+	/**
+	 * @param code the code to set
+	 */
+	public void setCode(Code code) {
+		this.code = code;
+	}
+
+
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
 		this.id = id;
 	}
 
+
+
+	/**
+	 * @return the date
+	 */
 	public Date getDate() {
 		return date;
 	}
 
+
+
+	/**
+	 * @param date the date to set
+	 */
 	public void setDate(Date date) {
 		this.date = date;
 	}
 
-	public int getMontant() {
+
+
+	/**
+	 * @return the montant
+	 */
+	public double getMontant() {
+		this.calculeMontant(this.impressions);
 		return montant;
 	}
 
-	public void setMontant(int montant) {
+
+
+	/**
+	 * @param montant the montant to set
+	 */
+	public void setMontant(double montant) {
 		this.montant = montant;
 	}
 
-	public String getStatus() {
-		return status;
+
+
+	/**
+	 * @return the statut
+	 */
+	public String getStatut() {
+		return statut;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+
+
+	/**
+	 * @param statut the statut to set
+	 */
+	public void setStatut(String statut) {
+		this.statut = statut;
+	}
+
+
+
+	/**
+	 * @return the client
+	 */
+	public Client getClient() {
+		return client;
+	}
+
+
+
+	/**
+	 * @param client the client to set
+	 */
+	public void setClient(Client client) {
+		this.client = client;
 	}
 	
 	
