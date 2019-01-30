@@ -5,16 +5,15 @@ public class Impression {
 	private String format;
 	private String qualite;
 	private int nbExemplaire;
-	private int numCommande;
-	private String formatSupport;
-	private String qualiteSupport;
-	private String typeSupport;
+	private Commande cmd;
+	private Support support;
 	
-	public Impression(int id, String format, String qualite, int nbExemplaire) {
-		this.id = id;
+	public Impression(String format, String qualite, int nbExemplaire,Commande c,Support s) {
 		this.format = format;
 		this.qualite = qualite;
 		this.nbExemplaire = nbExemplaire;
+		this.cmd=c;
+		this.support=s;
 	}
 
 	public int getId() {
@@ -49,39 +48,34 @@ public class Impression {
 		this.nbExemplaire = nbExemplaire;
 	}
 
-	public String getFormatSupport() {
-		return formatSupport;
+	/**
+	 * @return the support
+	 */
+	public Support getSupport() {
+		return support;
 	}
 
-	public void setFormatSupport(String formatSupport) {
-		this.formatSupport = formatSupport;
+	/**
+	 * @param support the support to set
+	 */
+	public void setSupport(Support support) {
+		this.support = support;
 	}
 
-	public int getNumCommande() {
-		return numCommande;
+	/**
+	 * @return the cmd
+	 */
+	public Commande getCmd() {
+		return cmd;
 	}
 
-	public void setNumCommande(int numCommande) {
-		this.numCommande = numCommande;
+	/**
+	 * @param cmd the cmd to set
+	 */
+	public void setCmd(Commande cmd) {
+		this.cmd = cmd;
 	}
 
-	public String getQualiteSupport() {
-		return qualiteSupport;
-	}
-
-	public void setQualiteSupport(String qualiteSupport) {
-		this.qualiteSupport = qualiteSupport;
-	}
-
-	public String getTypeSupport() {
-		return typeSupport;
-	}
-
-	public void setTypeSupport(String typeSupport) {
-		this.typeSupport = typeSupport;
-	}
-	
-	
 	
 
 }

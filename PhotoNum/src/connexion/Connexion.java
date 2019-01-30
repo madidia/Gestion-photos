@@ -31,7 +31,7 @@ public class Connexion {
             conn = DriverManager.getConnection(dbUrl, username, password);
             SQLWarningsExceptions.printWarnings(conn);
             //conn.close() ;
-            System.out.println("connexion établi");
+            System.out.println("connexion etablie");
         } catch (SQLException se) {
             // Print information about SQL exceptions
             SQLWarningsExceptions.printExceptions(se);

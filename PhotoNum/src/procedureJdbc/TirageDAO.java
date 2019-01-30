@@ -13,11 +13,12 @@ public class TirageDAO extends ImpressionDAO{
       }
       
       public Tirage create(Tirage obj) {
-    	  super.create(new Impression(obj.getId(),obj.getFormat(),obj.getQualite(),obj.getNbExemplaire()));
+    	  Impression imp = super.create(new Impression(obj.getFormat(),obj.getQualite(),obj.getNbExemplaire(),obj.getCmd(),obj.getSupport()));
     	  try {
 			Statement stmt = super.conn.createStatement();
-			String query = "Insert into Tirage Values("+obj.getId()+","+obj.getFormat()+","+obj.getQualite()+")";
+			String query = "Insert into Tirage Values("+imp.getId()+","+obj.getFormat()+","+obj.getQualite()+")";
 			stmt.executeQuery(query);
+			obj.setId(imp.getId());
 			stmt.close();
 			return obj;
 		} catch (SQLException e) {
@@ -27,10 +28,11 @@ public class TirageDAO extends ImpressionDAO{
       }
       
       public Tirage update(Tirage obj) {
-    	  super.update(new Impression(obj.getId(),obj.getFormat(),obj.getQualite(),obj.getNbExemplaire()));
+    	  super.update(new Impression(obj.getFormat(),obj.getQualite(),obj.getNbExemplaire(),obj.getCmd(),obj.getSupport()));
     	  try {
 			Statement stmt = super.conn.createStatement();
-			String query = "UPDATE Tirage SET format = '"+obj.getFormat()+"', qualite = '"+obj.getQualite()+"'";
+			String query = "UPDATE Tirage SET format = '"+obj.getFormat()+"', qualite = '"+obj.getQualite()+"'"
+					+ "WHERE idImpression = '"+obj.getId()+"'";
 			stmt.executeQuery(query);
 			stmt.close();
 		} catch (SQLException e) {

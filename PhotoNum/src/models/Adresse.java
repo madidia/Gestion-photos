@@ -1,23 +1,16 @@
 package models;
 
 public class Adresse {
-	private String id;
+	private int id;
 	private String adresse;
-	private String mail;
+	private Utilisateur user;
 	
-	public Adresse(String id, String adresse, String mail) {
-		this.id = id;
+	public Adresse(int id,String adresse, Utilisateur user) {
+		this.id=id;
 		this.adresse = adresse;
-		this.setMail(mail);
+		this.user=user;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getAdresse() {
 		return adresse;
@@ -27,13 +20,39 @@ public class Adresse {
 		this.adresse = adresse;
 	}
 
-	public String getMail() {
-		return mail;
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
 	}
 
-	public void setMail(String mail) {
-		this.mail = mail;
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
+
+
+	/**
+	 * @return the user
+	 */
+	public Utilisateur getUser() {
+		return user;
+	}
+
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(Utilisateur user) {
+		this.user = user;
+	}
+
+	
 	
 	
 }

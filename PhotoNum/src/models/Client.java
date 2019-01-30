@@ -2,10 +2,13 @@ package models;
 
 import java.util.ArrayList;
 
+import procedureJdbc.ClientDAO;
+
 public class Client extends Utilisateur{
 	private String nom;
 	private String prenom;
 	private String password;
+	private ArrayList<Commande> ListCommande= new ArrayList<Commande>();
 	private ArrayList<CodePersonnel> ListCode= new ArrayList<CodePersonnel>();
 	private ArrayList<Adresse> ListAdresse= new ArrayList<Adresse>();
 	private ArrayList<Image> ListImage = new ArrayList<Image>();
@@ -38,6 +41,7 @@ public class Client extends Utilisateur{
 	}
 
 	public void setPassword(String password) {
+		
 		this.password = password;
 	}
 
@@ -45,24 +49,22 @@ public class Client extends Utilisateur{
 		return ListCode;
 	}
 
-	public void setListCode(ArrayList<CodePersonnel> listCode) {
-		ListCode = listCode;
-	}
-
 	public ArrayList<Adresse> getListAdresse() {
 		return ListAdresse;
-	}
-
-	public void setListAdresse(ArrayList<Adresse> listAdresse) {
-		ListAdresse = listAdresse;
 	}
 
 	public ArrayList<Image> getListImage() {
 		return ListImage;
 	}
-
-	public void setListImage(ArrayList<Image> listImage) {
-		ListImage = listImage;
+	
+	public ArrayList<Commande> getListCommande() {
+		return ListCommande;
+	}
+	
+	public void creerCommande(Commande c) {
+		
+		this.ListCommande.add(c);
+		
 	}
 	
 }

@@ -4,10 +4,10 @@ public class Agenda extends Impression{
     private String typeAgenda;
 	private String model;
 	
-	public Agenda(int idImp,String format, String qualite,int nbExp,String typeAgenda,String model) {
-		super(idImp,format,qualite,nbExp);
+	public Agenda(Impression imp,String typeAgenda,String modelAgenda) {
+		super(imp.getFormat(),imp.getQualite(),imp.getNbExemplaire(),imp.getCmd(),imp.getSupport());
+		this.setModel(modelAgenda);
 		this.setTypeAgenda(typeAgenda);
-		this.model = model;
 	}
 
 	public String getModel() {
