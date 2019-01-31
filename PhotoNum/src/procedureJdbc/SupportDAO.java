@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import models.Support;
+import src.models.Support;
 
 public class SupportDAO extends DAO<Support>{
 	@Override

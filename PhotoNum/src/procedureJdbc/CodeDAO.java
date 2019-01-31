@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import models.Code;
+import src.models.Code;
 
 public class CodeDAO extends DAO <Code>{
 	@Override

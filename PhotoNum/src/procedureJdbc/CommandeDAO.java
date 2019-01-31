@@ -3,8 +3,9 @@ package src.procedureJdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import models.CodePersonnel;
-import models.Commande;
+
+import src.models.CodePersonnel;
+import src.models.Commande;
 
 /***
  * quand on utilise un code je n'arrive pas à le supprimer "mutating table"

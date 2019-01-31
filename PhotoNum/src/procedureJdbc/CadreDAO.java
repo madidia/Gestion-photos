@@ -4,8 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import models.Cadre;
-import models.Impression;
+import src.models.Cadre;
+import src.models.Impression;
 
 public class CadreDAO extends ImpressionDAO{
     public Cadre find(int x) {

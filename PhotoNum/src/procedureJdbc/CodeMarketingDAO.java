@@ -3,8 +3,8 @@ package src.procedureJdbc;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import models.Code;
-import models.CodeMarketing;
+import src.models.Code;
+import src.models.CodeMarketing;
 
 public class CodeMarketingDAO extends CodeDAO{
 	

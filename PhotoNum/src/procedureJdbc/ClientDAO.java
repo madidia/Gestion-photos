@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import models.Client;
+import src.models.Client;
 
 public class ClientDAO extends UtilisateurDAO<Client> {
 

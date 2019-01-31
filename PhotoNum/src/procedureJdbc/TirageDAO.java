@@ -3,8 +3,8 @@ package src.procedureJdbc;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import models.Impression;
-import models.Tirage;
+import src.models.Impression;
+import src.models.Tirage;
 
 public class TirageDAO extends ImpressionDAO{
       public Tirage find(Long id) {

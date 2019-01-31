@@ -43,12 +43,6 @@ INSERT INTO Img VALUES('/sr/dd.png','cfernanando4@newsvine.com','7','oui',sysdat
 
 insert into UtiliseImage values ('sgidney0@typepad.com','/pe/ll.png');
 
-insert into Code VALUES('assane', 5);
-insert into CodePersonnel VALUES('assane', 5, 'sgidney0@typepad.com');
-
-
-
-
 
 
 

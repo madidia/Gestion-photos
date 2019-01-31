@@ -2,7 +2,7 @@ package src.models;
 
 import java.util.ArrayList;
 
-import procedureJdbc.ClientDAO;
+import src.procedureJdbc.ClientDAO;
 
 public class Client extends Utilisateur{
 	private String nom;

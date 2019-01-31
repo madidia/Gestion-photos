@@ -57,7 +57,9 @@ create table Operation(dateOp date primary key,
 
 --################################ CREATION DE LA TABLE Code ###########################
 create table Code(code varchar2(10) primary key,
-		 valeur integer not null);
+		 valeur integer not null,
+		utilise varchar2(4) not null,
+		constraint code_ck check (utilise in ( 'oui','non')));
 
 
 --################################ CREATION DE LA TABLE CodeMarketing ###########################
@@ -157,7 +159,7 @@ create table Tirage(idImpression integer primary key ,
 create table Album(idImpression integer primary key ,
 		   		   format varchar2(245) not null,
                    qualite varchar2(245) not null,
-                   couverture varchar2(245) not null,
+                   couverture integer not null,
                    titre varchar2(245) not null,
                    constraint a_fk1 foreign key (idImpression) references Impression(idImpression) ON DELETE CASCADE,
 		   		   constraint a_fk2 foreign key (couverture) references Photo(idPhoto) ON DELETE CASCADE);

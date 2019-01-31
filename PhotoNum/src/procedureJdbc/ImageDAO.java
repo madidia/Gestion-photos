@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import models.Image;
+import src.models.Image;
 
 public class ImageDAO extends DAO<Image>{
 	@Override

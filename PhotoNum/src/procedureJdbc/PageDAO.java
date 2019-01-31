@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import models.Page;
+import src.models.Page;
 
 public class PageDAO extends DAO<Page>{
 	@Override

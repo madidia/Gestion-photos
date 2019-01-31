@@ -4,8 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import models.Code;
-import models.CodePersonnel;
+import src.models.Code;
+import src.models.CodePersonnel;
 
 public class CodePersonnelDAO extends CodeDAO{
     public CodePersonnel find(String x) {

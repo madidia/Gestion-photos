@@ -4,8 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import models.Impression;
-import models.Agenda;
+import src.models.Agenda;
+import src.models.Impression;
 
 public class AgendaDAO extends ImpressionDAO{
     public Agenda find(int x) {

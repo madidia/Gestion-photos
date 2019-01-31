@@ -4,8 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import models.Album;
-import models.Impression;
+import src.models.Album;
+import src.models.Impression;
 
 public class AlbumDAO extends ImpressionDAO{
     public Album find(int x) {
