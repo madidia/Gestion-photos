@@ -3,7 +3,9 @@ package src.procedureJdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import src.models.Client;
 import src.models.Code;
 import src.models.CodePersonnel;
 
@@ -36,7 +38,8 @@ public class CodePersonnelDAO extends CodeDAO{
     	  super.create(new Code(obj.getIdCode(),obj.getValeur()));
     	 
   			Statement stmt = conn.createStatement();
-  			stmt.executeUpdate("Insert into CodePersonnel Values('"+obj.getIdCode()+"',"+obj.getValeur()+",'"+obj.getMail()+"')");
+  			stmt.executeUpdate("Insert into CodePersonnel Values('"+obj.getIdCode()+"',"+
+  					obj.getValeur()+",'"+obj.getMail()+"')");
   			///// ajouter un code pour le client correspondant
   			ClientDAO cdao = new ClientDAO();
   			cdao.find(obj.getMail()).getListCode().add(obj);
@@ -56,5 +59,28 @@ public class CodePersonnelDAO extends CodeDAO{
     		  conn.commit();
     	  
   		  return obj;
-    }
+      }
+      
+      public ArrayList<Code> getMesCodes(Client obj) throws SQLException{
+    	  ArrayList<Code> mesCodes=new ArrayList<>();
+    	  Statement stmt = conn.createStatement();
+    	  String query = "Select * from CodePersonnel where mailCP = '"+obj.getMail()+"'";
+      	  ResultSet rs = stmt.executeQuery(query);
+      	  Code c =null;
+      	  while(rs.next()){
+      		  c = new Code(rs.getString(1), rs.getInt(2));
+        	  mesCodes.add(c);
+      	  }
+      	  query = "Select * from CodeMarketing ";
+    	  ResultSet rs2 = stmt.executeQuery(query);
+    	  while(rs2.next()){
+      		  c = new Code(rs.getString(1), rs.getInt(2));
+        	  mesCodes.add(c);
+      	  }
+      	  rs.close();
+      	  stmt.close();
+      	  obj.setListCode(mesCodes);
+      	  return mesCodes;
+      }
+     
 }

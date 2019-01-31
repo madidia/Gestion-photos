@@ -7,7 +7,7 @@ public class Client extends Utilisateur{
 	private String prenom;
 	private String password;
 	private ArrayList<Commande> ListCommande= new ArrayList<Commande>();
-	private ArrayList<CodePersonnel> ListCode= new ArrayList<CodePersonnel>();
+	private ArrayList<Code> ListCode= new ArrayList<Code>();
 	private ArrayList<Adresse> ListAdresse= new ArrayList<Adresse>();
 	private ArrayList<Image> ListImage = new ArrayList<Image>();
 	
@@ -43,9 +43,7 @@ public class Client extends Utilisateur{
 		this.password = password;
 	}
 
-	public ArrayList<CodePersonnel> getListCode() {
-		return ListCode;
-	}
+	
 
 	public ArrayList<Adresse> getListAdresse() {
 		return ListAdresse;
@@ -63,6 +61,20 @@ public class Client extends Utilisateur{
 		
 		this.ListCommande.add(c);
 		
+	}
+
+	/**
+	 * @return the listCode
+	 */
+	public ArrayList<Code> getListCode() {
+		return ListCode;
+	}
+
+	/**
+	 * @param listCode the listCode to set
+	 */
+	public void setListCode(ArrayList<Code> listCode) {
+		ListCode = listCode;
 	}
 	
 }

@@ -113,6 +113,7 @@ public class Menu {
 
 		}
 		System.out.println("choisir un statut : en attente,en cours,pret a lenvoi,envoyee");
+		
 		String s = LectureClavier.lireChaine();
 		Commande cmd = new Commande(c, adresse, s, null);
 		
