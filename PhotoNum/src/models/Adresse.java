@@ -5,8 +5,7 @@ public class Adresse {
 	private String adresse;
 	private Utilisateur user;
 	
-	public Adresse(int id,String adresse, Utilisateur user) {
-		this.id=id;
+	public Adresse(String adresse, Utilisateur user) {
 		this.adresse = adresse;
 		this.user=user;
 	}
@@ -52,7 +51,6 @@ public class Adresse {
 		this.user = user;
 	}
 
-	
 	
 	
 }

@@ -3,7 +3,9 @@ package src.procedureJdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import src.models.Adresse;
 import src.models.Client;
 import src.models.LectureClavier;
 
@@ -14,21 +16,21 @@ public class ClientDAO extends UtilisateurDAO<Client> {
 	   	Statement stmt;
   	    Client clt = null;
 		 
-			String m="",prenom="",nom="",mdp="";
-			stmt = conn.createStatement();
-	    	String query1 = "Select * from ClientP where mailC = '"+mail+"' and mdpasseC = '"+pwd+"'";
-	    	ResultSet rs = stmt.executeQuery(query1);
-	    	if(rs.next()) {
-	    		m=rs.getString(1);
-	    		nom=rs.getString(2);
-	    		prenom=rs.getString(3);
-	    		mdp=rs.getString(4);
-		    	clt = new Client(m,nom,prenom,mdp);
-	    	}else {
-	    		System.out.println("Vos identifiants sont incorrects");
-	    	}
-	    	rs.close();
-	    	stmt.close();
+		String m="",prenom="",nom="",mdp="";
+		stmt = conn.createStatement();
+	    String query1 = "Select * from ClientP where mailC = '"+mail+"' and mdpasseC = '"+pwd+"'";
+	    ResultSet rs = stmt.executeQuery(query1);
+	    if(rs.next()) {
+	    	m=rs.getString(1);
+	   		nom=rs.getString(2);
+	   		prenom=rs.getString(3);
+	   		mdp=rs.getString(4);
+		   	clt = new Client(m,nom,prenom,mdp);
+	   	}else {
+	   		System.out.println("Vos identifiants sont incorrects");
+	   	}
+	   	rs.close();
+	   	stmt.close();
 		
 		return clt;
 	}
@@ -122,5 +124,23 @@ public class ClientDAO extends UtilisateurDAO<Client> {
 	public Client find(String id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public ArrayList<Adresse> getAdresse(Client obj) throws SQLException {
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT * FROM adresse where mailAC='"+obj.getMail()+"'");
+		ArrayList<Adresse> adresses = new ArrayList<>();
+		Adresse a;
+        while (rs.next()) {
+        	a = new Adresse(rs.getString(2), this.find(rs.getString(3)));
+            adresses.add(a);
+        }
+        if(adresses.size()==0) {
+        	System.out.println("Vous n'avez pas encore d'adresse enregistrée");
+        }
+        rs.close();
+        stmt.close();
+		return adresses;
 	}
 }

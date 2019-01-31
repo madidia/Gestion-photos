@@ -3,7 +3,6 @@ package src.procedureJdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import src.models.CodePersonnel;
 import src.models.Commande;
 
@@ -52,10 +51,13 @@ public class CommandeDAO extends DAO<Commande>{
 					cmd.getAdresse().getId()+","+cmd.getMontant()+")");
 				System.out.println("ajout reussi");
 			}
-			/** inserer la commande dans la BD **/
-			
 			/** mettre a jour l'id de la commande **/
 			cmd.setId(numeroCommande);
+			/** inserer les impressions liées à la commande dans la BD **/
+			ImpressionDAO impdao = new ImpressionDAO();
+			for(int i=0;i<cmd.getImpressions().size();i++) {
+				impdao.create(cmd.getImpressions().get(i));
+			}		
 			rs.close();
 			stmt.close();
 			/** si la commande est superieure a 100 alors creer un code **/
@@ -108,7 +110,7 @@ public class CommandeDAO extends DAO<Commande>{
 	}
 
 	@Override
-	public Commande saisir() {
+	public Commande saisir() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

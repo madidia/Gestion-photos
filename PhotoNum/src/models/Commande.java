@@ -13,10 +13,10 @@ public class Commande {
 	private Code code;
 	private ArrayList<Impression> impressions = new ArrayList<>();
 	
-	public Commande(Client client,Adresse adresse, Date date, String status, Code c) {
+	public Commande(Client client,Adresse adresse, String status, Code c) {
 		this.client=client;
-		this.setDate(date);
 		this.adresse=adresse;
+		this.date=new Date();
 		this.setStatut(status);
 		this.code=c;
 	}

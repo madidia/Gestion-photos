@@ -1,10 +1,13 @@
 package src.menu;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import src.models.Adresse;
 import src.models.Client;
 import src.models.Commande;
 import src.models.LectureClavier;
+import src.procedureJdbc.AdresseDAO;
 import src.procedureJdbc.ClientDAO;
 
 public class Menu {
@@ -23,22 +26,25 @@ public class Menu {
         System.out.println("| 3 | -> Créer un compte");
         System.out.println("| 0 | -> Quitter");
         int choix = LectureClavier.lireEntier("Veuillez entrer un choix");
+        Client c=null;
         switch(choix) {
         	case 1 : break;
-        	case 2 : Client c=this.connexionClient();
-        			if(c==null) {this.reessayerConnexion(c);}
+        	case 2 : c=this.connexionClient();
+        			if(c==null) {
+        				this.reessayerConnexion(c);
+        			}
         			else{
-        				this.menuClient();
+        				this.menuClient(c);
         			}
         			break;
-        	case 3 : this.creerUnClient();
-        			this.menuClient();break;
+        	case 3 :  c=this.creerUnClient();
+        			this.menuClient(c);break;
         	case 0 : System.out.println("Vous avez quitté l'application");break;
         }
 		return 0;
     }
 	
-	public int menuClient() throws SQLException {
+	public int menuClient(Client c) throws SQLException {
 		
 		System.out.println("----------------------------------");
         System.out.println("          ESPACE CLIENT           ");
@@ -51,18 +57,67 @@ public class Menu {
         System.out.println("| 0 | -> Quitter");
         int choix = LectureClavier.lireEntier("Veuillez entrer un choix");
         switch(choix) {
-        	case 1 : this.creerCommande();break;
+        	case 1 : this.creerCommande(c);break;
         	case 2 : break;
         	case 3 : this.creerUnClient();break;
         	case 0 : System.out.println("Vous avez quitté l'application");break;
         }
 		return 0;
     }
-
-	private Commande creerCommande() {
-		return null;
-		// TODO Auto-generated method stub
+	
+	private Adresse choixAdresse(Client c,ArrayList<Adresse> adrs) throws SQLException {
+		System.out.println("----------------------------------");
+        System.out.println("          CHOIX ADRESSE           ");
+        System.out.println("----------------------------------");
+        System.out.println("");
+        for (int i=0;i<adrs.size();i++) {
+        	
+        	System.out.println("|"+(i+1)+" | -> "+adrs.get(i).getAdresse());
+        }
+        int choix = LectureClavier.lireEntier(" > Choisissez le numero correspondant");
+        while(choix > adrs.size() && choix !=0) {
+        	choix = LectureClavier.lireEntier(" > Choisissez le numero correspondant");
+            System.out.println("| 0 | -> Retour espace client");
+        }
+        if(choix==0) {
+        	this.menuClient(c);
+        }
+        
+		return adrs.get(choix);
 		
+	}
+	
+	private Commande creerCommande(Client c) throws SQLException {
+		Adresse adresse=null;
+		ClientDAO cdao = new ClientDAO();
+		ArrayList<Adresse> adrs = cdao.getAdresse(c);
+		AdresseDAO adao = new AdresseDAO();
+		if(adrs.size()==0) {
+			System.out.println("Fournir une adresse de livraison");
+			adresse=adao.creerAdresse(c);
+		}else {
+	        System.out.println("| 1 | -> Saisir une nouvelle adresse");
+	        System.out.println("| 2 | -> Choisir une adresse");
+            System.out.println("| 0 | -> Retour espace client");
+	        int choix = LectureClavier.lireEntier("Veuillez entrer un choix");
+	        while(choix !=1 && choix !=0 && choix !=2) {
+	        	choix = LectureClavier.lireEntier(" > Choisissez un numero valide");
+	        }
+	        if(choix==1) {
+	        	adresse=adao.creerAdresse(c);
+	        }else if(choix==2) {
+	        	adresse=this.choixAdresse(c, adrs);
+	        }else {
+	        	this.menuClient(c);
+	        }
+
+		}
+		System.out.println("choisir un statut : en attente,en cours,pret a lenvoi,envoyee");
+		String s = LectureClavier.lireChaine();
+		Commande cmd = new Commande(c, adresse, s, null);
+		
+		
+		return cmd;
 	}
 
 	private Client creerUnClient() throws SQLException {

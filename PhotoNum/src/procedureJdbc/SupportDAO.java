@@ -3,6 +3,7 @@ package src.procedureJdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import src.models.Support;
 
@@ -20,7 +21,8 @@ public class SupportDAO extends DAO<Support>{
 			int qte=0;
 			double pu=0;
 			stmt = conn.createStatement();
-			String query = "Select * from Support where type ='"+typeid+"' and format ='"+formatid+"' and qualite='"+qualiteid+"' ";
+			String query = "Select * from Support where type ='"+typeid+"' and format ='"+
+					formatid+"' and qualite='"+qualiteid+"' ";
 			ResultSet rs = stmt.executeQuery(query);
 			
 			if(rs.next()){
@@ -75,16 +77,30 @@ public class SupportDAO extends DAO<Support>{
 	}
 
 	@Override
-	public void delete(Support obj) throws SQLException{
-		 
+	public void delete(Support obj) throws SQLException{ 
 		Statement stmt = conn.createStatement();	
 		stmt.executeUpdate("DELETE from Support WHERE type ='"+obj.getType()+
 				"' AND format ='"+obj.getFormat()+"'AND qualite = '"+obj.getQualite()+"'");
 		stmt.close();
 		conn.commit();
-		
 	}
-
+	
+	public ArrayList<Support> getAllSupport() throws SQLException{
+		Statement stmt = conn.createStatement();
+		String query = "Select * from Support ";
+		ResultSet rs = stmt.executeQuery(query);
+		Support supp=null;
+		ArrayList<Support> s = new ArrayList<>();
+		while(rs.next()){
+			supp = new Support(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getInt(5));
+			s.add(supp);
+		}
+		stmt.close();
+		rs.close();
+		return s;
+	}
+	
+	
 	@Override
 	public Support saisir() {
 		// TODO Auto-generated method stub

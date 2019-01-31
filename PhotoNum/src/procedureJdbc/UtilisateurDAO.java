@@ -1,6 +1,9 @@
 package src.procedureJdbc;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import src.models.Adresse;
 
 public abstract class UtilisateurDAO<T> extends DAO<T> {
 	
@@ -39,5 +42,7 @@ public abstract class UtilisateurDAO<T> extends DAO<T> {
 		 * @param obj
 		 */
 		public abstract void delete(T obj)throws SQLException;
+		
+		public abstract ArrayList<Adresse> getAdresse(T obj) throws SQLException;
 	
 }
