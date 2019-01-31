@@ -100,11 +100,4 @@ public class SupportDAO extends DAO<Support>{
 		return s;
 	}
 	
-	
-	@Override
-	public Support saisir() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

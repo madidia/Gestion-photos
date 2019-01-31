@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import src.models.Administrateur;
 import src.models.Adresse;
-import src.models.LectureClavier;
 
 public class AdministrateurDAO extends UtilisateurDAO<Administrateur> {
 
@@ -70,25 +69,6 @@ public class AdministrateurDAO extends UtilisateurDAO<Administrateur> {
 	public Administrateur find(long id) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public Administrateur saisir() throws SQLException {
-		String nom,prenom,email,mdp;
-		//----------------------nom----------------------
-        System.out.println("Veuillez saisir votre nom :");
-        nom=LectureClavier.lireChaine();
-        //----------------------prenom----------------------
-        System.out.println("Veuillez saisir votre prenom :");
-        prenom=LectureClavier.lireChaine();
-        //----------------------email----------------------
-        System.out.println("Veuillez saisir votre email :");
-        email=LectureClavier.lireChaine();
-        //----------------------mdp----------------------
-        System.out.println("Veuillez saisir votre mot de passe :");
-        mdp=LectureClavier.lireChaine();
-        Administrateur c = new Administrateur(email, nom, prenom, mdp);
-        return this.create(c);
 	}
 
 	@Override

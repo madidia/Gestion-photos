@@ -70,9 +70,4 @@ public class CodeDAO extends DAO <Code>{
 			
 	}
 
-	@Override
-	public Code saisir() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

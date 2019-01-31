@@ -75,9 +75,4 @@ public class ImageDAO extends DAO<Image>{
 		
     }
 
-	@Override
-	public Image saisir() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

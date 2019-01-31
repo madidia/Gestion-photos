@@ -95,10 +95,4 @@ public class AdresseDAO extends DAO<Adresse>{
 		return this.create(new Adresse(adr, c));
 	}
 	
-	@Override
-	public Adresse saisir() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

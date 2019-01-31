@@ -98,10 +98,4 @@ public class ImpressionDAO extends DAO<Impression>{
 		
 	}
 
-	@Override
-	public Impression saisir() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-    
 }

@@ -121,13 +121,38 @@ public class Menu {
 	}
 
 	private Client creerUnClient() throws SQLException {
-		ClientDAO c = new ClientDAO();
-		return c.saisir();		
+		
+		String nom,prenom,email,mdp;
+		//----------------------nom----------------------
+        System.out.println("Veuillez saisir votre nom :");
+        nom=LectureClavier.lireChaine();
+        //----------------------prenom----------------------
+        System.out.println("Veuillez saisir votre prenom :");
+        prenom=LectureClavier.lireChaine();
+        //----------------------email----------------------
+        System.out.println("Veuillez saisir votre email :");
+        email=LectureClavier.lireChaine();
+        //----------------------mdp----------------------
+        System.out.println("Veuillez saisir votre mot de passe :");
+        mdp=LectureClavier.lireChaine();
+        ClientDAO cdao = new ClientDAO();
+        Client c = new Client(email, nom, prenom, mdp);
+		return cdao.create(c);		
 	}
 	
 	private Client connexionClient() throws SQLException {
+		String mail,pwd;
+		System.out.println("----------------------------------");
+        System.out.println("       ESPACE DE CONNEXION        ");
+        System.out.println("----------------------------------");
+		//----------------------email----------------------
+        System.out.println("saisissez votre email :");
+        mail=LectureClavier.lireChaine();
+        //----------------------mdp----------------------
+        System.out.println("saisissez votre mot de passe :");
+        pwd=LectureClavier.lireChaine();
 		ClientDAO c = new ClientDAO();
-		return c.seConnecter();		
+        return c.find(mail, pwd);
 	}
 	
 	private Client reessayerConnexion(Client c) throws SQLException {

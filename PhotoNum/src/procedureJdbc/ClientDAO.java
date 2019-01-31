@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import src.models.Adresse;
 import src.models.Client;
-import src.models.LectureClavier;
 
 public class ClientDAO extends UtilisateurDAO<Client> {
 
@@ -87,39 +86,6 @@ public class ClientDAO extends UtilisateurDAO<Client> {
 		return null;
 	}
 
-	@Override
-	public Client saisir() throws SQLException {
-		String nom,prenom,email,mdp;
-		//----------------------nom----------------------
-        System.out.println("Veuillez saisir votre nom :");
-        nom=LectureClavier.lireChaine();
-        //----------------------prenom----------------------
-        System.out.println("Veuillez saisir votre prenom :");
-        prenom=LectureClavier.lireChaine();
-        //----------------------email----------------------
-        System.out.println("Veuillez saisir votre email :");
-        email=LectureClavier.lireChaine();
-        //----------------------mdp----------------------
-        System.out.println("Veuillez saisir votre mot de passe :");
-        mdp=LectureClavier.lireChaine();
-        Client c = new Client(email, nom, prenom, mdp);
-        this.create(c);
-		return c;
-	}
-
-	public Client seConnecter() throws SQLException {
-		String mail,pwd;
-		System.out.println("----------------------------------");
-        System.out.println("       ESPACE DE CONNEXION        ");
-        System.out.println("----------------------------------");
-		//----------------------email----------------------
-        System.out.println("saisissez votre email :");
-        mail=LectureClavier.lireChaine();
-        //----------------------mdp----------------------
-        System.out.println("saisissez votre mot de passe :");
-        pwd=LectureClavier.lireChaine();
-        return this.find(mail, pwd);
-	}
 	@Override
 	public Client find(String id) {
 		// TODO Auto-generated method stub

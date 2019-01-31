@@ -80,9 +80,4 @@ public class PageDAO extends DAO<Page>{
 		
 	}
 
-	@Override
-	public Page saisir() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

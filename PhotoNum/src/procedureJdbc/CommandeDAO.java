@@ -109,10 +109,4 @@ public class CommandeDAO extends DAO<Commande>{
 		return null;
 	}
 
-	@Override
-	public Commande saisir() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
