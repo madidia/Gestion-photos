@@ -1,0 +1,34 @@
+package src.menu;
+
+import src.models.LectureClavier;
+
+public class Menu {
+
+	
+	
+	
+	public int menuPrincipal() {
+		
+		System.out.println("-----------------------------");
+        System.out.println("            MENU             ");
+        System.out.println("-----------------------------");
+        System.out.println("");
+        System.out.println("| 1 | -> Connexion Administrateur");
+        System.out.println("| 2 | -> Connexion Client");
+        System.out.println("| 3 | -> Créer un compte");
+        System.out.println("| 0 | -> Quitter");
+        int choix = LectureClavier.lireEntier("Veuillez entrer un choix");
+        switch(choix) {
+        	case 1 : break;
+        	case 2 : break;
+        	case 3 : this.creerUnClient();break;
+        	case 0 : System.exit(0);
+        }
+		return 0;
+    }
+
+	private void creerUnClient() {
+		ClientDAO c = new ClientDAO();
+		c.saisir();		
+	}
+}

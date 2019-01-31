@@ -1,0 +1,9 @@
+package src.procedureJdbc1;
+
+public class DAOFactory {
+
+	public static UtilisateurDAO getSocieteDAO(){
+		
+		return new ClientDAO();
+	}
+}
