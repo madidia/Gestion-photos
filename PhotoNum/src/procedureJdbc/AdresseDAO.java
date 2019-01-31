@@ -58,7 +58,7 @@ public class AdresseDAO extends DAO<Adresse>{
 			c.find(obj.getUser().getMail()).getListAdresse().add(obj);
 			rs.close();
 			stmt.close();
-			conn.commit();
+			conn.commit();	
 		
 		return obj;
 	}
@@ -92,7 +92,8 @@ public class AdresseDAO extends DAO<Adresse>{
 	public Adresse creerAdresse(Client c) throws SQLException {
         System.out.println("Veuillez saisir votre adresse :");
         String adr=LectureClavier.lireChaine();
-		return this.create(new Adresse(adr, c));
+		Adresse a= this.create(new Adresse(adr, c));
+		return a;
 	}
 	
 }

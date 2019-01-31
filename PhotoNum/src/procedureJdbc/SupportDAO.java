@@ -47,15 +47,17 @@ public class SupportDAO extends DAO<Support>{
 
 	@Override
 	public Support create(Support obj) throws SQLException{
-		
 		 
 			Statement stmt = conn.createStatement();
+			conn.setAutoCommit(false);
+			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
 			String query = "Insert into Support Values('"+obj.getType()+"','"+obj.getFormat()+"',"
 					+ "'"+obj.getQualite()+"',"+obj.getQuantite()+","+obj.getPrix()+")";
 			
 			stmt.executeUpdate(query);
 			stmt.close();
-		 	conn.commit();
+			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
+			conn.commit();
 		
 		return obj;
 	 	 
@@ -65,11 +67,13 @@ public class SupportDAO extends DAO<Support>{
 	public Support update(Support obj) throws SQLException{
 		 
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("Update Support SET type ='"+obj.getType()+"',format = '"+obj.getFormat()+
-					"',qualite ='"+obj.getQualite()+"',quantite ='"+obj.getQuantite()+
-					",pu ='"+obj.getPrix()+"' where format ='"+obj.getFormat()+
+			conn.setAutoCommit(false);
+			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
+			stmt.executeUpdate("Update Support SET quantiteStock ="+obj.getQuantite()+
+					",pu ="+obj.getPrix()+" where format ='"+obj.getFormat()+
 					"' AND qualite ='"+obj.getQualite()+"' AND type ='"+obj.getType()+"'");
 			stmt.close();
+			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
 			conn.commit();
 			
 		
@@ -79,9 +83,12 @@ public class SupportDAO extends DAO<Support>{
 	@Override
 	public void delete(Support obj) throws SQLException{ 
 		Statement stmt = conn.createStatement();	
+		conn.setAutoCommit(false);
+		conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
 		stmt.executeUpdate("DELETE from Support WHERE type ='"+obj.getType()+
 				"' AND format ='"+obj.getFormat()+"'AND qualite = '"+obj.getQualite()+"'");
 		stmt.close();
+		conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
 		conn.commit();
 	}
 	

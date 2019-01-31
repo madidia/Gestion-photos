@@ -16,9 +16,12 @@ public class TirageDAO extends ImpressionDAO{
     	  Impression imp = super.create(new Impression(obj.getFormat(),obj.getQualite(),obj.getNbExemplaire(),obj.getCmd(),obj.getSupport()));
     	   
 			Statement stmt = conn.createStatement();
+			conn.setAutoCommit(false);
+			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
 			stmt.executeUpdate("Insert into Tirage Values("+imp.getId()+","+obj.getFormat()+","+obj.getQualite()+")");
 			obj.setId(imp.getId());
 			stmt.close();
+			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
 			conn.commit();
 			
 		
@@ -29,9 +32,12 @@ public class TirageDAO extends ImpressionDAO{
     	  super.update(new Impression(obj.getFormat(),obj.getQualite(),obj.getNbExemplaire(),obj.getCmd(),obj.getSupport()));
     	   
 			Statement stmt = conn.createStatement();
+			conn.setAutoCommit(false);
+			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
 			stmt.executeUpdate("UPDATE Tirage SET format = '"+obj.getFormat()+"', qualite = '"+obj.getQualite()+"'"
 					+ "WHERE idImpression = '"+obj.getId()+"'");
 			stmt.close();
+			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
 			conn.commit();
 		  
 		return obj;

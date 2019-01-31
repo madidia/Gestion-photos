@@ -12,8 +12,7 @@ public class AgendaDAO extends ImpressionDAO {
       Agenda ag =  null;
       Impression imp = super.find(x);
       Statement stmt;
-        
-    	  
+       
     	  stmt = conn.createStatement();
     	  String typeAgenda="",modele="";
       	  String query = "Select * from Agenda where idImpression = '"+x+"'";
@@ -33,12 +32,15 @@ public class AgendaDAO extends ImpressionDAO {
   			  obj.getNbExemplaire(),obj.getCmd(),obj.getSupport()));
   	    
 			Statement stmt = conn.createStatement();
+			conn.setAutoCommit(false);
+  		    conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
 			stmt.executeUpdate("Insert into Agenda Values("+imp.getId()+",'"+obj.getFormat()+"','"+
 					obj.getQualite()+"','"+obj.getTypeAgenda()+"','"+obj.getModel()+"')");
 			
 			obj.setId(imp.getId());
 			stmt.close();
-			conn.commit();
+			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
+  			conn.commit();
 		
 		return obj;
     }
@@ -47,10 +49,13 @@ public class AgendaDAO extends ImpressionDAO {
   	  super.update(new Impression(obj.getFormat(),obj.getQualite(),obj.getNbExemplaire(),obj.getCmd(),obj.getSupport()));
   	    
 		Statement stmt = conn.createStatement();
+		conn.setAutoCommit(false);
+		conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
 		stmt.executeUpdate("Update Agenda SET format ='"+obj.getFormat()+"',qualite='"+obj.getQualite()+
 				"',typeAgenda ='"+obj.getTypeAgenda()+"'"+ ",model ='"+obj.getModel()+
 				"' WHERE idImpression ='"+obj.getId()+"'");
 		stmt.close();
+		conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
 		conn.commit();
   	  
 		return obj;

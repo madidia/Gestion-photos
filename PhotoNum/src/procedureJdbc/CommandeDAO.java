@@ -3,6 +3,9 @@ package src.procedureJdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import src.models.Client;
 import src.models.CodePersonnel;
 import src.models.Commande;
 
@@ -17,7 +20,8 @@ public class CommandeDAO extends DAO<Commande>{
 		int numeroCommande=0;
 		Statement stmt=null;
 		ResultSet rs=null;
-		 
+		conn.setAutoCommit(false);
+		conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
 			/** recuperer l'id max dans commande **/
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("select max(numCommande) from commande");
@@ -35,7 +39,7 @@ public class CommandeDAO extends DAO<Commande>{
 				System.out.println("code non null");
 				stmt.executeUpdate("insert into commande(numCommande,mail,dateComm,idAdresse,montant,code) "
 						+ "values("+numeroCommande+",'"+cmd.getClient().getMail()+"',sysdate,"+
-						cmd.getAdresse().getId()+","+cmd.getMontant()+",'"+cmd.getCode().getIdCode()+"')");
+						cmd.getAdresseLivraison().getId()+","+cmd.getMontant()+",'"+cmd.getCode().getIdCode()+"')");
 				System.out.println("ajout reussi");
 				
 				
@@ -48,18 +52,12 @@ public class CommandeDAO extends DAO<Commande>{
 				
 				stmt.executeUpdate("insert into commande(numCommande,mail,dateComm,idAdresse,montant) "
 					+ "values("+numeroCommande+",'"+cmd.getClient().getMail()+"',sysdate,"+
-					cmd.getAdresse().getId()+","+cmd.getMontant()+")");
+					cmd.getAdresseLivraison().getId()+","+cmd.getMontant()+")");
 				System.out.println("ajout reussi");
 			}
 			/** mettre a jour l'id de la commande **/
 			cmd.setId(numeroCommande);
-			/** inserer les impressions liées à la commande dans la BD **/
-			ImpressionDAO impdao = new ImpressionDAO();
-			for(int i=0;i<cmd.getImpressions().size();i++) {
-				impdao.create(cmd.getImpressions().get(i));
-			}		
-			rs.close();
-			stmt.close();
+			
 			/** si la commande est superieure a 100 alors creer un code **/
 			if(cmd.getMontant()>100) {
 				CodePersonnel c = new CodePersonnel("", 5,cmd.getClient().getMail());
@@ -67,8 +65,11 @@ public class CommandeDAO extends DAO<Commande>{
 				CodePersonnelDAO cpdao = new CodePersonnelDAO();
 				c.setIdCode(moncode);
 				cpdao.create(c);
-			}				
-			conn.commit();	
+			}	
+			rs.close();
+			stmt.close();
+			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
+			conn.commit();
 						  
 		return cmd;
 	}
@@ -77,10 +78,13 @@ public class CommandeDAO extends DAO<Commande>{
 	public Commande update(Commande obj) throws SQLException {
 		 
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("Update Commande SET idAdresse ="+obj.getAdresse().getId()+",statut ='"+
+			conn.setAutoCommit(false);
+			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
+			stmt.executeUpdate("Update Commande SET idAdresse ="+obj.getAdresseLivraison().getId()+",statut ='"+
 			obj.getStatut()+"',code ='"+obj.getCode().getIdCode()+"',montant ="+
 					obj.getMontant()+" where numCommande ="+obj.getId()+" AND statut !='en attente'");
 			stmt.close();
+			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
 			conn.commit();
 		
 		return obj;
@@ -89,13 +93,35 @@ public class CommandeDAO extends DAO<Commande>{
 	@Override
 	public void delete(Commande obj) throws SQLException {
 		 
-			Statement stmt = conn.createStatement();	
+			Statement stmt = conn.createStatement();
+			conn.setAutoCommit(false);
+			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
 			stmt.executeUpdate("DELETE from Commande WHERE numCommande ='"+obj.getId()+"'");
 			stmt.close();
-			conn.commit();
-			
+			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
+			conn.commit();	
 		
 	}
+	
+	public ArrayList<Commande> getAllCommande(Client c) throws SQLException{
+		
+		Statement stmt = conn.createStatement();
+		String query = "Select * from Commande ";
+		ResultSet rs = stmt.executeQuery(query);
+		Commande cmd=null;
+		ArrayList<Commande> cm = new ArrayList<>();
+		AdresseDAO adao = new AdresseDAO();
+		CodeDAO cdao = new CodeDAO();
+		while(rs.next()){
+			cmd = new Commande(c, adao.find(rs.getInt(4)), rs.getString(5), cdao.find(rs.getString(7)));
+			cm.add(cmd);
+		}
+		stmt.close();
+		rs.close();
+		return cm;
+		
+	}
+	
 
 	@Override
 	public Commande find(String id) {

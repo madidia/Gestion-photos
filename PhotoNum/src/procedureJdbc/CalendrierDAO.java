@@ -32,11 +32,14 @@ public class CalendrierDAO extends ImpressionDAO{
     			  obj.getNbExemplaire(),obj.getCmd(),obj.getSupport()));
     	   
   			Statement stmt = conn.createStatement();
+  			conn.setAutoCommit(false);
+  			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
   			stmt.executeUpdate("Insert into Calendrier Values("+imp.getId()+",'"+
   					obj.getFormat()+"','"+obj.getQualite()+"','"+obj.getModel()+"')");
   			obj.setId(imp.getId());
   			stmt.close();
-  			conn.commit();
+  			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
+			conn.commit();
   			return obj;
   		
       }
@@ -46,11 +49,14 @@ public class CalendrierDAO extends ImpressionDAO{
     			  obj.getCmd(),obj.getSupport()));
     	   
   		Statement stmt = conn.createStatement();
+  		conn.setAutoCommit(false);
+		conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
   		stmt.executeUpdate("Update Calendrier SET format ='"+obj.getFormat()+
   				"',qualite='"+obj.getQualite()+"'"
   				+ ",model ='"+obj.getModel()+"' WHERE idImpression ='"+obj.getId()+"'");
   		stmt.close();
-  		conn.commit();
+  		conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
+		conn.commit();
   	
   		return obj;
     }

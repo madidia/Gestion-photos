@@ -56,5 +56,10 @@ public class Support {
 		this.prix = prix;
 	}
 	
+	public String getMonSupport() {
+		return "Type : "+this.getType()+", format :"+this.getFormat()+",qualite :"+
+				this.getQualite()+", PU :"+this.getPrix()+", quantite disponible :"+this.getQuantite();
+	}
+	
 	
 }

@@ -7,7 +7,7 @@ public class Commande {
 	private int id;
 	private Client client;
 	private Date date;
-	private Adresse adresse;
+	private Adresse adresseLivraison;
 	private double montant;
 	private String statut;
 	private Code code;
@@ -15,12 +15,15 @@ public class Commande {
 	
 	public Commande(Client client,Adresse adresse, String status, Code c) {
 		this.client=client;
-		this.adresse=adresse;
+		this.setAdresseLivraison(adresse);
 		this.date=new Date();
 		this.setStatut(status);
 		this.code=c;
 	}
 
+	public void setIdLivraison(int i) {
+		this.getAdresseLivraison().setId(i);
+	}
 	
 
 	public void calculeMontant(ArrayList<Impression> imp) {
@@ -52,21 +55,6 @@ public class Commande {
 	 */
 	public void setImpressions(ArrayList<Impression> impressions) {
 		this.impressions = impressions;
-	}
-
-	
-	/**
-	 * @return the idAdresse
-	 */
-	public Adresse getAdresse() {
-		return adresse;
-	}
-
-	/**
-	 * @param idAdresse the idAdresse to set
-	 */
-	public void setAdresse(Adresse adresse) {
-		this.adresse = adresse;
 	}
 
 	/**
@@ -125,7 +113,7 @@ public class Commande {
 	 * @return the montant
 	 */
 	public double getMontant() {
-		this.calculeMontant(this.impressions);
+		this.calculeMontant(this.getImpressions());
 		return montant;
 	}
 
@@ -174,6 +162,28 @@ public class Commande {
 		this.client = client;
 	}
 	
+	public String getStringCommande() {
+		return "N° de commande :"+this.getId()+", montant de la commande :"+this.getMontant()
+			+", adresse de livraison :"+this.getAdresseLivraison().getAdresse();
+	}
+
+
+
+	/**
+	 * @return the adresseLivraison
+	 */
+	public Adresse getAdresseLivraison() {
+		return adresseLivraison;
+	}
+
+
+
+	/**
+	 * @param adresseLivraison the adresseLivraison to set
+	 */
+	public void setAdresseLivraison(Adresse adresseLivraison) {
+		this.adresseLivraison = adresseLivraison;
+	}
 	
 	
 }

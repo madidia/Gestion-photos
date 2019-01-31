@@ -7,14 +7,14 @@ public class Image {
 	private int resolution;
 	private String partage;
 	private Date dateDUtilisation;
-	private String mailProprio;
+	private Client proprio;
 	
-	public Image(String chemin,String mail,int resolution,String partage) {
+	public Image(String chemin,Client client,int resolution,String partage) {
 		this.chemin = chemin;
 		this.setResolution(resolution);
 		this.dateDUtilisation = new Date();
 		this.partage = partage;
-		this.setMailProprio(mail);
+		this.proprio = client;
 	}
 
 	public String getChemin() {
@@ -41,20 +41,20 @@ public class Image {
 		this.dateDUtilisation = dateDUtilisation;
 	}
 
-	public String getMailProprio() {
-		return mailProprio;
-	}
-
-	public void setMailProprio(String mailProprio) {
-		this.mailProprio = mailProprio;
-	}
-
 	public int getResolution() {
 		return resolution;
 	}
 
 	public void setResolution(int resolution) {
 		this.resolution = resolution;
+	}
+
+	public Client getProprio() {
+		return proprio;
+	}
+
+	public void setProprio(Client proprio) {
+		this.proprio = proprio;
 	}
 	
 }

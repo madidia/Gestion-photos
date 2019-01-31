@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class Album extends Impression{
 
 	private String titre;
-	private String couverture;
+	private int couverture;
 	private ArrayList<Page> pageAlb = new ArrayList<Page>();
 	
-	public Album(Impression imp,String titre, String couverture) {
+	public Album(Impression imp,String titre, int i) {
 		super(imp.getFormat(),imp.getQualite(),imp.getNbExemplaire(),imp.getCmd(),imp.getSupport());
-		this.setCouverture(couverture);
+		this.setCouverture(i);
 		this.setTitre(titre);
 	}
 
@@ -29,20 +29,6 @@ public class Album extends Impression{
 	}
 
 	/**
-	 * @return the couverture
-	 */
-	public String getCouverture() {
-		return couverture;
-	}
-
-	/**
-	 * @param couverture the couverture to set
-	 */
-	public void setCouverture(String couverture) {
-		this.couverture = couverture;
-	}
-
-	/**
 	 * @return the pageAlb
 	 */
 	public ArrayList<Page> getPageAlb() {
@@ -54,6 +40,14 @@ public class Album extends Impression{
 	 */
 	public void setPageAlb(ArrayList<Page> pageAlb) {
 		this.pageAlb = pageAlb;
+	}
+
+	public int getCouverture() {
+		return couverture;
+	}
+
+	public void setCouverture(int couverture) {
+		this.couverture = couverture;
 	}
 
 	

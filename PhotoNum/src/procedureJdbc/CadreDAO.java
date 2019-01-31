@@ -38,10 +38,13 @@ public class CadreDAO extends ImpressionDAO{
     			  obj.getNbExemplaire(),obj.getCmd(),obj.getSupport()));
     	    
   			Statement stmt = conn.createStatement();
+  			conn.setAutoCommit(false);
+  			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
   			stmt.executeUpdate("Insert into Cadre Values("+imp.getId()+",'"+obj.getFormat()
   				+"','"+obj.getQualite()+"','"+obj.getTaille()+"','"+obj.getModel()+"')");
   			obj.setId(imp.getId());
   			stmt.close();
+  			conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
   			conn.commit();
   		
   		return obj;
@@ -51,10 +54,13 @@ public class CadreDAO extends ImpressionDAO{
     	  super.create(new Impression(obj.getFormat(),obj.getQualite(),obj.getNbExemplaire(),obj.getCmd(),obj.getSupport()));
     	    
     		  Statement stmt = conn.createStatement();
+    		  conn.setAutoCommit(false);
+    		  conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
     		  stmt.executeUpdate("Update Cadre SET format ='"+obj.getFormat()+"',qualite='"+obj.getQualite()
     		  	+"',taille ='"+obj.getTaille()+"',model ='"+obj.getModel()+"' WHERE idImpression ='"+obj.getId()+"'");
     		  stmt.close();
-    		 conn.commit();
+    		  conn.setTransactionIsolation(conn.TRANSACTION_SERIALIZABLE);
+    		  conn.commit();
     	  
     	  return obj;
       }

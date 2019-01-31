@@ -80,6 +80,9 @@ public class CodePersonnelDAO extends CodeDAO{
       	  rs.close();
       	  stmt.close();
       	  obj.setListCode(mesCodes);
+      	  if(mesCodes.size()>0) {
+      		  System.out.println("Vous n avez pas de code reduction");
+      	  }
       	  return mesCodes;
       }
      

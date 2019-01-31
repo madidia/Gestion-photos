@@ -3,14 +3,13 @@ package src.models;
 public class Photo {
 
 	private int id;
-	private String chemin;
-	private String resolution;
+	private Image img;
+	private int resolution;
 	private String parametre;
 	
-	public Photo(int id, String chemin, String resolution, String parametre) {
-		this.id = id;
-		this.chemin = chemin;
-		this.resolution = resolution;
+	public Photo(Image img, int resolution, String parametre) {
+		this.setImg(img);
+		this.setResolution(resolution);
 		this.parametre = parametre;
 	}
 
@@ -22,28 +21,28 @@ public class Photo {
 		this.id = id;
 	}
 
-	public String getChemin() {
-		return chemin;
-	}
-
-	public void setChemin(String chemin) {
-		this.chemin = chemin;
-	}
-
-	public String getResolution() {
-		return resolution;
-	}
-
-	public void setResolution(String resolution) {
-		this.resolution = resolution;
-	}
-
 	public String getParametre() {
 		return parametre;
 	}
 
 	public void setParametre(String parametre) {
 		this.parametre = parametre;
+	}
+
+	public Image getImg() {
+		return img;
+	}
+
+	public void setImg(Image img) {
+		this.img = img;
+	}
+
+	public int getResolution() {
+		return resolution;
+	}
+
+	public void setResolution(int resolution) {
+		this.resolution = resolution;
 	}
 	
 	
