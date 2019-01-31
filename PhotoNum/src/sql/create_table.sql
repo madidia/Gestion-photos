@@ -29,8 +29,6 @@ DROP TABLE ClientP;
 DROP TABLE Utilisateur;
 
 
-set linesize 32767
-
 --################################ CREATION DE LA TABLE Utilisateur ###########################
 create table Utilisateur(mailU varchar2(245) primary key);
 

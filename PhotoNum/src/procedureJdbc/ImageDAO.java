@@ -9,20 +9,19 @@ import src.models.Image;
 
 public class ImageDAO extends DAO<Image>{
 	@Override
-	public Image find(String id) {
+	public Image find(String id) throws SQLException {
 		this.ProcedureImg();
 		Image img = null;
-		try {
+		 
 			Statement stmt = conn.createStatement();
 			String query = "Select * from Img where chemin = '"+id+"'";
 			ResultSet rs = stmt.executeQuery(query);
-			if(rs.next())
-			{
+			if(rs.next()){
 				img = new Image(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getString(4));	
+			}else {
+				System.out.println("Cette image n'hexiste pas");
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return img;
 	}
 
@@ -33,55 +32,47 @@ public class ImageDAO extends DAO<Image>{
 	}
 
 	@Override
-	public Image create(Image obj) {
+	public Image create(Image obj) throws SQLException {
 		this.ProcedureImg();
-		try {
+		 
 			Statement stmt = conn.createStatement();
-			String query = "Insert into Img VALUES('"+obj.getChemin()+"','"+obj.getMailProprio()+"',"+obj.getResolution()+",'"+obj.isPartage()+"'"
-					+ ",'"+obj.getDateDUtilisation()+"')";
-			if(this.find(obj.getChemin()) == null) {
-				stmt.executeQuery(query);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			stmt.executeUpdate("Insert into Img VALUES('"+obj.getChemin()
+				+"','"+obj.getMailProprio()+"',"+obj.getResolution()+",'"+obj.isPartage()+"'"
+					+ ",'"+obj.getDateDUtilisation()+"')");
 		return obj;
 	}
 
 	@Override
-	public Image update(Image obj) {
+	public Image update(Image obj) throws SQLException {
 		this.ProcedureImg();
-		try {
+		 
 		Statement stmt = conn.createStatement();
-		String query = "Update Img mail = '"+obj.getMailProprio()+"',"
+		stmt.executeUpdate("Update Img mail = '"+obj.getMailProprio()+"',"
 				+ "resolution ='"+obj.getResolution()+"',partagee ='"+obj.isPartage()+"'"
-				+ ",dateDerniereUtilisation ='"+obj.getDateDUtilisation()+"' where chemin = '"+obj.getChemin()+"'";
-		stmt.executeQuery(query);
-		} catch (SQLException e) {
-		e.printStackTrace();
-		}
+				+ ",dateDerniereUtilisation ='"+obj.getDateDUtilisation()
+				+"' where chemin = '"+obj.getChemin()+"'");
+		stmt.close();
+		conn.commit();
+		
 		return obj;
 	}
 
 	@Override
-	public void delete(Image obj) {
+	public void delete(Image obj) throws SQLException {
 		this.ProcedureImg();
-		try {
+		 
 			Statement stmt = conn.createStatement();
-			String query ="DELETE ON Img where chemin = '"+obj.getChemin()+"')";
-			stmt.executeQuery(query);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			stmt.executeUpdate("DELETE from Img where chemin = '"+obj.getChemin()+"')");
+			stmt.close();
+		conn.commit();
+		
 	}
 	
-    public void ProcedureImg() {
-    	try {
+    public void ProcedureImg() throws SQLException {
+    	 
 			CallableStatement stmt = conn.prepareCall("{call SuppressionImage()}");
 			stmt.executeQuery();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
     }
 
 	@Override

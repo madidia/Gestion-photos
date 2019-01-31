@@ -2,11 +2,9 @@ package src.main;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.Date;
 
 import src.connexion.Connexion;
 import src.menu.Menu;
-import src.models.*;
 import src.procedureJdbc.*;
 
 public class Test {

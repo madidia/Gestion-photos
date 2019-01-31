@@ -14,9 +14,9 @@ public class PageDAO extends DAO<Page>{
 	}
 
 	@Override
-	public Page find(long id) {
+	public Page find(long id) throws SQLException {
 		Page page = null;
-		try {
+		 
 			Statement stmt = conn.createStatement();
 			int idpage=0,numPage=0,numImp=0;
 			
@@ -29,18 +29,17 @@ public class PageDAO extends DAO<Page>{
 				ImpressionDAO impd = new ImpressionDAO();
 				page = new Page(numPage,impd.find(numImp));
 				page.setId(idpage);
+			}else {
+				System.out.println("Cette page n'hexiste pas");
 			}
 			stmt.close();
-			conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return page;
 	}
 
 	@Override
-	public Page create(Page obj) {
-		try {
+	public Page create(Page obj) throws SQLException {
+		 
 			int numPage = 0;
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("select max(idPage) from Pge");
@@ -53,38 +52,32 @@ public class PageDAO extends DAO<Page>{
 			obj.setId(numPage);
 			stmt.close();
 			conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return obj;
 	}
 
 	@Override
-	public Page update(Page obj) {
-		try {
+	public Page update(Page obj) throws SQLException {
+		 
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("Update Pge SET numPage ='"+obj.getNumero()+"' where idPage = '"+obj.getId()+"'");
+			stmt.executeUpdate("Update Pge SET numPage ='"+obj.getNumero()
+				+"' where idPage = '"+obj.getId()+"'");
 			
 			stmt.close();
 			conn.commit();
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return obj;
 	}
 
 	@Override
-	public void delete(Page obj) {
-		try {
+	public void delete(Page obj) throws SQLException {
+		 
 			Statement stmt = conn.createStatement();
-			String query = "DELETE FROM Pge WHERE idPage = '"+obj.getId()+"'";
-			stmt.executeQuery(query);
+			stmt.executeUpdate("DELETE FROM Pge WHERE idPage = '"+obj.getId()+"'");
 			stmt.close();
 			conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}	
+		
 	}
 
 	@Override

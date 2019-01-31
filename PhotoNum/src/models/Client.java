@@ -2,8 +2,6 @@ package src.models;
 
 import java.util.ArrayList;
 
-import src.procedureJdbc.ClientDAO;
-
 public class Client extends Utilisateur{
 	private String nom;
 	private String prenom;

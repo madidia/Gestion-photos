@@ -14,11 +14,11 @@ import src.models.Commande;
 public class CommandeDAO extends DAO<Commande>{
 
 	@Override
-	public Commande create(Commande cmd) {
+	public Commande create(Commande cmd) throws SQLException {
 		int numeroCommande=0;
 		Statement stmt=null;
 		ResultSet rs=null;
-		try {
+		 
 			/** recuperer l'id max dans commande **/
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("select max(numCommande) from commande");
@@ -65,45 +65,33 @@ public class CommandeDAO extends DAO<Commande>{
 				CodePersonnelDAO cpdao = new CodePersonnelDAO();
 				c.setIdCode(moncode);
 				cpdao.create(c);
-				/***stmt.executeUpdate("insert into code values ('"+moncode+"',"+5+")");
-				stmt.executeUpdate("insert into codePersonnel values('"+moncode+"',"+5+",'"+
-									cmd.getClient().getMail()+"')");
-				cmd.getClient().getListCode().add(c);*****/
-				
 			}				
 			conn.commit();	
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 					  
+						  
 		return cmd;
 	}
 	
 	@Override
-	public Commande update(Commande obj) {
-		try {
+	public Commande update(Commande obj) throws SQLException {
+		 
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("Update Commande SET idAdresse ="+obj.getAdresse().getId()+",statut ='"+
 			obj.getStatut()+"',code ='"+obj.getCode().getIdCode()+"',montant ="+
 					obj.getMontant()+" where numCommande ="+obj.getId()+" AND statut !='en attente'");
 			stmt.close();
 			conn.commit();
-		} catch (SQLException e) {
-		e.printStackTrace();
-		}
+		
 		return obj;
 	}
 
 	@Override
-	public void delete(Commande obj) {
-		try {
+	public void delete(Commande obj) throws SQLException {
+		 
 			Statement stmt = conn.createStatement();	
 			stmt.executeUpdate("DELETE from Commande WHERE numCommande ='"+obj.getId()+"'");
 			stmt.close();
 			conn.commit();
-			} catch(SQLException e) {
-				e.printStackTrace();
-			}
+			
 		
 	}
 

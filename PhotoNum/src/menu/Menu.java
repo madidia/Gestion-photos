@@ -1,5 +1,7 @@
 package src.menu;
 
+import java.sql.SQLException;
+
 import src.models.Client;
 import src.models.Commande;
 import src.models.LectureClavier;
@@ -10,7 +12,7 @@ public class Menu {
 	
 	
 	
-	public int menuPrincipal() {
+	public int menuPrincipal() throws SQLException {
 		
 		System.out.println("----------------------------------");
         System.out.println("            MENU                  ");
@@ -36,7 +38,7 @@ public class Menu {
 		return 0;
     }
 	
-	public int menuClient() {
+	public int menuClient() throws SQLException {
 		
 		System.out.println("----------------------------------");
         System.out.println("          ESPACE CLIENT           ");
@@ -63,17 +65,17 @@ public class Menu {
 		
 	}
 
-	private Client creerUnClient() {
+	private Client creerUnClient() throws SQLException {
 		ClientDAO c = new ClientDAO();
 		return c.saisir();		
 	}
 	
-	private Client connexionClient() {
+	private Client connexionClient() throws SQLException {
 		ClientDAO c = new ClientDAO();
 		return c.seConnecter();		
 	}
 	
-	private Client reessayerConnexion(Client c) {
+	private Client reessayerConnexion(Client c) throws SQLException {
 		int i=0;
 		boolean rep=LectureClavier.lireOuiNon("Voulez-vous reessayer ?");
 		while((i<3 && c==null)&& rep) {

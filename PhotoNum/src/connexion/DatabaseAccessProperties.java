@@ -6,8 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.Scanner;
-
 /**
  * The BenchmarkProperties class describes the properties of the benchmark to
  * run.
@@ -36,14 +34,9 @@ public class DatabaseAccessProperties {
                     + e.getMessage());
             e.printStackTrace();
         }
-        //Scanner sc = new Scanner(System.in);
         jdbcDriver = prop.getProperty("jdbc.driver");
         dbUrl = prop.getProperty("database.url");
-        //System.out.println("user name");
-       // username = sc.nextLine();
-        //System.out.println("pass word");
-        //password = sc.nextLine();
-        //sc.close();
+        
        username = prop.getProperty("database.username");
        password = prop.getProperty("database.password");
    

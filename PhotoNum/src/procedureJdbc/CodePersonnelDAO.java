@@ -8,10 +8,10 @@ import src.models.Code;
 import src.models.CodePersonnel;
 
 public class CodePersonnelDAO extends CodeDAO{
-    public CodePersonnel find(String x) {
+    public CodePersonnel find(String x) throws SQLException {
         CodePersonnel cp =  null;
         Statement stmt;
-        try {
+        
       	  stmt = conn.createStatement();
       	  String mail="",code="";
       	  int valeur=0;
@@ -21,21 +21,20 @@ public class CodePersonnelDAO extends CodeDAO{
       		  code=rs.getString(1);
       		  valeur=rs.getInt(2);
       		  mail=rs.getString(3);
+      		  cp = new CodePersonnel(code, valeur, mail);
+        	  rs.close();
+        	  stmt.close();
+      	  }else {
+      		  System.out.println("Ce code n'hexiste pas");
       	  }
-      	  cp = new CodePersonnel(code, valeur, mail);
-      	  rs.close();
-      	  stmt.close();
-      	  conn.commit();
-        }
-        catch(SQLException e1) {
-      	  e1.printStackTrace();
-        }
+      	  
+        
   	  return cp;  
       }
       
-      public CodePersonnel create(CodePersonnel obj) {
+      public CodePersonnel create(CodePersonnel obj) throws SQLException {
     	  super.create(new Code(obj.getIdCode(),obj.getValeur()));
-    	  try {
+    	 
   			Statement stmt = conn.createStatement();
   			stmt.executeUpdate("Insert into CodePersonnel Values('"+obj.getIdCode()+"',"+obj.getValeur()+",'"+obj.getMail()+"')");
   			///// ajouter un code pour le client correspondant
@@ -43,23 +42,19 @@ public class CodePersonnelDAO extends CodeDAO{
   			cdao.find(obj.getMail()).getListCode().add(obj);
   			stmt.close();
   			conn.commit();			
-  		} catch (SQLException e) {
-  			e.printStackTrace();
-  		}
+  		
   		return obj;
       }
       
-      public CodePersonnel update(CodePersonnel obj) {
+      public CodePersonnel update(CodePersonnel obj) throws SQLException {
     	  super.update(new Code(obj.getIdCode(),obj.getValeur()));
-    	  try {
+    	  
     		  Statement stmt = conn.createStatement();
     		  stmt.executeUpdate("Update CodePersonnel SET valeurCP='"+obj.getValeur()
     		  	+"',mailCP ='"+obj.getMail()+"' WHERE CodeCP ='"+obj.getIdCode()+"'");
     		  stmt.close();
     		  conn.commit();
-    	  } catch (SQLException e) {
-    		  e.printStackTrace();
-    	  }
+    	  
   		  return obj;
     }
 }

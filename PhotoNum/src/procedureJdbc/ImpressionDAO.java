@@ -15,11 +15,11 @@ public class ImpressionDAO extends DAO<Impression>{
 	}
 
 	@Override
-	public Impression find(long id) {
+	public Impression find(long id) throws SQLException {
 		id = (int) id;
 		Impression imp  = null;
 	   	Statement stmt;
-		try {
+		 
 			stmt = conn.createStatement();
 			int nb=0,numc=0;
 			String format="",qualite="";
@@ -34,30 +34,26 @@ public class ImpressionDAO extends DAO<Impression>{
 	    	  formatSupport=rs.getString(6);
 	    	  qualiteSupport=rs.getString(7);
 	    	  typeSupport=rs.getString(8);
-	    	  
+	    	  SupportDAO sdao = new SupportDAO();
+		    	
+	    	  Support s=sdao.find(typeSupport+"-"+formatSupport+"-"+qualiteSupport);
+	    	  CommandeDAO cdao= new CommandeDAO();
+	    	  Commande c=cdao.find(numc);
+	    	  imp = new Impression(format, qualite, nb, c,s);
+	    	}else{
+	    		System.out.println("Cette impression n'hexiste pas");
 	    	}
-	    	SupportDAO sdao = new SupportDAO();
-	    	
-	    	Support s=sdao.find(typeSupport+"-"+formatSupport+"-"+qualiteSupport);
-	    	
-	    	CommandeDAO cdao= new CommandeDAO();
-	    	Commande c=cdao.find(numc);
-	    	
-	    	imp = new Impression(format, qualite, nb, c,s);
 	    	
 	    	rs.close();
 	    	stmt.close();
-	    	conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return imp;
 	}
 
 	@Override
-	public Impression create(Impression obj) {
+	public Impression create(Impression obj) throws SQLException {
 		ResultSet rs=null;
-		   try {
+		    
 			   int numImp=0;
 			   Statement stmt = conn.createStatement();
 			   rs = stmt.executeQuery("select max(idImpression) from impression");
@@ -74,15 +70,13 @@ public class ImpressionDAO extends DAO<Impression>{
 		 	    rs.close();
 		 	    stmt.close();
 		 	    conn.commit();		 	  
-		   	} catch (SQLException e) {
-		   		e.printStackTrace();
-		   	}
+		   	
 		   return obj; 
 	}
 
 	@Override
-	public Impression update(Impression obj) {
-		try {
+	public Impression update(Impression obj) throws SQLException {
+		 
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("Update Impression SET idImpression ='"+obj.getId()+
 					"' ,format ='"+obj.getFormat()+"',qualite ='"+obj.getQualite()+
@@ -90,22 +84,18 @@ public class ImpressionDAO extends DAO<Impression>{
 					"' WHERE idImpression = '"+obj.getId()+"'");
 			stmt.close();
 			conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return obj;
 	}
 
 	@Override
-	public void delete(Impression obj) {
-		try {
+	public void delete(Impression obj) throws SQLException {
+		 
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("DELETE from Impression where idImpression = '"+obj.getId()+"'");
 			stmt.close();
 			conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 	@Override

@@ -9,30 +9,28 @@ import src.models.Administrateur;
 public class AdministrateurDAO extends UtilisateurDAO<Administrateur> {
 
 	@Override
-	public Administrateur find(String mail) {
+	public Administrateur find(String mail) throws SQLException {
 		Statement stmt;
 		Administrateur admin = null;
 		
-		try {
+		
 			stmt = conn.createStatement();
 			String query = "Select * from ClientP where mailC = '"+mail+"' ";
 			ResultSet rs = stmt.executeQuery(query);
 			if (rs.next()){
 				admin = new Administrateur(rs.getString("mailA"), rs.getString("nomA") , rs.getString("prenomA") , rs.getString("mdpasseA"));
 				rs.close();
+				stmt.close();
 			}
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
+		
 		
 		return admin;
 	}
 
 	@Override
-	public Administrateur create(Administrateur obj) {
+	public Administrateur create(Administrateur obj) throws SQLException {
 			
-		try {
+		
 			Statement stmt  = conn.createStatement();
 			String query = "Select * from Administrateur where mailA = '"+obj.getMail() +"'";
 			ResultSet rs = stmt.executeQuery(query);
@@ -47,40 +45,29 @@ public class AdministrateurDAO extends UtilisateurDAO<Administrateur> {
 			   } else {
 		 		   System.out.println("cette adresse mail est deja utilis�e");
 			   }
-		   	} catch (SQLException e) {
-			   e.printStackTrace();
-		   		}
+		  
 		 
 		return null;
 	}
 
 	@Override
-	public Administrateur update(Administrateur obj) {
-		try {
+	public Administrateur update(Administrateur obj) throws SQLException {
+		
 			Statement stmt = conn.createStatement();
 			String query = " Update Administrateur SET nomA ='"+obj.getNom()+"' ,prenomA ='"+obj.getPrenom()+"',mdpasseA ='"+obj.getPassword()+"'"
 					+ "WHERE mailA ='"+obj.getMail()+"'";
 			stmt.executeQuery(query);
 			stmt.close();
 			return obj;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return null;
 	}
 
 	@Override
-	public void delete(Administrateur obj) {
-		try {
+	public void delete(Administrateur obj) throws SQLException {
+		
 			Statement stmt = conn.createStatement();
-			String query = "DELETE ON Administrateur where mailA = '"+obj.getMail()+"'";
+			String query = "DELETE from Administrateur where mailA = '"+obj.getMail()+"'";
 			stmt.executeQuery(query);
 			stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		
 	}
 

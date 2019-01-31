@@ -14,9 +14,9 @@ public class AdresseDAO extends DAO<Adresse>{
 	}
 
 	@Override
-	public Adresse find(long id) {
+	public Adresse find(long id) throws SQLException {
 		Adresse adrs = null;
-		try {
+	
 			Statement stmt = conn.createStatement();
 			int idAdresse=0;
 			String adresse="";
@@ -27,57 +27,50 @@ public class AdresseDAO extends DAO<Adresse>{
 				idAdresse=rs.getInt(1);
 				adresse=rs.getString(2);
 				mail=rs.getString(3);
+				ClientDAO clt = new ClientDAO();
+				adrs = new Adresse(idAdresse, adresse, clt.find(mail));
+			}else {
+				System.out.println("Cette adresse n'existe pas");
 			}
-			ClientDAO clt = new ClientDAO();
-			adrs = new Adresse(idAdresse, adresse, clt.find(mail));
+			
 			rs.close();
 			stmt.close();
-			conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return adrs;
 	}
 
 	@Override
-	public Adresse create(Adresse obj) {
-		try {
+	public Adresse create(Adresse obj) throws SQLException {
+	
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("Insert into Adresse VALUES("+obj.getId()+",'"+obj.getAdresse()+
 					"','"+obj.getUser().getMail()+"')");
 			stmt.close();
 			conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return obj;
 	}
 
 	@Override
-	public Adresse update(Adresse obj) {
-		try {
+	public Adresse update(Adresse obj) throws SQLException {
+		
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("Update adresseC SET adresseC ='"+obj.getAdresse()+"',mailAC ='"+
 					obj.getUser().getMail()+"' where idAdresse = '"+obj.getId()+"'");
 			stmt.close();
-			conn.commit();
-			conn.close();			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			conn.commit();		
+		
 		return obj;
 	}
 
 	@Override
-	public void delete(Adresse obj) {
-		try {
+	public void delete(Adresse obj) throws SQLException {
+	
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("DELETE ON adresseC WHERE idAdresse = '"+obj.getId()+"'");
+			stmt.executeUpdate("DELETE from adresseC WHERE idAdresse = '"+obj.getId()+"'");
 			stmt.close();
 			conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}	
+		
 	}
 
 	@Override

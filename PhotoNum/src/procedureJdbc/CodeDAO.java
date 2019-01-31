@@ -8,9 +8,9 @@ import src.models.Code;
 
 public class CodeDAO extends DAO <Code>{
 	@Override
-	public Code find(String id) {
+	public Code find(String id) throws SQLException {
 		Code code = null;
-		try {
+		 
 			String c="";
 			int valeur=0;
 			
@@ -20,13 +20,14 @@ public class CodeDAO extends DAO <Code>{
 			if(rs.next()){
 				c=rs.getString(1);
 				valeur=rs.getInt(2);
+				code=new Code(c, valeur);
+			}else {
+				System.out.println("Ce code n'hexiste pas");
 			}
-			code=new Code(c, valeur);
+			
 			rs.close();
 			stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return code;
 	}
 
@@ -36,43 +37,37 @@ public class CodeDAO extends DAO <Code>{
 	}
 
 	@Override
-	public Code create(Code obj) {
-		try {
+	public Code create(Code obj) throws SQLException {
+		 
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("Insert into Code VALUES('"+obj.getIdCode()+"','"+
 					obj.getValeur()+"','"+obj.getUtilise()+"')");
 			stmt.close();
 			conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return obj;
 	}
 
 	@Override
-	public Code update(Code obj) {
-		try {
+	public Code update(Code obj) throws SQLException {
+		 
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("Update Code SET valeur ='"+obj.getValeur()+
 					"' where code = '"+obj.getIdCode()+"'");
 			stmt.close();
 			conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return obj;
 	}
 
 	@Override
-	public void delete(Code obj) {
-		try {
+	public void delete(Code obj) throws SQLException {
+		 
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("DELETE ON Code WHERE code = '"+obj.getIdCode()+"'");
 			stmt.close();
 			conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}	
+			
 	}
 
 	@Override

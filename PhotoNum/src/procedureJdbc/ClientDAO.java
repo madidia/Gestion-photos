@@ -10,10 +10,10 @@ import src.models.LectureClavier;
 public class ClientDAO extends UtilisateurDAO<Client> {
 
 	
-	public Client find(String mail,String pwd) {
+	public Client find(String mail,String pwd) throws SQLException {
 	   	Statement stmt;
   	    Client clt = null;
-		try {
+		 
 			String m="",prenom="",nom="",mdp="";
 			stmt = conn.createStatement();
 	    	String query1 = "Select * from ClientP where mailC = '"+mail+"' and mdpasseC = '"+pwd+"'";
@@ -29,15 +29,13 @@ public class ClientDAO extends UtilisateurDAO<Client> {
 	    	}
 	    	rs.close();
 	    	stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return clt;
 	}
 	
 	@Override
-	public Client create(Client obj) {
-	   try {
+	public Client create(Client obj) throws SQLException {
+	    
 		   Statement stmt = conn.createStatement();
 		   String query1 = "Select mailU from Utilisateur where mailU = '"+obj.getMail()+"' ";
 		   ResultSet rs = stmt.executeQuery(query1);
@@ -54,37 +52,31 @@ public class ClientDAO extends UtilisateurDAO<Client> {
 		   } else {
 	 		   System.out.println("le mail est d�ja utilis�");
 		   }
-	   	} catch (SQLException e) {
-		   e.printStackTrace();
-	   		}
+	   	
 	   return null; 
     }
     
 	@Override
-	public Client update(Client obj) {
-		try {
+	public Client update(Client obj) throws SQLException {
+		 
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("Update ClientP SET nomC ='"+obj.getNom()+"' ,prenomC ='"+
 					obj.getPrenom()+"',mdpasseC ='"+obj.getPassword()+"'"
 					+ "WHERE mailC ='"+obj.getMail()+"'");
 			stmt.close();
 			conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return obj;
 	}
 
 	@Override
-	public void delete(Client obj) {
-		try {
+	public void delete(Client obj) throws SQLException {
+		 
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("DELETE from ClientP where mailC = '"+obj.getMail()+"'");
 			stmt.close();
 			conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 	@Override
@@ -94,7 +86,7 @@ public class ClientDAO extends UtilisateurDAO<Client> {
 	}
 
 	@Override
-	public Client saisir() {
+	public Client saisir() throws SQLException {
 		String nom,prenom,email,mdp;
 		//----------------------nom----------------------
         System.out.println("Veuillez saisir votre nom :");
@@ -113,7 +105,7 @@ public class ClientDAO extends UtilisateurDAO<Client> {
 		return c;
 	}
 
-	public Client seConnecter() {
+	public Client seConnecter() throws SQLException {
 		String mail,pwd;
 		System.out.println("----------------------------------");
         System.out.println("       ESPACE DE CONNEXION        ");

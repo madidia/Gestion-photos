@@ -8,14 +8,14 @@ import src.models.Support;
 
 public class SupportDAO extends DAO<Support>{
 	@Override
-	public Support find(String id) {
+	public Support find(String id) throws SQLException {
 		String [] idS = id.split("-");
 		String typeid = idS[0];
 		String formatid = idS[1];
 		String qualiteid = idS[2];
 		Statement stmt;
 		Support supp = null;
-		try {
+		 
 			String type="",format="",qualite="";
 			int qte=0;
 			double pu=0;
@@ -29,13 +29,11 @@ public class SupportDAO extends DAO<Support>{
 				qualite=rs.getString(3);
 				qte=rs.getInt(4);
 				pu=rs.getInt(5);
+				supp = new Support(type, format, qualite, qte, pu);
 			}
-			supp = new Support(type, format, qualite, qte, pu);
 			stmt.close();
 			rs.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return supp;
 	}
 
@@ -46,9 +44,9 @@ public class SupportDAO extends DAO<Support>{
 	}
 
 	@Override
-	public Support create(Support obj) {
+	public Support create(Support obj) throws SQLException{
 		
-		try {
+		 
 			Statement stmt = conn.createStatement();
 			String query = "Insert into Support Values('"+obj.getType()+"','"+obj.getFormat()+"',"
 					+ "'"+obj.getQualite()+"',"+obj.getQuantite()+","+obj.getPrix()+")";
@@ -56,42 +54,35 @@ public class SupportDAO extends DAO<Support>{
 			stmt.executeUpdate(query);
 			stmt.close();
 		 	conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return obj;
 	 	 
 	}
 
 	@Override
-	public Support update(Support obj) {
-		try {
+	public Support update(Support obj) throws SQLException{
+		 
 			Statement stmt = conn.createStatement();
-			String query = "Update Support SET type ='"+obj.getType()+"',format = '"+obj.getFormat()+
+			stmt.executeUpdate("Update Support SET type ='"+obj.getType()+"',format = '"+obj.getFormat()+
 					"',qualite ='"+obj.getQualite()+"',quantite ='"+obj.getQuantite()+
 					",pu ='"+obj.getPrix()+"' where format ='"+obj.getFormat()+
-					"' AND qualite ='"+obj.getQualite()+"' AND type ='"+obj.getType()+"'";
-			stmt.executeUpdate(query);
+					"' AND qualite ='"+obj.getQualite()+"' AND type ='"+obj.getType()+"'");
 			stmt.close();
 			conn.commit();
 			
-		} catch (SQLException e) {
-		e.printStackTrace();
-		}
+		
 		return obj;
 	}
 
 	@Override
-	public void delete(Support obj) {
-		try {
+	public void delete(Support obj) throws SQLException{
+		 
 		Statement stmt = conn.createStatement();	
 		stmt.executeUpdate("DELETE from Support WHERE type ='"+obj.getType()+
 				"' AND format ='"+obj.getFormat()+"'AND qualite = '"+obj.getQualite()+"'");
 		stmt.close();
 		conn.commit();
-		} catch(SQLException e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 	@Override

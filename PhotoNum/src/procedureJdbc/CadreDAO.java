@@ -8,11 +8,11 @@ import src.models.Cadre;
 import src.models.Impression;
 
 public class CadreDAO extends ImpressionDAO{
-    public Cadre find(int x) {
+    public Cadre find(int x) throws SQLException {
         Cadre cd =  null;
         Impression imp = super.find(x);
         Statement stmt;
-        try {
+          
         	stmt = conn.createStatement();
         	String taille="",model="";
         	String query = "Select * from Cadre where idImpression = '"+x+"'";
@@ -20,44 +20,42 @@ public class CadreDAO extends ImpressionDAO{
       	  if(rs.next()){
       		  taille=rs.getString(4);
       		  model=rs.getString(5);
+      		cd = new Cadre(imp,taille,model);
+      	  }else {
+      		  System.out.println("Ce cadre n'hexiste pas");
       	  }
-      	  cd = new Cadre(imp,taille,model);
+      	  
+      	  rs.close();
       	  stmt.close();
-      	  conn.commit();
-        }
-        catch(SQLException e1) {
-      	  e1.printStackTrace();
-        }
+        
+        
         return cd;  
   	  }
+
       
-      public Cadre create(Cadre obj) {
+      public Cadre create(Cadre obj) throws SQLException {
     	  Impression imp = super.create(new Impression(obj.getFormat(),obj.getQualite(),
     			  obj.getNbExemplaire(),obj.getCmd(),obj.getSupport()));
-    	  try {
+    	    
   			Statement stmt = conn.createStatement();
   			stmt.executeUpdate("Insert into Cadre Values("+imp.getId()+",'"+obj.getFormat()
   				+"','"+obj.getQualite()+"','"+obj.getTaille()+"','"+obj.getModel()+"')");
   			obj.setId(imp.getId());
   			stmt.close();
   			conn.commit();
-  		} catch (SQLException e) {
-  			e.printStackTrace();
-  		}
+  		
   		return obj;
       }
       
-      public Cadre update(Cadre obj) {
+      public Cadre update(Cadre obj) throws SQLException {
     	  super.create(new Impression(obj.getFormat(),obj.getQualite(),obj.getNbExemplaire(),obj.getCmd(),obj.getSupport()));
-    	  try {
+    	    
     		  Statement stmt = conn.createStatement();
     		  stmt.executeUpdate("Update Cadre SET format ='"+obj.getFormat()+"',qualite='"+obj.getQualite()
     		  	+"',taille ='"+obj.getTaille()+"',model ='"+obj.getModel()+"' WHERE idImpression ='"+obj.getId()+"'");
     		  stmt.close();
     		 conn.commit();
-    	  } catch (SQLException e) {
-    		  e.printStackTrace();
-    	  }
+    	  
     	  return obj;
       }
 }

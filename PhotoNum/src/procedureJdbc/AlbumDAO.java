@@ -8,11 +8,11 @@ import src.models.Album;
 import src.models.Impression;
 
 public class AlbumDAO extends ImpressionDAO{
-    public Album find(int x) {
+    public Album find(int x) throws SQLException {
         Album ab =  null;
         Impression imp = super.find(x);
         Statement stmt;
-        try {
+       
         	stmt = conn.createStatement();
         	String titre="",couv="";
         	String query = "Select * from Album where idImpression = '"+x+"'";
@@ -20,46 +20,41 @@ public class AlbumDAO extends ImpressionDAO{
       	    if(rs.next()) {
       	    	couv=rs.getString(4);
       	    	titre=rs.getString(5);
+      	    	ab = new Album(imp,titre,couv);
+      	    	ab.setId(imp.getId());
       	    }
-      	  ab = new Album(imp,titre,couv);
-  		  ab.setId(imp.getId());
+      	  
+  		  rs.close();
   		  stmt.close();
-  		  conn.commit();
-        }
-        catch(SQLException e1) {
-      	  e1.printStackTrace();
-        }
+        
+        
   	  	return ab;
   	}
       
-      public Album create(Album obj) {
+      public Album create(Album obj)throws SQLException  {
     	  Impression imp = super.create(new Impression(obj.getFormat(),obj.getQualite(),obj.getNbExemplaire(),
     			  obj.getCmd(),obj.getSupport()));
-    	  try {
+    	    
   			Statement stmt = conn.createStatement();
   			stmt.executeUpdate("Insert into Album Values("+imp.getId()+",'"+obj.getFormat()+"','"+obj.getQualite()+"','"+obj.getTitre()+"','"+obj.getCouverture()+"')");
   			obj.setId(imp.getId());
   			stmt.close();
   			conn.commit();
-  		  }catch (SQLException e) {
-  			e.printStackTrace();
-  		  }
+  		  
     	  return obj;
       }
       
-      public Album update(Album obj) {
+      public Album update(Album obj) throws SQLException {
     	  super.update(new Impression(obj.getFormat(),obj.getQualite(),
     			  obj.getNbExemplaire(),obj.getCmd(),obj.getSupport()));
-    	  try {
+    	    
     		  Statement stmt = conn.createStatement();
     		  stmt.executeUpdate("Update Album SET format ='"+obj.getFormat()+"',qualite='"+
     				  obj.getQualite()+"',model ='"+obj.getCouverture()+"',couverture ='"+
     				  obj.getTitre()+"' WHERE idImpression ='"+obj.getId()+"'");
     		  stmt.close();
     		  conn.commit();
-    	  }catch (SQLException e) {
-    		  e.printStackTrace();
-    	  }
+    	  
     	  return obj;
       }
 }
