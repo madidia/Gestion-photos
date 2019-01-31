@@ -1,4 +1,4 @@
-package models;
+package src.models;
 
 public class Adresse {
 	private int id;

@@ -1,10 +1,10 @@
-package procedureJdbc;
+package src.procedureJdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import models.Adresse;
+import src.models.Adresse;
 
 public class AdresseDAO extends DAO<Adresse>{
 	@Override

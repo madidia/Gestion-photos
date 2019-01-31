@@ -1,4 +1,4 @@
-package procedureJdbc;
+package src.procedureJdbc;
 
 public class Operation extends DAO<Operation> {
 

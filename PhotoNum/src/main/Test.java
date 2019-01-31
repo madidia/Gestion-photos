@@ -1,11 +1,11 @@
-package main;
+package src.main;
 
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Date;
 
-import models.*;
-import procedureJdbc.*;
+import src.models.*;
+import src.procedureJdbc.*;
 import src.connexion.Connexion;
 
 public class Test {

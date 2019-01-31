@@ -1,4 +1,4 @@
-package models;
+package src.models;
 
 public class Cadre extends Impression{
 	private String model;

@@ -1,9 +1,9 @@
-package procedureJdbc;
+package src.procedureJdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import models.Administrateur;
+import src.models.Administrateur;
 
 public class AdministrateurDAO extends UtilisateurDAO<Administrateur> {
 

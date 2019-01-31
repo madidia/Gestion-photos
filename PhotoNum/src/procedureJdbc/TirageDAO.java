@@ -1,4 +1,4 @@
-package procedureJdbc;
+package src.procedureJdbc;
 
 import java.sql.SQLException;
 import java.sql.Statement;
