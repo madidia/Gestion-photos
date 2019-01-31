@@ -86,4 +86,10 @@ public class PageDAO extends DAO<Page>{
 			e.printStackTrace();
 		}	
 	}
+
+	@Override
+	public Page saisir() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

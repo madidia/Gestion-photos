@@ -24,7 +24,6 @@ public class CodeDAO extends DAO <Code>{
 			code=new Code(c, valeur);
 			rs.close();
 			stmt.close();
-			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -40,7 +39,8 @@ public class CodeDAO extends DAO <Code>{
 	public Code create(Code obj) {
 		try {
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("Insert into Code VALUES('"+obj.getIdCode()+"','"+obj.getValeur()+"')");
+			stmt.executeUpdate("Insert into Code VALUES('"+obj.getIdCode()+"','"+
+					obj.getValeur()+"','"+obj.getUtilise()+"')");
 			stmt.close();
 			conn.commit();
 		} catch (SQLException e) {
@@ -73,5 +73,11 @@ public class CodeDAO extends DAO <Code>{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
+	}
+
+	@Override
+	public Code saisir() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

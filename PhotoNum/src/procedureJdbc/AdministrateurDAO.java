@@ -89,4 +89,10 @@ public class AdministrateurDAO extends UtilisateurDAO<Administrateur> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Administrateur saisir() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

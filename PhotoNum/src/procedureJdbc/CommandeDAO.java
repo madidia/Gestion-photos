@@ -39,11 +39,10 @@ public class CommandeDAO extends DAO<Commande>{
 						cmd.getAdresse().getId()+","+cmd.getMontant()+",'"+cmd.getCode().getIdCode()+"')");
 				System.out.println("ajout reussi");
 				
-				/** supprimer le code utilisé dans la bd et dans l'objet client  
 				
-				//stmt.executeUpdate("delete from code where code='"+cmd.getCode().getIdCode()+"'");*/
+				stmt.executeUpdate("update code set utilise='oui' where code='"+cmd.getCode().getIdCode()+"'");
 				
-				cmd.getClient().getListCode().remove(cmd.getCode());
+				cmd.getCode().setUtilise("oui");
 			}
 			else {
 				/*** si un code n'est pas utilisé alors inséré null */ 
@@ -116,6 +115,12 @@ public class CommandeDAO extends DAO<Commande>{
 
 	@Override
 	public Commande find(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Commande saisir() {
 		// TODO Auto-generated method stub
 		return null;
 	}

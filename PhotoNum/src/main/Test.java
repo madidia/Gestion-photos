@@ -12,8 +12,10 @@ import src.procedureJdbc.*;
 public class Test {
 
 	public static void main(String[] args) throws SQLException, ParseException {
+		DAO.conn = Connexion.getConnection();
 		Menu m = new Menu();
-		/*DAO.conn = Connexion.getConnection();
+		m.menuPrincipal();
+		/*
 		ClientDAO c = new ClientDAO();
 		Client ac = c.find("sgidney0@typepad.com");
 		CommandeDAO com = new CommandeDAO();
@@ -45,8 +47,9 @@ public class Test {
 		/** creer impression 
 		System.out.println("id du imp "+i.getId());
 		//System.out.println("impression de notre commande : "+cmd.getImpressions().get(cmd.getImpressions().size()-1).getId());
-	    //System.out.println("le code du client ac est "+ac.getListCode().get(0).getIdCode()); 
-        DAO.conn.close(); */
+	    //System.out.println("le code du client ac est "+ac.getListCode().get(0).getIdCode()); */
+        DAO.conn.close();
+        System.out.println("fin");
 	}
 
 }

@@ -107,5 +107,11 @@ public class ImpressionDAO extends DAO<Impression>{
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public Impression saisir() {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 }

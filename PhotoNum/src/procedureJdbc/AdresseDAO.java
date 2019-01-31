@@ -80,4 +80,10 @@ public class AdresseDAO extends DAO<Adresse>{
 		}	
 	}
 
+	@Override
+	public Adresse saisir() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

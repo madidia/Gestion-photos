@@ -83,4 +83,10 @@ public class ImageDAO extends DAO<Image>{
 			e.printStackTrace();
 		}
     }
+
+	@Override
+	public Image saisir() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

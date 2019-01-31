@@ -32,4 +32,10 @@ public class Operation extends DAO<Operation> {
 		
 	}
 
+	@Override
+	public Operation saisir() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -6,10 +6,12 @@ public class Code {
 	
 	private String idcode;
 	private int valeur;
+	private String utilise;
 	
 	public Code(String code, int valeur) {
 		this.idcode=code;
 		this.valeur = valeur;
+		this.setUtilise("non");
 	}
 
 	public int getValeur() {
@@ -40,6 +42,20 @@ public class Code {
         return saltStr;
 
     }
+
+	/**
+	 * @return the utilise
+	 */
+	public String getUtilise() {
+		return utilise;
+	}
+
+	/**
+	 * @param utilise the utilise to set
+	 */
+	public void setUtilise(String utilise) {
+		this.utilise = utilise;
+	}
 	
 
 }
