@@ -4,12 +4,15 @@ public class Adresse {
 	private int id;
 	private String adresse;
 	private Utilisateur user;
-	
+
 	public Adresse(String adresse, Utilisateur user) {
 		this.adresse = adresse;
 		this.user=user;
 	}
 
+	public void infoAdresse() {
+		System.out.println(this.adresse);
+	}
 
 	public String getAdresse() {
 		return adresse;
@@ -51,6 +54,6 @@ public class Adresse {
 		this.user = user;
 	}
 
-	
-	
+
+
 }

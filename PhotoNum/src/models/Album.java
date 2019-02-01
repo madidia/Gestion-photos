@@ -7,7 +7,7 @@ public class Album extends Impression{
 	private String titre;
 	private int couverture;
 	private ArrayList<Page> pageAlb = new ArrayList<Page>();
-	
+
 	public Album(Impression imp,String titre, int i) {
 		super(imp.getFormat(),imp.getQualite(),imp.getNbExemplaire(),imp.getCmd(),imp.getSupport());
 		this.setCouverture(i);
@@ -50,5 +50,5 @@ public class Album extends Impression{
 		this.couverture = couverture;
 	}
 
-	
+
 }

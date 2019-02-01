@@ -11,7 +11,7 @@ public class PhotoDAO extends DAO<Photo>{
 	@Override
 	public Photo find(long id) throws SQLException {
 		Photo photo = null;
-		 
+
 		Statement stmt = conn.createStatement();
 		String query = "Select * from Photo where idPhoto = "+id+"";
 		ResultSet rs = stmt.executeQuery(query);
@@ -24,9 +24,9 @@ public class PhotoDAO extends DAO<Photo>{
 		}
 		rs.close();
 		stmt.close();
-	
-	return photo;
-}
+
+		return photo;
+	}
 	@Override
 	public Photo find(String id) throws SQLException {
 		// TODO Auto-generated method stub
@@ -40,7 +40,7 @@ public class PhotoDAO extends DAO<Photo>{
 		ResultSet rs;
 		rs = stmt.executeQuery("select max(idPhoto) from Photo");
 		while(rs.next()) {
-			   idPhoto=rs.getInt(1);
+			idPhoto=rs.getInt(1);
 		}
 		idPhoto = idPhoto+1;
 		stmt.executeUpdate("INSERT INTO Photo VALUES ("+idPhoto+",'"+obj.getImg().getChemin()+"','"+obj.getResolution()+"','"+obj.getParametre()+"')");
@@ -57,7 +57,7 @@ public class PhotoDAO extends DAO<Photo>{
 				+ ", resolution = "+obj.getResolution()+" ,parametre = '"+obj.getParametre()+" where idPhoto = "+obj.getId()+")");
 		stmt.close();
 		conn.commit();
-		
+
 		return obj;
 	}
 

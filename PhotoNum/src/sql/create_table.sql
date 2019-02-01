@@ -38,7 +38,9 @@ create table ClientP(mailC varchar2(245) primary key,
                     nomC varchar2(245) not null,
                     prenomC varchar2(245) not null,
                     mdpasseC varchar2(245) not null,
-                    constraint cp_c1 foreign key(mailC) references Utilisateur(mailU) ON DELETE CASCADE);
+		    etat varchar2(10) not null,
+		    constraint cp_c1 foreign key(mailC) references Utilisateur(mailU) ON DELETE CASCADE,
+		    constraint cp_c2 check (etat in ( 'actif','desactif')));
 
 --################################ CREATION DE LA TABLE Admin ###########################
 create table Administrateur(mailA varchar2(245) primary key,

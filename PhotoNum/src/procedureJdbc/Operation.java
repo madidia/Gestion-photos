@@ -29,7 +29,7 @@ public class Operation extends DAO<Operation> {
 	@Override
 	public void delete(Operation obj) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 

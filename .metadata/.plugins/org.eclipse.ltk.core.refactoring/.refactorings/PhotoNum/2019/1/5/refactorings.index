@@ -33,3 +33,6 @@
 1548903008874	Rename package 'vues'
 1548903408064	Delete element
 1548903922358	Encapsulate field 'utilise'
+1548938627759	Encapsulate field 'ListCode'
+1548945087256	Encapsulate field 'adresseLivraison'
+1548976756569	Encapsulate field 'ListCommande'

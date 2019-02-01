@@ -12,17 +12,27 @@ public class CodeMarketingDAO extends CodeDAO{
   	  CodeMarketing code =  (CodeMarketing) super.find(x);
 	  return code;
     }
-      
+    /**
+     * 
+     * @param obj
+     * @return
+     * @throws SQLException
+     */
     public CodeMarketing create(CodeMarketing obj) throws SQLException {
     	super.create(new Code(obj.getIdCode(),obj.getValeur()));
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("Insert into CodeMarketing Values("+obj.getIdCode()+","+obj.getValeur()+")");
 			stmt.close();
-			conn.commit();
-		
+			conn.commit();	
   	  	return obj;
     }
     
+    /**
+     * 
+     * @param obj
+     * @return
+     * @throws SQLException
+     */
     public CodeMarketing update(CodeMarketing obj) throws SQLException {
   	  super.update(new Code(obj.getIdCode(),obj.getValeur()));
   	  
@@ -30,8 +40,7 @@ public class CodeMarketingDAO extends CodeDAO{
 			stmt.executeQuery("UPDATE CodeMarketing SET valeur = '"+obj.getValeur()+
 					"' where code = '"+obj.getIdCode()+"'");
 			stmt.close();
-			conn.commit();
-			  
+			conn.commit();		  
 		return obj;
     }
 }

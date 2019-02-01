@@ -21,7 +21,7 @@ insert into CLIENTP (mailC, nomC, prenomC, mdpasseC) values ('lickovic7@ihg.com'
 insert into CLIENTP (mailC, nomC, prenomC, mdpasseC) values ('aeastgate8@google.co.uk', 'Eastgate', 'Arnuad', 'xrNmYklQb354');
 
 
-insert into Administrateur (mailA, nomA, prenomA, mdpasseA) values ('aknoble9@reddit.com', 'Knoble', 'Aubree', 'YAkib8bs6L');
+insert into Administrateur (mailA, nomA, prenomA, mdpasseA) values ('admin@gmail.com', 'Knoble', 'Aubree', '1234');
 
 
 insert into ADRESSE values (1,'6 bis rue du vieux temple 38000 Grenoble', 'sgidney0@typepad.com');

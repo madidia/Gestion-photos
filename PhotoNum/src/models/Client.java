@@ -6,6 +6,7 @@ public class Client extends Utilisateur{
 	private String nom;
 	private String prenom;
 	private String password;
+	private String etat;
 	private ArrayList<Commande> ListCommande= new ArrayList<Commande>();
 	private ArrayList<Code> ListCode= new ArrayList<Code>();
 	private ArrayList<Adresse> ListAdresse= new ArrayList<Adresse>();
@@ -16,6 +17,7 @@ public class Client extends Utilisateur{
 		this.nom = nom;
 		this.prenom = prenom;
 		this.password = password;
+		this.setEtat("actif");
 	}
 
 	public String getNom() {
@@ -83,8 +85,22 @@ public class Client extends Utilisateur{
 	}
 	
 	public void infosClient() {
-		System.out.println("Nom :"+this.getNom()+",prenom :"+this.getPrenom()
-			+",email :"+this.getMail()+", mot de passe :"+this.getPassword());		
+		System.out.println("Nom : "+this.getNom()+",prenom : "+this.getPrenom()
+			+",email : "+this.getMail()+", mot de passe : "+this.getPassword());		
+	}
+
+	/**
+	 * @return the etat
+	 */
+	public String getEtat() {
+		return etat;
+	}
+
+	/**
+	 * @param etat the etat to set
+	 */
+	public void setEtat(String etat) {
+		this.etat = etat;
 	}
 	
 }

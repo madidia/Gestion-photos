@@ -43,6 +43,12 @@ public abstract class UtilisateurDAO<T> extends DAO<T> {
 		 */
 		public abstract void delete(T obj)throws SQLException;
 		
+		/**
+		 * 
+		 * @param obj
+		 * @return les adresses d'un utilisateur
+		 * @throws SQLException
+		 */
 		public abstract ArrayList<Adresse> getAdresse(T obj) throws SQLException;
 	
 }

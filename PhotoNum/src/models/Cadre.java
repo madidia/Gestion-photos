@@ -3,7 +3,7 @@ package src.models;
 public class Cadre extends Impression{
 	private String model;
 	private String taille;
-	
+
 	public Cadre(Impression imp,String model, String taille) {
 		super(imp.getFormat(),imp.getQualite(),imp.getNbExemplaire(),imp.getCmd() , imp.getSupport());
 		this.setModel(model);
@@ -38,6 +38,6 @@ public class Cadre extends Impression{
 		this.model = model;
 	}
 
-	
-	
+
+
 }
