@@ -3,6 +3,7 @@ package src.procedureJdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import src.models.Commande;
 import src.models.Impression;
@@ -14,6 +15,15 @@ public class ImpressionDAO extends DAO<Impression>{
 		return null;
 	}
 
+	public void addImpressions(ArrayList<Impression> imps,Commande c) throws SQLException{
+		ImpressionDAO impdao = new ImpressionDAO();
+		for(int i=0;i<c.getImpressions().size();i++) {
+			System.out.println("nb imp" +c.getImpressions().size());
+			System.out.println("yyye1");
+
+			impdao.create(imps.get(i));
+		}	
+	}
 	@Override
 	public Impression find(long id) throws SQLException {
 		id = (int) id;
@@ -69,7 +79,7 @@ public class ImpressionDAO extends DAO<Impression>{
 		 	    obj.setId(numImp);
 		 	    rs.close();
 		 	    stmt.close();
-		 	    conn.commit();		 	  
+				conn.commit();	 	  
 		   	
 		   return obj; 
 	}

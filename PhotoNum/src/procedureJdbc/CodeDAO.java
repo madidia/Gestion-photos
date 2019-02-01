@@ -21,8 +21,6 @@ public class CodeDAO extends DAO <Code>{
 				c=rs.getString(1);
 				valeur=rs.getInt(2);
 				code=new Code(c, valeur);
-			}else {
-				System.out.println("Ce code n'hexiste pas");
 			}
 			
 			rs.close();

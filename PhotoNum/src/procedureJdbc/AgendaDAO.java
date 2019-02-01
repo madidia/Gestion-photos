@@ -12,8 +12,7 @@ public class AgendaDAO extends ImpressionDAO {
       Agenda ag =  null;
       Impression imp = super.find(x);
       Statement stmt;
-        
-    	  
+       
     	  stmt = conn.createStatement();
     	  String typeAgenda="",modele="";
       	  String query = "Select * from Agenda where idImpression = '"+x+"'";
@@ -38,7 +37,7 @@ public class AgendaDAO extends ImpressionDAO {
 			
 			obj.setId(imp.getId());
 			stmt.close();
-			conn.commit();
+  			conn.commit();
 		
 		return obj;
     }

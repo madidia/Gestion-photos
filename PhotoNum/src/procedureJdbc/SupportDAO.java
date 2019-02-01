@@ -47,7 +47,6 @@ public class SupportDAO extends DAO<Support>{
 
 	@Override
 	public Support create(Support obj) throws SQLException{
-		
 		 
 			Statement stmt = conn.createStatement();
 			String query = "Insert into Support Values('"+obj.getType()+"','"+obj.getFormat()+"',"
@@ -55,7 +54,7 @@ public class SupportDAO extends DAO<Support>{
 			
 			stmt.executeUpdate(query);
 			stmt.close();
-		 	conn.commit();
+			conn.commit();
 		
 		return obj;
 	 	 
@@ -65,9 +64,8 @@ public class SupportDAO extends DAO<Support>{
 	public Support update(Support obj) throws SQLException{
 		 
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("Update Support SET type ='"+obj.getType()+"',format = '"+obj.getFormat()+
-					"',qualite ='"+obj.getQualite()+"',quantite ='"+obj.getQuantite()+
-					",pu ='"+obj.getPrix()+"' where format ='"+obj.getFormat()+
+			stmt.executeUpdate("Update Support SET quantiteStock ="+obj.getQuantite()+
+					",pu ="+obj.getPrix()+" where format ='"+obj.getFormat()+
 					"' AND qualite ='"+obj.getQualite()+"' AND type ='"+obj.getType()+"'");
 			stmt.close();
 			conn.commit();
@@ -78,7 +76,7 @@ public class SupportDAO extends DAO<Support>{
 
 	@Override
 	public void delete(Support obj) throws SQLException{ 
-		Statement stmt = conn.createStatement();	
+		Statement stmt = conn.createStatement();
 		stmt.executeUpdate("DELETE from Support WHERE type ='"+obj.getType()+
 				"' AND format ='"+obj.getFormat()+"'AND qualite = '"+obj.getQualite()+"'");
 		stmt.close();

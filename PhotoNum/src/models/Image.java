@@ -4,17 +4,17 @@ import java.util.Date;
 
 public class Image {
 	private String chemin;
-	private int resolution;
+	private double resolution;
 	private String partage;
 	private Date dateDUtilisation;
-	private String mailProprio;
+	private Client proprio;
 	
-	public Image(String chemin,String mail,int resolution,String partage) {
+	public Image(String chemin,Client client,double resolution,String partage) {
 		this.chemin = chemin;
-		this.setResolution(resolution);
+		this.resolution=resolution;
 		this.dateDUtilisation = new Date();
 		this.partage = partage;
-		this.setMailProprio(mail);
+		this.proprio = client;
 	}
 
 	public String getChemin() {
@@ -41,20 +41,32 @@ public class Image {
 		this.dateDUtilisation = dateDUtilisation;
 	}
 
-	public String getMailProprio() {
-		return mailProprio;
+
+	public Client getProprio() {
+		return proprio;
 	}
 
-	public void setMailProprio(String mailProprio) {
-		this.mailProprio = mailProprio;
+	public void setProprio(Client proprio) {
+		this.proprio = proprio;
 	}
 
-	public int getResolution() {
+	/**
+	 * @return the resolution
+	 */
+	public double getResolution() {
 		return resolution;
 	}
 
-	public void setResolution(int resolution) {
+	/**
+	 * @param resolution the resolution to set
+	 */
+	public void setResolution(double resolution) {
 		this.resolution = resolution;
+	}
+	
+	public String  infosImage() {
+		return "Chemin :"+this.getChemin()+"resolution :"+this.getResolution()
+		+"visible par tous :"+this.isPartage();
 	}
 	
 }

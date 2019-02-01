@@ -42,7 +42,8 @@ public class ClientDAO extends UtilisateurDAO<Client> {
 		   ResultSet rs = stmt.executeQuery(query1);
 		   if(!rs.next()) {
 	 		 String query2 = "INSERT INTO Utilisateur Values ('"+obj.getMail()+"')";
-	 		 String query3 = "INSERT INTO ClientP Values ('"+obj.getMail()+"','"+obj.getNom()+"','"+obj.getPrenom()+"','"+obj.getPassword()+"')";
+	 		 String query3 = "INSERT INTO ClientP Values ('"+obj.getMail()+"','"+obj.getNom()+"','"+
+	 		 obj.getPrenom()+"','"+obj.getPassword()+"')";
 	 		 stmt.executeQuery(query2);
 	 		 stmt.executeQuery(query3);
 	 		 System.out.println("Votre compte a été créé avec succès");
@@ -66,6 +67,7 @@ public class ClientDAO extends UtilisateurDAO<Client> {
 					+ "WHERE mailC ='"+obj.getMail()+"'");
 			stmt.close();
 			conn.commit();
+			System.out.println("Mise a jour effectuee avec succes");
 		
 		return obj;
 	}
@@ -87,9 +89,27 @@ public class ClientDAO extends UtilisateurDAO<Client> {
 	}
 
 	@Override
-	public Client find(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Client find(String id) throws SQLException {
+		Statement stmt;
+  	    Client clt = null;
+		 
+		String m="",prenom="",nom="",mdp="";
+		stmt = conn.createStatement();
+	    String query1 = "Select * from ClientP where mailC = '"+id+"'";
+	    ResultSet rs = stmt.executeQuery(query1);
+	    if(rs.next()) {
+	    	m=rs.getString(1);
+	   		nom=rs.getString(2);
+	   		prenom=rs.getString(3);
+	   		mdp=rs.getString(4);
+		   	clt = new Client(m,nom,prenom,mdp);
+	   	}else {
+	   		System.out.println("Ce client n'hexiste pas");
+	   	}
+	   	rs.close();
+	   	stmt.close();
+		
+		return clt;
 	}
 
 	@Override
@@ -100,6 +120,7 @@ public class ClientDAO extends UtilisateurDAO<Client> {
 		Adresse a;
         while (rs.next()) {
         	a = new Adresse(rs.getString(2), this.find(rs.getString(3)));
+        	a.setId(rs.getInt(1));;
             adresses.add(a);
         }
         if(adresses.size()==0) {

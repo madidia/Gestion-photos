@@ -54,7 +54,7 @@ public class CadreDAO extends ImpressionDAO{
     		  stmt.executeUpdate("Update Cadre SET format ='"+obj.getFormat()+"',qualite='"+obj.getQualite()
     		  	+"',taille ='"+obj.getTaille()+"',model ='"+obj.getModel()+"' WHERE idImpression ='"+obj.getId()+"'");
     		  stmt.close();
-    		 conn.commit();
+    		  conn.commit();
     	  
     	  return obj;
       }

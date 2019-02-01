@@ -1,5 +1,6 @@
 package src.models;
 
+
 public class Impression {
 	private int id;
 	private String format;
@@ -16,6 +17,8 @@ public class Impression {
 		this.support=s;
 	}
 
+	
+	
 	public int getId() {
 		return id;
 	}

@@ -12,16 +12,17 @@ public class ImageDAO extends DAO<Image>{
 	public Image find(String id) throws SQLException {
 		this.ProcedureImg();
 		Image img = null;
-		 
+		ClientDAO clt = new ClientDAO();
 			Statement stmt = conn.createStatement();
 			String query = "Select * from Img where chemin = '"+id+"'";
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()){
-				img = new Image(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getString(4));	
+				img = new Image(rs.getString(1),clt.find(rs.getString(2)),rs.getInt(3),rs.getString(4));	
 			}else {
 				System.out.println("Cette image n'hexiste pas");
 			}
-		
+		rs.close();
+		stmt.close();
 		return img;
 	}
 
@@ -34,11 +35,11 @@ public class ImageDAO extends DAO<Image>{
 	@Override
 	public Image create(Image obj) throws SQLException {
 		this.ProcedureImg();
-		 
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("Insert into Img VALUES('"+obj.getChemin()
-				+"','"+obj.getMailProprio()+"',"+obj.getResolution()+",'"+obj.isPartage()+"'"
-					+ ",'"+obj.getDateDUtilisation()+"')");
+				+"','"+obj.getProprio().getMail()+"',"+obj.getResolution()+",'"+obj.isPartage()+"',sysdate)");
+			stmt.close();
+			conn.commit();
 		return obj;
 	}
 
@@ -47,10 +48,9 @@ public class ImageDAO extends DAO<Image>{
 		this.ProcedureImg();
 		 
 		Statement stmt = conn.createStatement();
-		stmt.executeUpdate("Update Img mail = '"+obj.getMailProprio()+"',"
-				+ "resolution ='"+obj.getResolution()+"',partagee ='"+obj.isPartage()+"'"
-				+ ",dateDerniereUtilisation ='"+obj.getDateDUtilisation()
-				+"' where chemin = '"+obj.getChemin()+"'");
+		stmt.executeUpdate("Update Img SET mail = '"+obj.getProprio().getMail()+"',"
+				+ "resolution ="+obj.getResolution()+",partagee ='"+obj.isPartage()+"'"
+				+ ",dateDerniereUtilisation = sysdate where chemin = '"+obj.getChemin()+"'");
 		stmt.close();
 		conn.commit();
 		
@@ -62,7 +62,7 @@ public class ImageDAO extends DAO<Image>{
 		this.ProcedureImg();
 		 
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("DELETE from Img where chemin = '"+obj.getChemin()+"')");
+			stmt.executeUpdate("DELETE from Img where chemin = '"+obj.getChemin()+"'");
 			stmt.close();
 		conn.commit();
 		

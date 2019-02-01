@@ -36,7 +36,7 @@ public class CalendrierDAO extends ImpressionDAO{
   					obj.getFormat()+"','"+obj.getQualite()+"','"+obj.getModel()+"')");
   			obj.setId(imp.getId());
   			stmt.close();
-  			conn.commit();
+			conn.commit();
   			return obj;
   		
       }
@@ -50,7 +50,7 @@ public class CalendrierDAO extends ImpressionDAO{
   				"',qualite='"+obj.getQualite()+"'"
   				+ ",model ='"+obj.getModel()+"' WHERE idImpression ='"+obj.getId()+"'");
   		stmt.close();
-  		conn.commit();
+		conn.commit();
   	
   		return obj;
     }

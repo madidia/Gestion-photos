@@ -42,6 +42,10 @@ public class Code {
         return saltStr;
 
     }
+	
+	public String infosCode() {
+		return "Code :"+this.getIdCode()+", Valeur :"+this.getValeur();
+	}
 
 	/**
 	 * @return the utilise

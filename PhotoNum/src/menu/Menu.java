@@ -6,9 +6,17 @@ import java.util.ArrayList;
 import src.models.Adresse;
 import src.models.Client;
 import src.models.Commande;
+import src.models.Image;
+import src.models.Impression;
 import src.models.LectureClavier;
+import src.models.Support;
 import src.procedureJdbc.AdresseDAO;
 import src.procedureJdbc.ClientDAO;
+import src.procedureJdbc.CodePersonnelDAO;
+import src.procedureJdbc.CommandeDAO;
+import src.procedureJdbc.ImageDAO;
+import src.procedureJdbc.SupportDAO;
+import src.models.Code;
 
 public class Menu {
 
@@ -25,7 +33,7 @@ public class Menu {
         System.out.println("| 2 | -> Connexion Client");
         System.out.println("| 3 | -> Créer un compte");
         System.out.println("| 0 | -> Quitter");
-        int choix = LectureClavier.lireEntier("Veuillez entrer un choix");
+        int choix = LectureClavier.lireEntier(" > Veuillez entrer un choix");
         Client c=null;
         switch(choix) {
         	case 1 : break;
@@ -46,25 +54,84 @@ public class Menu {
 	
 	public int menuClient(Client c) throws SQLException {
 		
-		System.out.println("----------------------------------");
-        System.out.println("          ESPACE CLIENT           ");
-        System.out.println("----------------------------------");
+		System.out.println("--------------------------------------------------------------------");
+        System.out.println("                         ESPACE CLIENT                              ");
+        System.out.println("--------------------------------------------------------------------");
         System.out.println("");
-        System.out.println("| 1 | -> Créer une commande");
-        System.out.println("| 2 | -> Consulter mes commandes");
-        System.out.println("| 3 | -> Modifier mon compte");
-        System.out.println("| 4 | -> Ajouter une image");
-        System.out.println("| 0 | -> Quitter");
-        int choix = LectureClavier.lireEntier("Veuillez entrer un choix");
+        System.out.println("| 1 | -> Créer une commande      	| 2 | -> Consulter mes commandes");
+        System.out.println("| 3 | -> Informations du Compte  	| 4 | -> Modifier mon compte");
+        System.out.println("| 5 | -> Ajouter une image       	| 6 | -> Mes codes  de reduction");
+        System.out.println("| 0 | -> QUITTER ");
+        int choix = LectureClavier.lireEntier(" > Veuillez entrer un choix");
         switch(choix) {
         	case 1 : this.creerCommande(c);break;
-        	case 2 : break;
-        	case 3 : this.creerUnClient();break;
-        	case 0 : System.out.println("Vous avez quitté l'application");break;
+        	case 2 : this.voirCommande(c);break;
+        	case 3 : c.infosClient();break;
+        	case 4 : this.modifierCompte(c);break;
+        	case 5 : this.ajouterImage(c);break;
+        	case 6 : this.voirMesCodes(c);break;
+        	default : System.out.println("Vous avez quitté l'application");break;
+        }
+        System.out.println("");
+        System.out.println("| 0 | -> Retour espace client ");
+        System.out.println("| 1 | -> QUITTER ");
+        choix = LectureClavier.lireEntier(" > Veuillez entrer un choix");
+        switch(choix) {
+        	case 0:this.menuClient(c);break;
+        	default : System.out.println("Vous avez quitté l'application");break;
         }
 		return 0;
     }
 	
+	private void modifierCompte(Client c) throws SQLException {
+		String nom,prenom,mdp;
+		ClientDAO cdao = new ClientDAO();
+		System.out.println("----------------------------------");
+        System.out.println("          MODIFIER COMPTE         ");
+        System.out.println("----------------------------------");
+        System.out.println("");
+        System.out.println("| 1 | -> Changer le nom");
+        System.out.println("| 2 | -> Changer le prenom");
+        System.out.println("| 3 | -> Changer le mot de passe");
+        int choix = LectureClavier.lireEntier(" > Veuillez entrer un choix");
+
+        switch(choix) {
+        	case 1:nom=LectureClavier.lireChaine();
+        		  	c.setNom(nom);break;
+        	case 2:prenom=LectureClavier.lireChaine();
+        			c.setPrenom(prenom);break;
+        	case 3:mdp=LectureClavier.lireChaine();
+        			c.setPassword(mdp);break;
+        	default:this.menuClient(c);
+        }
+        cdao.update(c);
+        
+        boolean rep=LectureClavier.lireOuiNon("Modifier un autre champ ?");
+        while(rep) {
+    		System.out.println("----------------------------------");
+            System.out.println("          MODIFIER COMPTE         ");
+            System.out.println("----------------------------------");
+            System.out.println("");
+            System.out.println("| 1 | -> Changer le nom");
+            System.out.println("| 2 | -> Changer le prenom");
+            System.out.println("| 3 | -> Changer le mot de passe");
+            choix = LectureClavier.lireEntier(" > Veuillez entrer un choix");
+
+            switch(choix) {
+        		case 1:nom=LectureClavier.lireChaine();
+        			c.setNom(nom);break;
+        		case 2:prenom=LectureClavier.lireChaine();
+        			c.setPrenom(prenom);break;
+        		case 3:mdp=LectureClavier.lireChaine();
+        			c.setPassword(mdp);break;
+        		default:this.menuClient(c);
+            }
+            cdao.update(c);
+            rep=LectureClavier.lireOuiNon("Modifier un autre champ ?");
+        }
+		
+	}
+
 	private Adresse choixAdresse(Client c,ArrayList<Adresse> adrs) throws SQLException {
 		System.out.println("----------------------------------");
         System.out.println("          CHOIX ADRESSE           ");
@@ -72,7 +139,7 @@ public class Menu {
         System.out.println("");
         for (int i=0;i<adrs.size();i++) {
         	
-        	System.out.println("|"+(i+1)+" | -> "+adrs.get(i).getAdresse());
+        	System.out.println("|"+(i+1)+" | -> "+adrs.get(i).getAdresse()+" id "+adrs.get(i).getId());
         }
         int choix = LectureClavier.lireEntier(" > Choisissez le numero correspondant");
         while(choix > adrs.size() && choix !=0) {
@@ -82,16 +149,23 @@ public class Menu {
         if(choix==0) {
         	this.menuClient(c);
         }
-        
-		return adrs.get(choix);
+        System.out.println("choix "+choix);
+        System.out.println("id "+adrs.get(choix-1).getId());
+		return adrs.get(choix-1);
 		
 	}
 	
 	private Commande creerCommande(Client c) throws SQLException {
 		Adresse adresse=null;
 		ClientDAO cdao = new ClientDAO();
+		CodePersonnelDAO code = new CodePersonnelDAO();
+		ArrayList<Code> mescodes;
 		ArrayList<Adresse> adrs = cdao.getAdresse(c);
 		AdresseDAO adao = new AdresseDAO();
+		CommandeDAO cmdDao = new CommandeDAO();
+		boolean rep;
+		Code codeutilise=null;
+		/** Choisir adresse */
 		if(adrs.size()==0) {
 			System.out.println("Fournir une adresse de livraison");
 			adresse=adao.creerAdresse(c);
@@ -99,7 +173,7 @@ public class Menu {
 	        System.out.println("| 1 | -> Saisir une nouvelle adresse");
 	        System.out.println("| 2 | -> Choisir une adresse");
             System.out.println("| 0 | -> Retour espace client");
-	        int choix = LectureClavier.lireEntier("Veuillez entrer un choix");
+	        int choix = LectureClavier.lireEntier(" > Veuillez entrer un choix");
 	        while(choix !=1 && choix !=0 && choix !=2) {
 	        	choix = LectureClavier.lireEntier(" > Choisissez un numero valide");
 	        }
@@ -110,15 +184,96 @@ public class Menu {
 	        }else {
 	        	this.menuClient(c);
 	        }
-
 		}
-		System.out.println("choisir un statut : en attente,en cours,pret a lenvoi,envoyee");
+		Commande cmd = new Commande(c, adresse, "", null);
+		cmdDao.create(cmd);
+		/** Creer impression **/
+		this.creerImpression(cmd, this.choixSupport());
+		rep=LectureClavier.lireOuiNon("Voulez-vous ajouter une autre impression ?");
+		while(rep) {
+			this.creerImpression(cmd, this.choixSupport());
+			rep=LectureClavier.lireOuiNon("Voulez-vous ajouter une autre impression ?");
+		}
 		
-		String s = LectureClavier.lireChaine();
-		Commande cmd = new Commande(c, adresse, s, null);
+		/** Choisir un code */
+		mescodes=code.getMesCodes(c);
+		if(mescodes.size()>0) {
+			rep=LectureClavier.lireOuiNon("Voulez-vous utiliser un code ?");
+			if(rep) {
+				codeutilise=this.choixCode(mescodes);
+			}
+		}
 		
 		
+		cmd.setIdLivraison(adresse.getId());
+		cmd.setCode(codeutilise);
+		cmd.getMontant();
+		c.getListCommande().add(cmd);
+		cmdDao.update(cmd);
+		System.out.println("nb comm "+c.getListCommande().size());
+		System.out.println(cmd.getStringCommande());
+		
+	
 		return cmd;
+	}
+	
+	
+	private Impression creerImpression(Commande cmd,Support s) {
+
+		String format,qualite;
+		int nb;
+        System.out.println("Veuillez saisir le format d impression :");
+        format=LectureClavier.lireChaine();
+        System.out.println("Veuillez saisir la qualite d impression:");
+        qualite=LectureClavier.lireChaine();
+        nb=LectureClavier.lireEntier("Veuillez saisir le nombre d'exemplaire :");
+        Impression imp = new Impression(format, qualite, nb, cmd, s);
+        cmd.getImpressions().add(imp);
+		return imp;
+	}
+	
+	private Support choixSupport() throws SQLException {
+		SupportDAO supdao =new SupportDAO();
+		ArrayList<Support> sup=supdao.getAllSupport();
+		Support s = null;
+		System.out.println("----------------------------------");
+        System.out.println("           CHOIX SUPPORT          ");
+        System.out.println("----------------------------------");
+        System.out.println("");
+		for (int i=0;i<sup.size();i++) {
+        	System.out.println("|"+(i+1)+" | -> "+sup.get(i).getMonSupport());
+        }
+		int choix = LectureClavier.lireEntier(" > Choisissez le numero correspondant");
+        while(choix > sup.size() && choix !=0) {
+        	choix = LectureClavier.lireEntier(" > Choisissez le numero correspondant");
+            System.out.println("| 0 | -> Retour espace commande");
+        }
+        if(choix!=0) {
+        	s=sup.get(choix-1);
+        }
+		
+		return s;
+	}
+
+	private Code choixCode(ArrayList<Code> mescodes) {
+		Code c=null;
+		System.out.println("----------------------------------");
+        System.out.println("            CHOIX CODE            ");
+        System.out.println("----------------------------------");
+        System.out.println("");
+		for (int i=0;i<mescodes.size();i++) {
+        	System.out.println("|"+(i+1)+" | -> "+mescodes.get(i).getIdCode());
+        }
+		int choix = LectureClavier.lireEntier(" > Choisissez le numero correspondant");
+        while(choix > mescodes.size() && choix !=0) {
+        	choix = LectureClavier.lireEntier(" > Choisissez le numero correspondant");
+            System.out.println("| 0 | -> Retour espace commande");
+        }
+        if(choix!=0) {
+        	c=mescodes.get(choix);
+        }
+		return c;
+				
 	}
 
 	private Client creerUnClient() throws SQLException {
@@ -137,8 +292,8 @@ public class Menu {
         System.out.println("Veuillez saisir votre mot de passe :");
         mdp=LectureClavier.lireChaine();
         ClientDAO cdao = new ClientDAO();
-        Client c = new Client(email, nom, prenom, mdp);
-		return cdao.create(c);		
+        Client c = cdao.create(new Client(email, nom, prenom, mdp));
+        return c;
 	}
 	
 	private Client connexionClient() throws SQLException {
@@ -166,6 +321,60 @@ public class Menu {
 			if(c==null && i<3) rep=LectureClavier.lireOuiNon("Voulez-vous reessayer ?");
 		}
 		return c;
+		
+	}
+	
+	private void voirCommande(Client c) throws SQLException {
+		CommandeDAO cdao = new CommandeDAO();
+		ArrayList<Commande> cmds =cdao.getAllCommande(c);
+		System.out.println("----------------------------------");
+        System.out.println("          MES COMMANDES           ");
+        System.out.println("----------------------------------");
+        if(cmds.size()>0) {
+        	for(int i=0;i<cmds.size();i++) {
+    			System.out.println(cmds.get(i).getStringCommande());
+    		}
+        }else {
+        	System.out.println("Vous n avez pas de commande");
+        }
+        System.out.println("");
+		
+		
+	}
+	
+	private void ajouterImage(Client c) throws SQLException {
+		String chemin,partage="non";
+		double resolution;
+		boolean rep;
+		ImageDAO idao = new ImageDAO();
+		Image img;
+		System.out.println("----------------------------------");
+        System.out.println("            AJOUT IMAGE           ");
+        System.out.println("----------------------------------");
+        System.out.println("Donnez le chemin :");
+        chemin=LectureClavier.lireChaine();
+        resolution=LectureClavier.lireDouble("Donnez la resolution :");
+        rep=LectureClavier.lireOuiNon("Voulez-vous partagez l image ?");
+        if(rep) {
+        	partage="oui";
+        }
+        img = new Image(chemin, c, resolution, partage);
+        idao.create(img);
+        System.out.println("Votre image a ete ajoute avec succes :");
+        img.infosImage();
+	}
+	
+	private void voirMesCodes(Client c) throws SQLException {
+		CodePersonnelDAO cpdao = new CodePersonnelDAO();
+		ArrayList<Code> codes=cpdao.getMesCodes(c);
+		if(codes.size()>0) {
+			for(int i=0;i<codes.size();i++) {
+				System.out.println(codes.get(i).infosCode());
+			}
+		}else {
+			System.out.println("Vous n'avez pas de Code de Reduction");
+		}
+		System.out.println("");
 		
 	}
 	

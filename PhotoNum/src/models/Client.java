@@ -53,15 +53,6 @@ public class Client extends Utilisateur{
 		return ListImage;
 	}
 	
-	public ArrayList<Commande> getListCommande() {
-		return ListCommande;
-	}
-	
-	public void creerCommande(Commande c) {
-		
-		this.ListCommande.add(c);
-		
-	}
 
 	/**
 	 * @return the listCode
@@ -75,6 +66,25 @@ public class Client extends Utilisateur{
 	 */
 	public void setListCode(ArrayList<Code> listCode) {
 		ListCode = listCode;
+	}
+
+	/**
+	 * @return the listCommande
+	 */
+	public ArrayList<Commande> getListCommande() {
+		return ListCommande;
+	}
+
+	/**
+	 * @param listCommande the listCommande to set
+	 */
+	public void setListCommande(ArrayList<Commande> listCommande) {
+		ListCommande = listCommande;
+	}
+	
+	public void infosClient() {
+		System.out.println("Nom :"+this.getNom()+",prenom :"+this.getPrenom()
+			+",email :"+this.getMail()+", mot de passe :"+this.getPassword());		
 	}
 	
 }

@@ -65,8 +65,6 @@ public class PageDAO extends DAO<Page>{
 			
 			stmt.close();
 			conn.commit();
-			
-		
 		return obj;
 	}
 
