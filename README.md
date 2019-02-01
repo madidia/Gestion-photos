@@ -18,4 +18,4 @@ Developpeurs :
 BODIANG Assane https://github.com/bodiangas
 DIALLO Mamadou Dian https://github.com/madidia
 DIALLO Thierno Ibrahima https://github.com/sorytech
-JOUHARI Ali
+JOUHARI Ali https://github.com/ali-j1
